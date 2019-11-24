@@ -17,8 +17,8 @@ public class TowersOfBrimstoneModel {
 		return grid.get(row);
 	}
 	
-	public ArrayList<Title> getCol(int col){
-		
+	public ArrayList<Tile> getCol(int col){
+		return null;
 	}
 	private ArrayList<ArrayList<Tile>> createBlankMap() {
 		ArrayList<ArrayList<Tile>> grid = new ArrayList<ArrayList<Tile>>(); 
