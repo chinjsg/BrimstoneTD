@@ -1,14 +1,17 @@
 package towers;
 
+import javafx.geometry.Point2D;
+
 public abstract class Tower {
 	protected int attackPower;
 	protected int rateOfFire;
 	protected boolean areaDamage;	// single target - aoe
 	protected int cost;
+	protected Point2D pos;
 	//protected image image;
 	//protected Title tile;
 	
-	public Tower(int attackPower, int rateOfFire, boolean areaDamage, int cost) {
+	public Tower(int attackPower, int rateOfFire, boolean areaDamage, int cost, int row, int col) {
 		this.attackPower = attackPower;
 		this.rateOfFire = rateOfFire;
 		this.areaDamage = areaDamage;
