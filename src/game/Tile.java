@@ -6,6 +6,7 @@ public class Tile {
 	private int row;
 	private int col;
 	private Enemy enemy;
+	private Tower tower;
 	private boolean ContainsEnemy;
 	private boolean isPath;
 	private boolean isPlaceable;
@@ -28,6 +29,16 @@ public class Tile {
 	public void placeEnemy(Enemy enemy) {
 		this.enemy = enemy;
 		ContainsEnemy = true;
+	}
+	
+	public void setIsPlaceable(boolean placeAble) {
+		isPlaceable = placeAble;
+	}
+	public boolean placeTower(Tower tower) {
+		if(isPlaceable) {
+			this.tower = tower;
+		}
+		return isPlaceable;
 	}
 	
 	public void removeEnemy() {

@@ -21,7 +21,11 @@ public class TowersOfBrimstoneModel {
 	}
 	
 	public ArrayList<Tile> getCol(int col){
-		return null;
+		ArrayList<Tile> column = new ArrayList<Tile>();
+		for(int row = 0; row < grid.size(); row++) {
+			column.add(row, grid.get(row).get(col));
+		}
+		return column;
 	}
 	
 	public ArrayList<ArrayList<Tile>> getGrid() {
