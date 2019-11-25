@@ -1,6 +1,6 @@
 package towers;
 
-public class Tower {
+public abstract class Tower {
 	protected int attackPower;
 	protected int rateOfFire;
 	protected boolean areaDamage;	// single target - aoe
