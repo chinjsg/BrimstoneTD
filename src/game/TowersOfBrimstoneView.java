@@ -19,8 +19,7 @@ public class TowersOfBrimstoneView extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		BorderPane root = new BorderPane();
-		Canvas canvas = new Canvas(1550, 1000);
-		GridPane gridPane = new GridPane();
+		Canvas canvas = new Canvas(1400, 1000);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
 		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
@@ -36,12 +35,8 @@ public class TowersOfBrimstoneView extends Application{
 				gc.drawImage(tile.getTexture(), 50*col, 50*row);
 			}
 		}
-		Rectangle rect = new Rectangle(100, 1000);
-		rect.setFill(Color.ALICEBLUE);
-		gridPane.add(rect, 1, 1);
 		
 		root.setLeft(canvas);
-		root.setRight(rect);
 		Scene scene = new Scene(root, 1550, 1000);
 		
 		primaryStage.setScene(scene);
