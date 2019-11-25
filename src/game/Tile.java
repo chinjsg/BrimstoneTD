@@ -1,6 +1,7 @@
 package game;
 
 import enemies.Enemy;
+import towers.Tower;
 
 public class Tile {
 	private int row;
