@@ -8,12 +8,8 @@ public class TowersOfBrimstoneController {
 	private ArrayList<Tile> enemyPath;
 	
 	public TowersOfBrimstoneController(TowersOfBrimstoneModel model) {
-		model = this.model;
+		this.model = model;
 	}
-	
-	public void placeTower() {
-
-	}	
 	
 	public void createMap() {
 		enemyPath = new ArrayList<Tile>();
