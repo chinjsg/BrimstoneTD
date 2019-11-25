@@ -8,14 +8,11 @@ public class TowersOfBrimstone {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
-		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
-		controller.createMap();
-		ArrayList<Tile> path = controller.getEnemyPath();
 		
-		System.out.println(path);
 		
-		//Application.launch(TowersOfBrimstoneView.class, args);
+		
+		
+		Application.launch(TowersOfBrimstoneView.class, args);
 
 	}
 
