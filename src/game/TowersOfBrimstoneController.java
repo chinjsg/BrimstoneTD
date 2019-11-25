@@ -12,10 +12,10 @@ public class TowersOfBrimstoneController {
 	}
 	
 	public void placeTower() {
-		
+
 	}	
 	
-	public void createMap1() {
+	public void createMap() {
 		enemyPath = new ArrayList<Tile>();
 		int pathOrder = 0;
 		ArrayList<ArrayList<Tile>> board = model.getGrid();
@@ -34,9 +34,8 @@ public class TowersOfBrimstoneController {
 			}
 		}
 	}
-	
+
 	public ArrayList<Tile> getEnemyPath() {
 		return enemyPath;
 	}
-
 }

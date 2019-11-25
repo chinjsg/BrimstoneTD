@@ -10,7 +10,7 @@ public class TowersOfBrimstone {
 		// TODO Auto-generated method stub
 		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
 		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
-		controller.createMap1();
+		controller.createMap();
 		ArrayList<Tile> path = controller.getEnemyPath();
 		
 		System.out.println(path);
