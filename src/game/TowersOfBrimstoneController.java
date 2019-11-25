@@ -45,11 +45,14 @@ public class TowersOfBrimstoneController {
 		
 		for(int row = 0; row < path.length; row++) {
 			for(int col = 0; col < path[0].length; col++) {
+				Tile tile = board.get(row).get(col);
 				if(path[row][col] == 1) {
-					board.get(row).get(col).setIsPath();
+					tile.setIsPath();
+					enemyPath.add(pathOrder, tile);
+					pathOrder++;
 				}
-				if(path[row][col] == 2) {
-					board.get(row).get(col).setIsPlaceable();
+				else if(path[row][col] == 2) {
+					tile.setIsPlaceable();
 				}
 			}
 		}
