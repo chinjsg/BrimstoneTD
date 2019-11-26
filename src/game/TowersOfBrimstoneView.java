@@ -212,8 +212,7 @@ public class TowersOfBrimstoneView extends Application {
 				System.out.println("Unimplemented Ability 1");		
 			} else if (event.getSource().equals(damageboost)) {
 				System.out.println("Unimplemented Ability 2");		
-			}
-			
+			}		
 		}	
 	}
 }
