@@ -114,31 +114,28 @@ public class TowersOfBrimstoneView extends Application {
 	primaryStage.show();
 
 	new AnimationTimer() {
-	    long lastUpdate = 0;
+	long lastUpdate = 0;
 
 	    @Override
 	    public void handle(long now) {
-		// TODO Auto-generated method stub
-		long timeSec = (now - lastUpdate) / (1000000000 / 30); // 30 Frames every 1 sec.
-		if (timeSec >= 1) {
-		    for (int row = 0; row < grid.size(); row++) {
-				for (int col = 0; col < grid.get(0).size(); col++) {
-				    Tile tile = grid.get(row).get(col);
-				    gc.drawImage(tile.getTexture(), 50 * col, 50 * row);
-				    if (tile.getPlacedTower() != null) {
-				    	Tower tower = tile.getPlacedTower();
-				    	gc2.drawImage(tower.getImage(), 50*col-4, 50*row-15, 65, 65);
-				    }
-				    
-				    
-				}
-		    }
-		   
-		    towerMenuLayer.drawImage(new Image("menuTowerEmpty.png"), 0, 900, 1400, 100);
-		    valueLayer.fillText("Money: " + money, 200, 200);
-		    lastUpdate = now;
-		}
-
+			// TODO Auto-generated method stub
+			long timeSec = (now - lastUpdate) / (1000000000 / 30); // 30 Frames every 1 sec.
+			if (timeSec >= 1) {
+			    for (int row = 0; row < grid.size(); row++) {
+					for (int col = 0; col < grid.get(0).size(); col++) {
+					    Tile tile = grid.get(row).get(col);
+					    gc.drawImage(tile.getTexture(), 50 * col, 50 * row);
+					    if (tile.getPlacedTower() != null) {
+					    	Tower tower = tile.getPlacedTower();
+					    	gc2.drawImage(tower.getImage(), 50*col-4, 50*row-15, 65, 65);
+					    }   
+					}
+			    }
+			   
+			    towerMenuLayer.drawImage(new Image("menuTowerEmpty.png"), 0, 900, 1400, 100);
+			    valueLayer.fillText("Gold: " + money, 200, 200);
+			    lastUpdate = now;
+			}
 	    }
 
 	}.start();
@@ -212,7 +209,7 @@ public class TowersOfBrimstoneView extends Application {
 				System.out.println("Unimplemented Ability 1");		
 			} else if (event.getSource().equals(damageboost)) {
 				System.out.println("Unimplemented Ability 2");		
-			}		
+			}	
 		}	
 	}
 }
