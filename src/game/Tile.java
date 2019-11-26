@@ -1,6 +1,7 @@
 package game;
 
 import enemies.Enemy;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import towers.Tower;
 
@@ -12,6 +13,7 @@ public class Tile {
 	private int col;
 	private Enemy enemy;
 	private Tower tower;
+	private Point2D pos;
 	private boolean ContainsEnemy;
 	private boolean isPath;
 	private boolean isPlaceable;
@@ -21,6 +23,7 @@ public class Tile {
 	public Tile(int row, int col) {
 		this.row = row;
 		this.col = col;
+		pos = new Point2D(col*50+25, row*50+25);
 		isPath = false;
 		isPlaceable = false;
 		texture = new Image(GRASS);
@@ -60,6 +63,9 @@ public class Tile {
 	public void removeEnemy() {
 		enemy = null;
 		ContainsEnemy = false;
+	}
+	public Point2D getPos() {
+		return pos;
 	}
 	public String toString() {
 		return "row: " + row + " col: " + col;

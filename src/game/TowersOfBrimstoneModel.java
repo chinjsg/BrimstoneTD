@@ -55,6 +55,12 @@ public class TowersOfBrimstoneModel {
 		gold = gold - amount;
 		return true;
 	}
+	public void setEnd(int row, int col) {
+		endingTile = grid.get(row).get(col);
+	}
+	public Tile getEnd() {
+		return endingTile;
+	}
 	
 	public int getGold() {
 		return gold;

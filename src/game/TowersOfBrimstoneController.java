@@ -11,10 +11,6 @@ public class TowersOfBrimstoneController {
 		this.model = model;
 	}
 	
-	public void placeTower() {
-
-	}	
-	
 	public void createMap() {
 		enemyPath = new ArrayList<Tile>();
 		int pathOrder = 0;
@@ -48,14 +44,38 @@ public class TowersOfBrimstoneController {
 				Tile tile = board.get(row).get(col);
 				if(path[row][col] == 1) {
 					tile.setIsPath();
-					enemyPath.add(pathOrder, tile);
-					pathOrder++;
 				}
 				else if(path[row][col] == 2) {
 					tile.setIsPlaceable();
 				}
 			}
 		}
+		model.setEnd(4, 27);
+		createPath(6, 0);
+	}
+	public boolean createPath(int row, int col) {
+		boolean found = false;
+		System.out.println("ROW: "+ row + " COL: " + col);
+		if(model.getRow(row).get(col).equals(model.getEnd())) {
+			enemyPath.add(model.getRow(row).get(col));
+			found = true;
+			return found;
+		}
+		if(enemyPath.contains(model.getRow(row).get(col))) {
+			return false;
+		}
+		if(model.getRow(row).get(col).getIsPath()) {
+			enemyPath.add(model.getRow(row).get(col));
+			if(!found)
+				found = createPath(row, col+1);
+			if(!found)
+				found = createPath(row+1, col);
+			if(!found)
+				found = createPath(row-1, col);
+			if(!found)
+				found = createPath(row, col-1);
+		}
+		return found;
 	}
 
 	public ArrayList<Tile> getEnemyPath() {
