@@ -70,7 +70,7 @@ public class TowersOfBrimstoneView extends Application {
 	towerType = 1; // temp
 	selectedTower = controller.getTowerType(1); // temp
 
-	gc.fillText("Money: " + Integer.toString(money), 100, 100);
+	gc.fillText("Gold: " + Integer.toString(money), 100, 100);
 	
 	root.getChildren().add(canvas);
 	root.getChildren().add(canvas2);
@@ -87,13 +87,13 @@ public class TowersOfBrimstoneView extends Application {
 	    
 	    
 	    
-		//Check tower on this spot
+		// Check tower on this spot
 		controller.checkTower(row, col);
 		
 		// Used to stop placement on Right Click
 		if (event.getButton() == MouseButton.SECONDARY && togglePlacement == true) {
 			togglePlacement = false;
-			System.out.println("Tower Placement enabled: " + togglePlacement);
+			System.out.println("Tower Placement disabled!");
 		}
 		
 		// Tower Placement logic
@@ -105,26 +105,6 @@ public class TowersOfBrimstoneView extends Application {
 				System.out.println("Tower has been placed!");
 			} else {
 				System.out.println("Cannot place on this spot or insufficient funds");
-			}
-		}
-		
-		// test--TEMPORARY HIDDEN BUTTON FOR TOGGLING PLACEMENT -- to be triggered when selecting a tower in the GUIMenu
-		if (row == 0 && col == 27) { // Top right corner
-			togglePlacement = !togglePlacement;
-			System.out.println("togglePlacement is " + togglePlacement);
-		}
-		// test--TEMP FOR CYCLING THROUGH AVAILABLE TOWERS -- to be removed
-		if (row == 1 && col == 27) { // Top right corner
-			if (towerType == 1) {
-				towerType = 2;
-				selectedTower = controller.getTowerType(towerType);
-				System.out.println(selectedTower.getAttackPower());
-				System.out.println("You have selected to place Archer Towers! (" + towerType + ")");
-			} else {
-				towerType = 1;
-				selectedTower = controller.getTowerType(towerType);
-				System.out.println(selectedTower.getAttackPower());
-				System.out.println("You have selected to place Sample Towers! (" + towerType + ")");
 			}
 		}
 	});
@@ -215,19 +195,23 @@ public class TowersOfBrimstoneView extends Application {
 				System.out.println("Selected Stone tower");
 			} else if (event.getSource().equals(fire)) {
 				selectedTower = controller.getTowerType(2);
-				System.out.println("Selected Fire tower");		
+				System.out.println("Selected Fire tower");
 			} else if (event.getSource().equals(ice)) {
-				System.out.println("ice");		
+				selectedTower = controller.getTowerType(3);
+				System.out.println("Selected Ice tower");		
 			} else if (event.getSource().equals(heavy)) {
-				System.out.println("heavy");		
+				selectedTower = controller.getTowerType(4);
+				System.out.println("Selected Heavy tower");		
 			} else if (event.getSource().equals(lightning)) {
-				System.out.println("lightning");		
+				selectedTower = controller.getTowerType(5);
+				System.out.println("Selected Lightning tower");		
 			} else if (event.getSource().equals(magic)) {
-				System.out.println("magic");		
+				selectedTower = controller.getTowerType(6);
+				System.out.println("Selected Magic tower");		
 			} else if (event.getSource().equals(slowdown)) {
-				System.out.println("slowdown");		
+				System.out.println("Unimplemented Ability 1");		
 			} else if (event.getSource().equals(damageboost)) {
-				System.out.println("damageboost");		
+				System.out.println("Unimplemented Ability 2");		
 			}
 			
 		}	

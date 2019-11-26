@@ -14,7 +14,7 @@ public class TowersOfBrimstoneModel {
 	public TowersOfBrimstoneModel() {
 		grid = createBlankMap();
 		towerMap = new TowerMap();
-		gold = 50000;
+		gold = 2000;
 	}
 	
 	public void setEndingTile(int row, int col) {

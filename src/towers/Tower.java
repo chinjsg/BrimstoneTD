@@ -18,13 +18,26 @@ public abstract class Tower {
 	//protected image image;
 	//protected Title tile;
 	
-	public Tower(int attackPower, int rateOfFire, boolean areaDamage, int cost, int row, int col, String image_path) {
+	public Tower(int attackPower, int rateOfFire, boolean areaDamage, int cost, int row, int col, int imageNum) {
 		this.attackPower = attackPower;
 		this.rateOfFire = rateOfFire;
 		this.areaDamage = areaDamage;
 		this.cost = cost;
 		this.row = row;
 		this.col = col;
+		if (imageNum == 1) {
+			image_path = "tower_stone.png";
+		} else if (imageNum == 2) {
+			image_path = "tower_fire.png";
+		} else if (imageNum == 3) {
+			image_path = "tower_ice.png";
+		} else if (imageNum == 4) {
+			image_path = "tower_heavy.png";
+		} else if (imageNum == 5) {
+			image_path = "tower_lightning.png";
+		} else {
+			image_path = "tower_magic.png";
+		}
 		this.texture = new Image(image_path);
 	}
 	

@@ -2,8 +2,12 @@ package game;
 
 import java.util.ArrayList;
 
-import towers.ArcherTower;
-import towers.SampleTower;
+import towers.StoneTower;
+import towers.FireTower;
+import towers.HeavyTower;
+import towers.IceTower;
+import towers.LightningTower;
+import towers.MagicTower;
 import towers.Tower;
 import towers.TowerMap;
 
@@ -87,7 +91,7 @@ public class TowersOfBrimstoneController {
 		
 		if (tile.getPlacedTower() != null) {
 			Tower tower = tile.getPlacedTower();
-			System.out.println("This tower has " + String.valueOf(tower.getAttackPower()) + " AP "
+			System.out.println("The price of this " + String.valueOf(tower.getCost()) + " gold "
 					+ "and it is placed on Row: " + tower.getRow() + " and Col:" + tower.getCol());
 		}
 		
@@ -96,9 +100,17 @@ public class TowersOfBrimstoneController {
 	public Tower getTowerType(int towerNum) {
 		Tower tower = null;
 		if (towerNum == 1) {
-			tower = new SampleTower();
+			tower = new StoneTower();
 		} else if (towerNum == 2) {
-			tower = new ArcherTower();
+			tower = new FireTower();
+		} else if (towerNum == 3) {
+			tower = new IceTower();
+		} else if (towerNum == 4) {
+			tower = new HeavyTower();
+		} else if (towerNum == 5) {
+			tower = new LightningTower();
+		} else if (towerNum == 6) {
+			tower = new MagicTower();
 		}
 		return tower;
 	}
