@@ -147,7 +147,7 @@ public class TowersOfBrimstoneView extends Application {
 				    gc.drawImage(tile.getTexture(), 50 * col, 50 * row);
 				    if (tile.getPlacedTower() != null) {
 				    	Tower t = tile.getPlacedTower();
-				    	gc2.drawImage(t.getImage(), 50*col, 50*row, 70, 70);
+				    	gc2.drawImage(t.getImage(), 50*col-5, 50*row-30, 70, 70);
 				    }
 				    
 				    
