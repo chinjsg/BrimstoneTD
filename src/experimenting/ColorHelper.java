@@ -83,7 +83,7 @@ public class ColorHelper extends GUI {
 	Image img = new Image("assets/easyMap2-01.png");
 	Canvas map = new Canvas();
 	
-	map.getGraphicsContext2D().drawImage(img, 0, 0);
+	map.getGraphicsContext2D().drawImage(img, 0, 0,1400,1000);
 	Image image = new Image("assets/UI/label/menuTowerEmpty.png",1400, 200, false, false);
 	
 	BackgroundImage background = new BackgroundImage(image, null, null, null, null);

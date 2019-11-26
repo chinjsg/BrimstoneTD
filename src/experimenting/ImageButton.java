@@ -17,7 +17,7 @@ public class ImageButton extends Button {
 	imgView.setPreserveRatio(true);
 	imgView.setFitWidth(width);
 	imgView.setFitHeight(height);
-
+	
 	setGraphic(imgView);
 	setStyle(STYLE_NORMAL);
 

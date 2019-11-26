@@ -47,7 +47,7 @@ public class GUI extends Application {
         ColorHelper cHelper = new ColorHelper();
         cHelper.makeMainScreen();
         Parent root;
-        cHelper.mainScreen.setRight(imageView);
+//        cHelper.mainScreen.setRight(imageView);
 	scene = new Scene(cHelper.mainScreen,1400,1000);
 	
         primaryStage.setScene(scene);
