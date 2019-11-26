@@ -51,6 +51,8 @@ public class TowersOfBrimstoneView extends Application {
 	base = new AnchorPane();
 	BorderPane root = new BorderPane();
 	Canvas canvas = new Canvas(1400, 1000);
+	Canvas canvas2 = new Canvas(1400, 1000);
+	GraphicsContext gc2 = canvas2.getGraphicsContext2D();
 	GraphicsContext gc = canvas.getGraphicsContext2D();
 	//gc.drawImage(new Image("easyMap.png",1400,1000, false, false),0, 0);
 	GraphicsContext valueLayer = canvas.getGraphicsContext2D();
@@ -69,11 +71,13 @@ public class TowersOfBrimstoneView extends Application {
 	selectedTower = controller.getTowerType(1); // temp
 
 	gc.fillText("Money: " + Integer.toString(money), 100, 100);
-	root.setCenter(canvas);
+	
+	root.getChildren().add(canvas);
+	root.getChildren().add(canvas2);
 	base.getChildren().add(root);
 	setUpTowerMenu();
 	Scene scene = new Scene(base, 1400, 1000);
-	canvas.setOnMouseClicked((event) -> {
+	canvas2.setOnMouseClicked((event) -> {
 	    int xPos = (int) event.getX();
 	    int yPos = (int) event.getY();
 	    int row = yPos/50;
@@ -124,6 +128,8 @@ public class TowersOfBrimstoneView extends Application {
 			}
 		}
 	});
+	
+	
 	primaryStage.setScene(scene);
 	primaryStage.show();
 
@@ -136,14 +142,14 @@ public class TowersOfBrimstoneView extends Application {
 		long timeSec = (now - lastUpdate) / (1000000000 / 30); // 30 Frames every 1 sec.
 		if (timeSec >= 1) {
 		    for (int row = 0; row < grid.size(); row++) {
-		    	
 				for (int col = 0; col < grid.get(0).size(); col++) {
 				    Tile tile = grid.get(row).get(col);
-				    //gc.drawImage(tile.getTexture(), 50 * col, 50 * row);
+				    gc.drawImage(tile.getTexture(), 50 * col, 50 * row);
 				    if (tile.getPlacedTower() != null) {
 				    	Tower t = tile.getPlacedTower();
-				    	gc.drawImage(t.getImage(), 50*col, 50*row, 70, 70);
+				    	gc2.drawImage(t.getImage(), 50*col, 50*row, 70, 70);
 				    }
+				    
 				    
 				}
 		    }
