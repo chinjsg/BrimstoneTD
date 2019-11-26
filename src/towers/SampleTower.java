@@ -9,6 +9,6 @@ public class SampleTower extends Tower {
 		//  - Area Damage  = No
 		//  - Cost         = 50 gold
 		//  - X/Y coordinates will be set when it is placed
-		super(10, 1, false, 50, 0, 0);
+		super(10, 1, false, 50, 0, 0, "tower_1@4x.png");
 	}
 }

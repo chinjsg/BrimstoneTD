@@ -73,4 +73,8 @@ public class Tile {
 	public boolean getIsPlaceable() {
 		return isPlaceable;
 	}
+
+	
+
+
 }
