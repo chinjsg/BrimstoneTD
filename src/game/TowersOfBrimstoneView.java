@@ -146,8 +146,8 @@ public class TowersOfBrimstoneView extends Application {
 				    Tile tile = grid.get(row).get(col);
 				    gc.drawImage(tile.getTexture(), 50 * col, 50 * row);
 				    if (tile.getPlacedTower() != null) {
-				    	Tower t = tile.getPlacedTower();
-				    	gc2.drawImage(t.getImage(), 50*col-4, 50*row-10, 65, 65);
+				    	Tower tower = tile.getPlacedTower();
+				    	gc2.drawImage(tower.getImage(), 50*col-4, 50*row-15, 65, 65);
 				    }
 				    
 				    
@@ -166,36 +166,36 @@ public class TowersOfBrimstoneView extends Application {
     }
 
     private void setUpTowerMenu() {
-	int height = 90;
-	int width = 110;
-	HBox hBox = new HBox();
-	stone = new ImageButton("stone.png",width, height);
-	fire = new ImageButton("fire.png", width, height);
-	ice = new ImageButton("ice.png", width, height);
-	heavy = new ImageButton("heavy.png", width, height);
-	lightning = new ImageButton("lightning.png", width, height);
-	magic = new ImageButton("magic.png", width, height);
-	slowdown = new ImageButton("slowdown.png", width, height);
-	damageboost = new ImageButton("damageboost.png", width, height);
-
-	hBox.setAlignment(Pos.CENTER);
-	hBox.setSpacing(100);
-	hBox.setPadding(new Insets(0, 0, 0, 50));
-	hBox.getChildren().add(stone);
-	hBox.getChildren().add(fire);
-	hBox.getChildren().add(ice);
-	hBox.getChildren().add(heavy);
-	hBox.getChildren().add(lightning);
-	hBox.getChildren().add(magic);
-	hBox.getChildren().add(slowdown);
-	hBox.getChildren().add(damageboost);
-	base.getChildren().add(hBox);
+		int height = 90;
+		int width = 110;
+		HBox hBox = new HBox();
+		stone = new ImageButton("stone.png",width, height);
+		fire = new ImageButton("fire.png", width, height);
+		ice = new ImageButton("ice.png", width, height);
+		heavy = new ImageButton("heavy.png", width, height);
+		lightning = new ImageButton("lightning.png", width, height);
+		magic = new ImageButton("magic.png", width, height);
+		slowdown = new ImageButton("slowdown.png", width, height);
+		damageboost = new ImageButton("damageboost.png", width, height);
 	
-	base.setBottomAnchor(hBox, 25.0);
-	
-	for (Node btn : hBox.getChildren()) {
-		((ImageButton) btn).setOnAction(new ButtonListener());
-	}
+		hBox.setAlignment(Pos.CENTER);
+		hBox.setSpacing(100);
+		hBox.setPadding(new Insets(0, 0, 0, 50));
+		hBox.getChildren().add(stone);
+		hBox.getChildren().add(fire);
+		hBox.getChildren().add(ice);
+		hBox.getChildren().add(heavy);
+		hBox.getChildren().add(lightning);
+		hBox.getChildren().add(magic);
+		hBox.getChildren().add(slowdown);
+		hBox.getChildren().add(damageboost);
+		base.getChildren().add(hBox);
+		
+		base.setBottomAnchor(hBox, 25.0);
+		
+		for (Node btn : hBox.getChildren()) {
+			((ImageButton) btn).setOnAction(new ButtonListener());
+		}
     }
 
     private class ButtonListener implements EventHandler<ActionEvent> {
