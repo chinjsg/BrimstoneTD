@@ -42,7 +42,6 @@ public abstract class Enemy {
 	}
 	public Point2D getDirection() {
 		Tile targetTile = path.get(TileIndex);
-		
 		Point2D direction = targetTile.getPos().subtract(position);
 		double distance = direction.magnitude();
 		if(distance <= 10) {

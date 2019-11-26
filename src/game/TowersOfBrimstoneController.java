@@ -13,7 +13,6 @@ public class TowersOfBrimstoneController {
 	
 	public void createMap() {
 		enemyPath = new ArrayList<Tile>();
-		int pathOrder = 0;
 		ArrayList<ArrayList<Tile>> board = model.getGrid();
 	
 		int[][] path = 
@@ -78,7 +77,7 @@ public class TowersOfBrimstoneController {
 		return found;
 	}
 
-	public ArrayList<Tile> getEnemyPath() {
+	public ArrayList<Tile> getEnemyPath(){
 		return enemyPath;
 	}
 }
