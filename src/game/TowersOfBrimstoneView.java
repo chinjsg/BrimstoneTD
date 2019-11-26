@@ -33,6 +33,7 @@ public class TowersOfBrimstoneView extends Application {
 	BorderPane root = new BorderPane();
 	Canvas canvas = new Canvas(1400, 1000);
 	GraphicsContext gc = canvas.getGraphicsContext2D();
+	 gc.drawImage(new Image("easyMap.png",1400,1000, false, false),0, 0);
 	GraphicsContext valueLayer = canvas.getGraphicsContext2D();
 	GraphicsContext towerMenuLayer = canvas.getGraphicsContext2D();
 
@@ -78,7 +79,7 @@ public class TowersOfBrimstoneView extends Application {
 //			    gc.drawImage(tile.getTexture(), 50 * col, 50 * row);
 //			}
 //		    }
-		    gc.drawImage(new Image("easyMap.png",1400,1000, false, false),0, 0);
+		   
 		    towerMenuLayer.drawImage(new Image("menuTowerEmpty.png"), 0, 900, 1400, 100);
 		    valueLayer.fillText("Money: " + money, 200, 200);
 		    lastUpdate = now;
