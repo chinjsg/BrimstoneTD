@@ -83,7 +83,7 @@ public class TowersOfBrimstoneView extends Application {
 	    
 	    
 	    
-	  //Check tower on this spot
+		//Check tower on this spot
 		controller.checkTower(row, col);
 		
 		// Used to stop placement on Right Click
@@ -139,7 +139,7 @@ public class TowersOfBrimstoneView extends Application {
 		    	
 				for (int col = 0; col < grid.get(0).size(); col++) {
 				    Tile tile = grid.get(row).get(col);
-				    //gc.drawImage(tile.getTexture(), 50 * col, 50 * row);
+				    gc.drawImage(tile.getTexture(), 50 * col, 50 * row);
 				    if (tile.getPlacedTower() != null) {
 				    	Tower t = tile.getPlacedTower();
 				    	gc.drawImage(t.getImage(), 50*col, 50*row, 70, 70);
