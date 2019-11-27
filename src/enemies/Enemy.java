@@ -44,7 +44,7 @@ public abstract class Enemy {
 		Tile targetTile = path.get(TileIndex);
 		Point2D direction = targetTile.getPos().subtract(position);
 		double distance = direction.magnitude();
-		if(distance <= 10) {
+		if(distance <= 10 && TileIndex < path.size()-1) {
 			TileIndex++;
 		}
 		direction = direction.normalize();

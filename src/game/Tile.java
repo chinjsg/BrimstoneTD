@@ -27,6 +27,7 @@ public class Tile {
 		isPath = false;
 		isPlaceable = false;
 		texture = new Image(GRASS);
+		tower = null;
 	}
 
 	public Image getTexture() {
@@ -53,11 +54,11 @@ public class Tile {
 		isPlaceable = true;
 		texture = new Image(PLACE);
 	}
-	public boolean placeTower(Tower tower) {
-		if(isPlaceable) {
+	public void placeTower(Tower tower) {
+		//if(isPlaceable) {
 			this.tower = tower;
-		}
-		return isPlaceable;
+		//}
+		//return isPlaceable;
 	}
 	
 	public void removeEnemy() {
@@ -70,5 +71,16 @@ public class Tile {
 	public String toString() {
 		return "row: " + row + " col: " + col;
 	}
+
+	public Tower getPlacedTower() {
+		return tower;
+	}
+	
+	public boolean getIsPlaceable() {
+		return isPlaceable;
+	}
+
+	
+
 
 }

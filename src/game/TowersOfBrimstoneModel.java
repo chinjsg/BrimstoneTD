@@ -2,14 +2,19 @@ package game;
 
 import java.util.ArrayList;
 
+import towers.Tower;
+import towers.TowerMap;
+
 public class TowersOfBrimstoneModel {
 	private ArrayList<ArrayList<Tile>> grid;
 	private Tile endingTile;
 	private int gold;
+	private TowerMap towerMap;
 	
 	public TowersOfBrimstoneModel() {
 		grid = createBlankMap();
-		gold = 100;
+		towerMap = new TowerMap();
+		gold = 2000;
 	}
 	
 	public void setEndingTile(int row, int col) {
@@ -66,4 +71,7 @@ public class TowersOfBrimstoneModel {
 		return gold;
 	}
 
+	public void updateTowerMap(Tower tower) {
+		towerMap.addTower(tower);
+	}
 }

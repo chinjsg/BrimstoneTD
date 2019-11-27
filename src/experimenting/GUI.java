@@ -13,7 +13,7 @@ import javafx.util.Duration;
 
 public class GUI extends Application {
 
-    private static final Image IMAGE = new Image("6_enemies_1_walk.png");
+    private static final Image IMAGE = new Image("assets/ice/enemies/1/ice1Attack.png");
 
     private static final int COLUMNS  =   5;
     private static final int COUNT    =  20;
@@ -22,7 +22,8 @@ public class GUI extends Application {
     private static final int WIDTH    = 337;
     private static final int HEIGHT   = 294;
 
-    private Scene scene;
+    public Scene scene;
+    
     public static void main(String[] args) {
         launch(args);
     }
@@ -46,8 +47,8 @@ public class GUI extends Application {
         ColorHelper cHelper = new ColorHelper();
         cHelper.makeMainScreen();
         Parent root;
-        cHelper.mainScreen.setRight(imageView);
-	Scene scene = new Scene(cHelper.mainScreen,1400,1000);
+//        cHelper.mainScreen.setRight(imageView);
+	scene = new Scene(cHelper.mainScreen,1400,1000);
 	
         primaryStage.setScene(scene);
         primaryStage.show();
