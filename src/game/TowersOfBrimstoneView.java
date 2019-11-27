@@ -60,11 +60,11 @@ public class TowersOfBrimstoneView extends Application {
 		time = 1;
 		BorderPane root = new BorderPane();
 		Canvas canvas = new Canvas(1400, 1000);
-		Canvas canvas2 = new Canvas(1400, 1000);
+		Canvas selectionCanvas = new Canvas(1400, 1000);
 		Canvas enemies = new Canvas(1400,1000);
 		GraphicsContext enemyGc = enemies.getGraphicsContext2D();
 		GraphicsContext gc = canvas.getGraphicsContext2D();
-		GraphicsContext gc2 = canvas2.getGraphicsContext2D();
+		GraphicsContext gc2 = selectionCanvas.getGraphicsContext2D();
 		gc.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
 		GraphicsContext towerMenuLayer = canvas.getGraphicsContext2D();
 
@@ -91,7 +91,7 @@ public class TowersOfBrimstoneView extends Application {
 
 		root.getChildren().add(canvas);
 		root.getChildren().add(enemies);
-		root.getChildren().add(canvas2);
+		root.getChildren().add(selectionCanvas);
 		base.getChildren().add(root);
 		base.getChildren().add(gold);
 		
@@ -99,7 +99,7 @@ public class TowersOfBrimstoneView extends Application {
 		base.setLeftAnchor(gold, 200.00);
 		setUpTowerMenu();
 		Scene scene = new Scene(base, 1400, 1000);
-		canvas2.setOnMouseClicked((event) -> {
+		selectionCanvas.setOnMouseClicked((event) -> {
 			int xPos = (int) event.getX();
 			int yPos = (int) event.getY();
 			int row = yPos / 50;
@@ -144,7 +144,7 @@ public class TowersOfBrimstoneView extends Application {
 			@Override
 			public void handle(long now) {
 				// TODO Auto-generated method stub
-				long timeSec = (now - lastUpdate)/(1000000000/60);				// 30 Frames every 1 sec.
+				long timeSec = (now - lastUpdate)/(1000000000/60);				// 60 Frames every 1 sec.
 				if(timeSec >= 1) {
 					for (int row = 0; row < grid.size(); row++) {
 						for (int col = 0; col < grid.get(0).size(); col++) {
