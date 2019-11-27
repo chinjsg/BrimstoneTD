@@ -65,7 +65,6 @@ public class TowersOfBrimstoneView extends Application {
 		GraphicsContext enemyGc = enemies.getGraphicsContext2D();
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		GraphicsContext gc2 = canvas2.getGraphicsContext2D();
-//		gc.drawImage(new Image("easyMap.png", 1400, 1000, false, false), 0, 0);
 		gc.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
 		GraphicsContext towerMenuLayer = canvas.getGraphicsContext2D();
 
