@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 import javafx.application.Application;
 
 public class TowersOfBrimstone {
@@ -9,5 +11,4 @@ public class TowersOfBrimstone {
 		Application.launch(TowersOfBrimstoneView.class, args);
 
 	}
-
 }
