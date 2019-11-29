@@ -1,7 +1,8 @@
 package game;
 
 import java.util.ArrayList;
-
+import java.util.Observable;
+import java.util.Observer;
 
 import enemies.Enemy;
 import enemies.Zombie;
@@ -31,7 +32,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import towers.Tower;
 
-public class TowersOfBrimstoneView extends Application {
+public class TowersOfBrimstoneView extends Application implements Observer {
 
 	ImageButton stone;
 	ImageButton fire;
@@ -47,11 +48,17 @@ public class TowersOfBrimstoneView extends Application {
 	private static final int WIDTH = 1400;
 	private static final int HEIGHT = 1000;
 	private int time;
-	private int money;
+	//private int money;
 	private AnchorPane base;
 	private boolean togglePlacement;
 	private Tower selectedTower;
-
+	
+	private GraphicsContext enemyGc;
+	private GraphicsContext gc;
+	private GraphicsContext gc2;
+	private GraphicsContext towerMenuLayer;
+	private Label currency;
+	int tick;
 
 
 	@Override
@@ -62,29 +69,28 @@ public class TowersOfBrimstoneView extends Application {
 		Canvas canvas = new Canvas(1400, 1000);
 		Canvas selectionCanvas = new Canvas(1400, 1000);
 		Canvas enemies = new Canvas(1400,1000);
-		GraphicsContext enemyGc = enemies.getGraphicsContext2D();
-		GraphicsContext gc = canvas.getGraphicsContext2D();
-		GraphicsContext gc2 = selectionCanvas.getGraphicsContext2D();
+		enemyGc = enemies.getGraphicsContext2D();
+		gc = canvas.getGraphicsContext2D();
+		gc2 = selectionCanvas.getGraphicsContext2D();
 		gc.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
-		GraphicsContext towerMenuLayer = canvas.getGraphicsContext2D();
+		towerMenuLayer = canvas.getGraphicsContext2D();
 
 		
 		
 
 		model = new TowersOfBrimstoneModel();
-		money = model.getGold();
+		model.addObserver(this);
+		
+		//money = model.getGold();
 		controller = new TowersOfBrimstoneController(model);
 		controller.createMap();
 		
-		String str = "Gold: " + Integer.toString(money);
-		Label gold = new Label(str);
+		String str = "Gold: " + Integer.toString(model.getGold());
+		currency = new Label(str);
 		
 		ArrayList<ArrayList<Tile>> grid = model.getGrid();
 		
 		controller.getEnemyPath();
-		
-		System.out.println(grid);
-
 		
 		togglePlacement = false;
 		selectedTower = controller.getTowerType(1); // temp
@@ -93,12 +99,14 @@ public class TowersOfBrimstoneView extends Application {
 		root.getChildren().add(enemies);
 		root.getChildren().add(selectionCanvas);
 		base.getChildren().add(root);
-		base.getChildren().add(gold);
+		base.getChildren().add(currency);
 		
-		base.setTopAnchor(gold, 200.00);
-		base.setLeftAnchor(gold, 200.00);
+		base.setTopAnchor(currency, 200.00);
+		base.setLeftAnchor(currency, 200.00);
+		
 		setUpTowerMenu();
 		Scene scene = new Scene(base, 1400, 1000);
+		
 		selectionCanvas.setOnMouseClicked((event) -> {
 			int xPos = (int) event.getX();
 			int yPos = (int) event.getY();
@@ -111,8 +119,7 @@ public class TowersOfBrimstoneView extends Application {
 			controller.checkTower(row, col);
 
 			// Used to stop placement on Right Click
-			if (event.getButton() == MouseButton.SECONDARY
-					&& togglePlacement == true) {
+			if (event.getButton() == MouseButton.SECONDARY && togglePlacement == true) {
 				togglePlacement = false;
 				System.out.println("Tower Placement disabled!");
 			}
@@ -122,17 +129,16 @@ public class TowersOfBrimstoneView extends Application {
 			if (togglePlacement == true && row < temp) {
 				boolean isPlaced = controller.placeTower(row, col, selectedTower);
 				if (isPlaced) {
-					money = model.getGold();
+					//money = model.getGold();
 					System.out.println("Tower has been placed!");
 				} else {
-					System.out.println(
-							"Cannot place on this spot or insufficient funds");
+					System.out.println("Cannot place on this spot or insufficient funds");
 				}
 			}
 		});
 
 		Zombie zomb = new Zombie(0,6, controller.getEnemyPath());
-		
+		towerMenuLayer.drawImage(new Image("menuTowerEmpty2.png"), 0, 900, 1400, 100);
 		
 
 		primaryStage.setScene(scene);
@@ -146,33 +152,33 @@ public class TowersOfBrimstoneView extends Application {
 				// TODO Auto-generated method stub
 				long timeSec = (now - lastUpdate)/(1000000000/60);				// 60 Frames every 1 sec.
 				if(timeSec >= 1) {
-					for (int row = 0; row < grid.size(); row++) {
-						for (int col = 0; col < grid.get(0).size(); col++) {
-							Tile tile = grid.get(row).get(col);
-							if (tile.getPlacedTower() != null) {
-								Tower tower = tile.getPlacedTower();
-								gc2.drawImage(tower.getImage(), 50 * col - 4, 50 * row - 15, 65, 65);
-							}
-						}
-						if(tick%20 == 0) {
-							updateEnemy(zomb, enemyGc);
-						}
-						tick++;
-					}
-					towerMenuLayer.drawImage(new Image("menuTowerEmpty2.png"), 0, 900, 1400, 100);
-					String str = "Gold: " + money;
-					gold.setText(str);
+					controller.frameUpdate(tick, zomb);			
 					lastUpdate = now;
-				}
-				
-
+				}				
 			}
-
 		}.start();
-
 	}
 						
-						
+	private void frameUpdateGUI(ArrayList<ArrayList<Tile>> grid, int tick, Zombie zomb) {
+		for (int row = 0; row < grid.size(); row++) {
+			for (int col = 0; col < grid.get(0).size(); col++) {
+				Tile tile = grid.get(row).get(col);
+				if (tile.getPlacedTower() != null) {
+					Tower tower = tile.getPlacedTower();
+					gc2.drawImage(tower.getImage(), 50 * col - 4, 50 * row - 15, 65, 65);
+				}
+			}
+			if(tick%20 == 0) {
+				updateEnemy(zomb, enemyGc);
+			}
+			tick++;
+		}
+	}
+	
+	private void frameUpdateCurrency(int newVal) {
+		String str = "Gold: " + newVal;
+		currency.setText(str);
+	}
 						
 						
 	private void updateEnemy(Enemy enemy, GraphicsContext d) {
@@ -250,6 +256,17 @@ public class TowersOfBrimstoneView extends Application {
 			} else if (event.getSource().equals(damageboost)) {
 				System.out.println("Unimplemented Ability 2");
 			}
+		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		if (arg instanceof FrameMessage) {
+			FrameMessage msg = (FrameMessage) arg;
+			
+			frameUpdateCurrency(msg.getCurrency());
+			frameUpdateGUI(msg.getGrid(), msg.getTick(), msg.getZombie());	
 		}
 	}
 }

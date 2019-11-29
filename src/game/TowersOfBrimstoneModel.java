@@ -1,11 +1,13 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
+import enemies.Zombie;
 import towers.Tower;
 import towers.TowerMap;
 
-public class TowersOfBrimstoneModel {
+public class TowersOfBrimstoneModel extends Observable {
 	private ArrayList<ArrayList<Tile>> grid;
 	private Tile endingTile;
 	private int gold;
@@ -73,5 +75,12 @@ public class TowersOfBrimstoneModel {
 
 	public void updateTowerMap(Tower tower) {
 		towerMap.addTower(tower);
+	}
+	
+	public void updateFrame(int tick, Zombie zomb) {
+		FrameMessage update = new FrameMessage(getGrid(), tick, getGold(), zomb);
+		
+		setChanged();
+		notifyObservers(update);
 	}
 }

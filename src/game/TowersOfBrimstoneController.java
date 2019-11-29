@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
+import enemies.Zombie;
 import towers.StoneTower;
 import towers.FireTower;
 import towers.HeavyTower;
@@ -63,7 +64,7 @@ public class TowersOfBrimstoneController {
 	}
 	public boolean createPath(int row, int col) {
 		boolean found = false;
-		System.out.println("ROW: "+ row + " COL: " + col);
+		//System.out.println("ROW: "+ row + " COL: " + col);
 		if(col < model.getRow(row).size() && row < model.getCol(col).size()) {
 		if(model.getRow(row).get(col).equals(model.getEnd())) {
 			enemyPath.add(model.getRow(row).get(col));
@@ -138,5 +139,9 @@ public class TowersOfBrimstoneController {
 			tower = new MagicTower();
 		}
 		return tower;
+	}
+	
+	public void frameUpdate(int tick, Zombie zomb) {
+		model.updateFrame(tick, zomb);
 	}
 }
