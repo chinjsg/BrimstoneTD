@@ -151,8 +151,7 @@ public class TowersOfBrimstoneView extends Application {
 							Tile tile = grid.get(row).get(col);
 							if (tile.getPlacedTower() != null) {
 								Tower tower = tile.getPlacedTower();
-								gc2.drawImage(tower.getImage(), 50 * col - 4,
-										50 * row - 15, 65, 65);
+								gc2.drawImage(tower.getImage(), 50 * col - 4, 50 * row - 15, 65, 65);
 							}
 						}
 						if(tick%20 == 0) {
