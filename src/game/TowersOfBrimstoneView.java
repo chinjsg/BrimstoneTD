@@ -20,6 +20,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -62,10 +63,12 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	boolean highlighted = false;
 	int prevCol = 0;
 	int prevRow = 19;
+	private AnchorPane towerStatMenu;
 
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		towerStatMenu = new AnchorPane();
 		base = new AnchorPane();
 		time = 1;
 		BorderPane root = new BorderPane();
@@ -77,6 +80,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		gc2 = selectionCanvas.getGraphicsContext2D();
 		gc.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
 		towerMenuLayer = canvas.getGraphicsContext2D();
+		
+		//towerview
+		ImageView towerView = new ImageView(new Image("tower_bg_stats.png", 150, 350, false, false));
 		
 		
 		
@@ -144,6 +150,11 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		
 		base.setTopAnchor(currency, 200.00);
 		base.setLeftAnchor(currency, 200.00);
+		
+		// Code for tower statisTAK
+		base.getChildren().add(towerView);
+		AnchorPane.setLeftAnchor(towerView, 0.00);
+		AnchorPane.setTopAnchor(towerView, 350.00);
 		
 		setUpTowerMenu();
 		Scene scene = new Scene(base, 1400, 1000);
