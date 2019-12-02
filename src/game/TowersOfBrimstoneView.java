@@ -59,6 +59,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	private GraphicsContext towerMenuLayer;
 	private Label currency;
 	int tick;
+	boolean highlighted = false;
+	int prevCol = 0;
+	int prevRow = 19;
 
 
 	@Override
@@ -74,7 +77,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		gc2 = selectionCanvas.getGraphicsContext2D();
 		gc.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
 		towerMenuLayer = canvas.getGraphicsContext2D();
-
+		
 		
 		
 
@@ -89,6 +92,44 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		currency = new Label(str);
 		
 		ArrayList<ArrayList<Tile>> grid = model.getGrid();
+		//boolean highlight = false;
+		selectionCanvas.setOnMouseMoved((event) -> {
+			int row = (int) event.getY() / 50;
+			int col = (int) event.getX() / 50;
+			
+			if (togglePlacement == true) {
+					
+				Tile tile = grid.get(row).get(col);
+				
+				if (prevCol != col || prevRow != row) {
+					if (highlighted == true) {
+						System.out.println("remov");
+						highlighted = false;
+						gc2.clearRect(50*prevCol, 50*prevRow, 50, 50);
+					}
+					
+					if (tile.getIsPath() == false && highlighted == false) {
+						System.out.println("drawn new sq");
+						highlighted = true;
+						String imagePath;
+						if (tile.getIsPlaceable() && tile.getPlacedTower() == null) {
+							imagePath = "green-sq.png";
+						} else {
+							imagePath = "red-sq.png";
+						}
+						gc2.drawImage(new Image(imagePath), 50 * col, 50 * row, 50, 50);
+						prevCol = col;
+						prevRow = row;
+					}
+				}		
+				
+			} else if (highlighted == true) {
+				System.out.println("remove prev sq");
+				highlighted = false;
+				gc2.clearRect(50*prevCol, 50*prevRow, 50, 50);
+			}
+			
+		});
 		
 		controller.getEnemyPath();
 		
@@ -121,6 +162,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			// Used to stop placement on Right Click
 			if (event.getButton() == MouseButton.SECONDARY && togglePlacement == true) {
 				togglePlacement = false;
+				if (highlighted == true) {
+					gc2.clearRect(50*prevCol, 50*prevRow, 50, 50);
+				}
 				System.out.println("Tower Placement disabled!");
 			}
 
