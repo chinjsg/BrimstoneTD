@@ -92,8 +92,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		gc2 = selectionCanvas.getGraphicsContext2D();
 		gc.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
 		towerMenuLayer = canvas.getGraphicsContext2D();
-		//setUpTowerMenu();
-		//towerMenuLayer.drawImage(new Image("menuTowerEmpty2.png"), 0, 900, 1400, 100);
 		
 		root.getChildren().add(canvas);
 		root.getChildren().add(enemies);
