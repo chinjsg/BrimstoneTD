@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -35,14 +36,14 @@ import towers.Tower;
 
 public class TowersOfBrimstoneView extends Application implements Observer {
 
-	ImageButton stone;
-	ImageButton fire;
-	ImageButton ice;
-	ImageButton heavy;
-	ImageButton lightning;
-	ImageButton magic;
-	ImageButton slowdown;
-	ImageButton damageboost;
+    ImageButton stone;
+    ImageButton fire;
+    ImageButton ice;
+    ImageButton heavy;
+    ImageButton lightning;
+    ImageButton magic;
+    ImageButton slowdown;
+    ImageButton damageboost;
 
 	private TowersOfBrimstoneModel model;
 	private TowersOfBrimstoneController controller;
@@ -69,6 +70,10 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	private Label tCoords;				     //temp till GUI available
 	private ImageView towerStatsBg;		     //temp till GUI available
 	private GridPane towerStatsgp;		     //temp till GUI available
+	
+	ImageView healthBar;
+	ImageView goldBar;
+	ImageView barView;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -78,6 +83,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		controller.createMap();
 		
 		currency = new Label();
+		currency.setTextFill(Color.web("#ffffff", 1));
 		togglePlacement = false;
 		
 		// These GUI setup components below should be placed into a function in the future
@@ -91,21 +97,35 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		gc = canvas.getGraphicsContext2D();
 		gc2 = selectionCanvas.getGraphicsContext2D();
 		gc.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
+		healthBar = new ImageView(new Image("healthBar.png", 150, 15, false, false));
+		goldBar = new ImageView(new Image("goldBar.png", 150, 15, false, false));
+		barView = new ImageView(new Image("barMenu.png", 200, 150, false, false));
 		towerMenuLayer = canvas.getGraphicsContext2D();
 		
 		root.getChildren().add(canvas);
 		root.getChildren().add(enemies);
 		root.getChildren().add(selectionCanvas);
 		base.getChildren().add(root);
-		base.getChildren().add(currency);
 		
-		base.setTopAnchor(currency, 200.00);
-		base.setLeftAnchor(currency, 200.00);
+		base.setLeftAnchor(currency, 59.00);
+		base.setTopAnchor(currency, 80.00);
 		
 		// Generate GUIs
 		generateTowerStatsView(); // temp for display of Tower stats onclick
 		setUpTowerMenu();
 		towerMenuLayer.drawImage(new Image("menuTowerEmpty2.png"), 0, 900, 1400, 100);
+		
+		// BarView
+		base.getChildren().add(barView);
+		base.getChildren().add(healthBar);
+		base.getChildren().add(goldBar);
+		base.getChildren().add(currency); //need actual value display
+		AnchorPane.setLeftAnchor(goldBar, 59.00);
+		AnchorPane.setTopAnchor(goldBar, 60.00);
+		AnchorPane.setLeftAnchor(healthBar, 59.00);
+		AnchorPane.setTopAnchor(healthBar, 120.00);
+		AnchorPane.setLeftAnchor(barView, 25.00);
+		AnchorPane.setTopAnchor(barView, 25.00);
 		
 		// TEMP Code for Tower Statistic Display until GUI available - will be removed
 		base.getChildren().add(towerStatsBg); // background
@@ -114,7 +134,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		AnchorPane.setTopAnchor(towerStatsBg, 350.00);
 		AnchorPane.setLeftAnchor(towerStatsgp, 25.00);
 		AnchorPane.setTopAnchor(towerStatsgp, 385.00);
-		
 		
 		ArrayList<ArrayList<Tile>> grid = model.getGrid();
 		controller.getEnemyPath();
@@ -298,9 +317,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			((ImageButton) btn).setOnAction(new ButtonListener());
 		}
 	}
-
+	
 	private class ButtonListener implements EventHandler<ActionEvent> {
-
 		/**
 		 * Handle logic when button is clicked
 		 *
@@ -310,7 +328,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		public void handle(ActionEvent event) {
 			togglePlacement = true;
 			System.out.println("Tower Placement enabled: " + togglePlacement);
-
+		
 			if (event.getSource().equals(stone)) {
 				selectedTowerType = 1;
 				System.out.println("Selected Stone tower");
@@ -335,7 +353,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 				System.out.println("Unimplemented Ability 2");
 			}
 		}
-	}
+    }
 	
 	// Normal GUI frame updates go here
 	private void frameUpdateGUI(ArrayList<ArrayList<Tile>> grid, int tick, Zombie zomb) {
@@ -357,6 +375,11 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	private void frameUpdateCurrency(int newVal) {
 		String str = "Gold: " + newVal;
 		currency.setText(str);
+		
+		//double percentage = ((double)money) / 2000.00;
+		double percentage = ((double)newVal) / 2000.00;
+		double width = percentage * 150.00;
+		goldBar.setViewport(new Rectangle2D(0, 0, width, HEIGHT));
 	}
 	
 	@Override
