@@ -49,7 +49,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	private static final int WIDTH = 1400;
 	private static final int HEIGHT = 1000;
 	private int time;
-	//private int money;
 	private AnchorPane base;
 	private boolean togglePlacement;
 	private int selectedTowerType;
@@ -59,18 +58,29 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	private GraphicsContext gc2;
 	private GraphicsContext towerMenuLayer;
 	private Label currency;
-	int tick;
-	boolean highlighted = false;
-	int prevCol = 0;
-	int prevRow = 19;
-	private AnchorPane towerStatMenu;
-	GraphicsContext towerStatView;
-	private boolean isSelected;
+	private int tick;
+	private boolean highlighted = false;
+	private int prevCol = 0;
+	private int prevRow = 19;
 	private Tower towerView;
+	private Label tName;				     //temp till GUI available
+	private Label tDmg;				         //temp till GUI available
+	private Label tSell;				     //temp till GUI available	//clickable label to sell tower
+	private Label tCoords;				     //temp till GUI available
+	private ImageView towerStatsBg;		     //temp till GUI available
+	private GridPane towerStatsgp;		     //temp till GUI available
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		towerStatMenu = new AnchorPane();
+		model = new TowersOfBrimstoneModel();
+		model.addObserver(this);
+		controller = new TowersOfBrimstoneController(model);
+		controller.createMap();
+		
+		currency = new Label();
+		togglePlacement = false;
+		
+		// These GUI setup components below should be placed into a function in the future
 		base = new AnchorPane();
 		time = 1;
 		BorderPane root = new BorderPane();
@@ -82,73 +92,61 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		gc2 = selectionCanvas.getGraphicsContext2D();
 		gc.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
 		towerMenuLayer = canvas.getGraphicsContext2D();
+		//setUpTowerMenu();
+		//towerMenuLayer.drawImage(new Image("menuTowerEmpty2.png"), 0, 900, 1400, 100);
 		
-		//towerview
-		towerView = null;
-		GridPane gp = new GridPane();
-		Canvas td = new Canvas(150, 350);
-		towerStatView = td.getGraphicsContext2D();
-		towerStatView.drawImage(new Image("tower_bg_stats.png"), 0, 0);
-		gp.setPickOnBounds(false);;
-		ImageView towerStatsBg = new ImageView(new Image("tower_bg_stats.png", 150, 350, false, false));
-		//towerStatsBg.setVisible(false);
-		Label tName = new Label();
-		Label tDmg = new Label();
-		Label tSell = new Label();
-		Label tCoords = new Label();
-		tName.setTextFill(Color.web("#ffffff", 1));
-		tDmg.setTextFill(Color.web("#ffffff", 1));
-		tSell.setTextFill(Color.web("#ffffff", 1));
-		tCoords.setTextFill(Color.web("#ffffff", 1));
-		gp.add(tName, 1, 1);
-		gp.add(tDmg, 1, 2);
-		gp.add(tSell, 1, 3);
-		gp.add(tCoords, 1, 5);
+		root.getChildren().add(canvas);
+		root.getChildren().add(enemies);
+		root.getChildren().add(selectionCanvas);
+		base.getChildren().add(root);
+		base.getChildren().add(currency);
 		
-		gp.setVgap(30.00);
-		towerStatsBg.setVisible(false);
-		gp.setVisible(false);
+		base.setTopAnchor(currency, 200.00);
+		base.setLeftAnchor(currency, 200.00);
 		
+		// Generate GUIs
+		generateTowerStatsView(); // temp for display of Tower stats onclick
+		setUpTowerMenu();
+		towerMenuLayer.drawImage(new Image("menuTowerEmpty2.png"), 0, 900, 1400, 100);
+		
+		// TEMP Code for Tower Statistic Display until GUI available - will be removed
+		base.getChildren().add(towerStatsBg); // background
+		base.getChildren().add(towerStatsgp); // label display
+		AnchorPane.setLeftAnchor(towerStatsBg, 0.00);
+		AnchorPane.setTopAnchor(towerStatsBg, 350.00);
+		AnchorPane.setLeftAnchor(towerStatsgp, 25.00);
+		AnchorPane.setTopAnchor(towerStatsgp, 385.00);
+		
+		
+		ArrayList<ArrayList<Tile>> grid = model.getGrid();
+		controller.getEnemyPath();
+		Zombie zomb = new Zombie(0,6, controller.getEnemyPath());
+		
+		
+		// Temp Label to sell Selected towers
 		tSell.setOnMouseClicked((event) -> {
-			System.out.println("SELL");
 			if (towerView != null) {
 				controller.sellTower(towerView);
 				towerStatsBg.setVisible(false);
-				gp.setVisible(false);
+				towerStatsgp.setVisible(false);
 			}
 		});
-		
-		
-
-		model = new TowersOfBrimstoneModel();
-		model.addObserver(this);
-		
-		//money = model.getGold();
-		controller = new TowersOfBrimstoneController(model);
-		controller.createMap();
-		
-		String str = "Gold: " + Integer.toString(model.getGold());
-		currency = new Label(str);
-		
-		ArrayList<ArrayList<Tile>> grid = model.getGrid();
-		//boolean highlight = false;
+	
+		// Tower Placement GUI feedback
 		selectionCanvas.setOnMouseMoved((event) -> {
 			int row = (int) event.getY() / 50;
 			int col = (int) event.getX() / 50;
 			
 			if (togglePlacement == true) {
-					
 				Tile tile = grid.get(row).get(col);
 				
 				if (prevCol != col || prevRow != row) {
 					if (highlighted == true) {
-						//System.out.println("remov");
 						highlighted = false;
 						gc2.clearRect(50*prevCol, 50*prevRow, 50, 50);
 					}
 					
 					if (tile.getIsPath() == false && highlighted == false) {
-						//System.out.println("drawn new sq");
 						highlighted = true;
 						String imagePath;
 						if (tile.getIsPlaceable() && tile.getPlacedTower() == null) {
@@ -163,38 +161,13 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 				}		
 				
 			} else if (highlighted == true) {
-				//System.out.println("remove prev sq");
 				highlighted = false;
 				gc2.clearRect(50*prevCol, 50*prevRow, 50, 50);
 			}
 			
 		});
 		
-		controller.getEnemyPath();
-		
-		togglePlacement = false;
-		//selectedTower = controller.getTowerType(1); // temp
-
-		root.getChildren().add(canvas);
-		root.getChildren().add(enemies);
-		root.getChildren().add(selectionCanvas);
-		base.getChildren().add(root);
-		base.getChildren().add(currency);
-		
-		base.setTopAnchor(currency, 200.00);
-		base.setLeftAnchor(currency, 200.00);
-		
-		// Code for tower statisTAK
-		base.getChildren().add(towerStatsBg);
-		base.getChildren().add(gp);
-		AnchorPane.setLeftAnchor(towerStatsBg, 0.00);
-		AnchorPane.setTopAnchor(towerStatsBg, 350.00);
-		AnchorPane.setLeftAnchor(gp, 25.00);
-		AnchorPane.setTopAnchor(gp, 385.00);
-		
-		setUpTowerMenu();
-		Scene scene = new Scene(base, 1400, 1000);
-		
+		// Main canvas for Tower Placement
 		selectionCanvas.setOnMouseClicked((event) -> {
 			int xPos = (int) event.getX();
 			int yPos = (int) event.getY();
@@ -214,12 +187,11 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			} else
 
 			// Tower Placement logic
-			//int temp = 15; // depending on where the store menu starts graphically
+			//int temp = 15;
 			if (togglePlacement == true) {
 				Tower tower = controller.getTowerType(selectedTowerType);
 				boolean isPlaced = controller.placeTower(row, col, tower);
 				if (isPlaced) {
-					//money = model.getGold();
 					gc2.clearRect(50*col, 50*row, 50, 50);
 					gc2.drawImage(new Image("red-sq.png"), 50 * col, 50 * row, 50, 50);
 					System.out.println("Tower has been placed!");
@@ -235,57 +207,35 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 					tSell.setText("Sell for " + towerView.getSellPrice() + "?");
 					tCoords.setText("Row:" + towerView.getRow() + " Col: " + towerView.getCol());
 					towerStatsBg.setVisible(true);
-					gp.setVisible(true);
+					towerStatsgp.setVisible(true);
 				} else {
 					towerStatsBg.setVisible(false);
-					gp.setVisible(false);
+					towerStatsgp.setVisible(false);
 				}
 			}
 		});
-
-		Zombie zomb = new Zombie(0,6, controller.getEnemyPath());
-		towerMenuLayer.drawImage(new Image("menuTowerEmpty2.png"), 0, 900, 1400, 100);
 		
-
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
+		// Animation Timer - handles ticking of game clock
 		new AnimationTimer() {
 			long lastUpdate = 0;
 			int tick = 0;
 			@Override
 			public void handle(long now) {
 				// TODO Auto-generated method stub
-				long timeSec = (now - lastUpdate)/(1000000000/60);				// 60 Frames every 1 sec.
+				long timeSec = (now - lastUpdate)/(1000000000/60);		// 60 Frames every 1 sec.
 				if(timeSec >= 1) {
 					controller.frameUpdate(tick, zomb);			
 					lastUpdate = now;
 				}				
 			}
 		}.start();
-	}
-						
-	private void frameUpdateGUI(ArrayList<ArrayList<Tile>> grid, int tick, Zombie zomb) {
-		for (int row = 0; row < grid.size(); row++) {
-			for (int col = 0; col < grid.get(0).size(); col++) {
-				Tile tile = grid.get(row).get(col);
-				if (tile.getPlacedTower() != null) {
-					Tower tower = tile.getPlacedTower();
-					gc2.drawImage(tower.getImage(), 50 * col - 4, 50 * row - 15, 65, 65);
-				}
-			}
-			if(tick%20 == 0) {
-				updateEnemy(zomb, enemyGc);
-			}
-			tick++;
-		}
+		
+		// Display the scene
+		Scene scene = new Scene(base, 1400, 1000);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 	
-	private void frameUpdateCurrency(int newVal) {
-		String str = "Gold: " + newVal;
-		currency.setText(str);
-	}
-						
 						
 	private void updateEnemy(Enemy enemy, GraphicsContext d) {
 		d.clearRect(0, 0, WIDTH, HEIGHT);
@@ -293,7 +243,31 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		d.drawImage(enemy.getImage(), enemy.getPos().getX()-25, enemy.getPos().getY()-25);
 		
 	}
-
+	
+	public void generateTowerStatsView() {
+		//Temporary GUI for displaying tower statistics
+		towerView = null;
+		towerStatsgp = new GridPane();
+		towerStatsBg = new ImageView(new Image("tower_bg_stats.png", 150, 350, false, false));
+		towerStatsBg.setVisible(false);
+		tName = new Label();
+		tDmg = new Label();
+		tSell = new Label();
+		tCoords = new Label();
+		tName.setTextFill(Color.web("#ffffff", 1));
+		tDmg.setTextFill(Color.web("#ffffff", 1));
+		tSell.setTextFill(Color.web("#ffffff", 1));
+		tCoords.setTextFill(Color.web("#ffffff", 1));
+		towerStatsgp.add(tName, 1, 1);
+		towerStatsgp.add(tDmg, 1, 2);
+		towerStatsgp.add(tSell, 1, 3);
+		towerStatsgp.add(tCoords, 1, 5);
+		
+		towerStatsgp.setVgap(30.00);
+		towerStatsBg.setVisible(false);
+		towerStatsgp.setVisible(false);
+	}
+	
 	private void setUpTowerMenu() {
 		int height = 90;
 		int width = 110;
@@ -364,21 +338,44 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			}
 		}
 	}
-
+	
+	// Normal GUI frame updates go here
+	private void frameUpdateGUI(ArrayList<ArrayList<Tile>> grid, int tick, Zombie zomb) {
+		for (int row = 0; row < grid.size(); row++) {
+			for (int col = 0; col < grid.get(0).size(); col++) {
+				Tile tile = grid.get(row).get(col);
+				if (tile.getPlacedTower() != null) {
+					Tower tower = tile.getPlacedTower();
+					gc2.drawImage(tower.getImage(), 50 * col - 4, 50 * row - 15, 65, 65);
+				}
+			}
+			if(tick%20 == 0) {
+				updateEnemy(zomb, enemyGc);
+			}
+			tick++;
+		}
+	}
+	
+	private void frameUpdateCurrency(int newVal) {
+		String str = "Gold: " + newVal;
+		currency.setText(str);
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		if (arg instanceof FrameMessage) {
+			// if you create a method that is meant to be updated by ticking, name it in the form: "frameDoSomething() {}"
 			FrameMessage msg = (FrameMessage) arg;
 			
 			frameUpdateCurrency(msg.getCurrency());
 			frameUpdateGUI(msg.getGrid(), msg.getTick(), msg.getZombie());	
 		} else if (arg instanceof int[]) {
-			int[] coordinates = (int[]) arg;
+			//int[] coordinates = (int[]) arg;
 			//coordinates not used
+			// Removes tower from GUI after selling
 			towerView = null;
 			gc2.clearRect(0, 0, 1400, 1000);
-			System.out.println("cleared rect");
 			
 		}
 	}

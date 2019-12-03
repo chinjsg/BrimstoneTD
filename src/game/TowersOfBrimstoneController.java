@@ -101,7 +101,6 @@ public class TowersOfBrimstoneController {
 		if (!tile.getIsPath() && tile.getIsPlaceable() && tile.getPlacedTower() == null) {
 			int price = tower.getCost();
 			if (price <= model.getGold()) {
-				//tower.setPlacementCoordinates(row, col);
 				return model.placeTower(row, col, tower);
 			}
 		}
@@ -114,8 +113,6 @@ public class TowersOfBrimstoneController {
 		
 		if (tile.getPlacedTower() != null) {
 			return tile.getPlacedTower();
-//			System.out.println("The price of this " + String.valueOf(tower.getCost()) + " gold "
-//					+ "and it is placed on Row: " + tower.getRow() + " and Col:" + tower.getCol());
 		}
 		return null;
 		
@@ -142,7 +139,6 @@ public class TowersOfBrimstoneController {
 	public void sellTower(Tower tower) {
 		int row = tower.getRow();
 		int col = tower.getCol();
-		System.out.println("remove from row:"+ row + " col:" + col);
 		int sellback = tower.getSellPrice();
 		model.removeTower(row, col, sellback);
 	}
