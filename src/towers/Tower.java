@@ -73,4 +73,8 @@ public abstract class Tower {
 	public Image getImage() {
 		return texture;
 	}
+	
+	public int getSellPrice() {
+		return (int) (0.8 * cost);
+	}
 }

@@ -11,4 +11,8 @@ public class MagicTower extends Tower {
 		//  - X/Y coordinates will be set when it is placed
 		super(15, 1, false, 550, 0, 0, 6);
 	}
+	
+	public String toString() {
+		return "Magic Tower";
+	}
 }

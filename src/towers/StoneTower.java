@@ -11,4 +11,8 @@ public class StoneTower extends Tower {
 		//  - X/Y coordinates will be set when it is placed
 		super(15, 1, false, 100, 0, 0, 1);
 	}
+	
+	public String toString() {
+		return "Stone Tower";
+	}
 }

@@ -11,4 +11,8 @@ public class HeavyTower extends Tower {
 		//  - X/Y coordinates will be set when it is placed
 		super(15, 1, false, 300, 0, 0, 4);
 	}
+	
+	public String toString() {
+		return "Heavy Tower";
+	}
 }

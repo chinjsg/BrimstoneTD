@@ -52,7 +52,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	//private int money;
 	private AnchorPane base;
 	private boolean togglePlacement;
-	private Tower selectedTower;
+	private int selectedTowerType;
 	
 	private GraphicsContext enemyGc;
 	private GraphicsContext gc;
@@ -64,7 +64,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	int prevCol = 0;
 	int prevRow = 19;
 	private AnchorPane towerStatMenu;
-
+	GraphicsContext towerStatView;
+	private boolean isSelected;
+	private Tower towerView;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -82,8 +84,39 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		towerMenuLayer = canvas.getGraphicsContext2D();
 		
 		//towerview
-		ImageView towerView = new ImageView(new Image("tower_bg_stats.png", 150, 350, false, false));
+		towerView = null;
+		GridPane gp = new GridPane();
+		Canvas td = new Canvas(150, 350);
+		towerStatView = td.getGraphicsContext2D();
+		towerStatView.drawImage(new Image("tower_bg_stats.png"), 0, 0);
+		gp.setPickOnBounds(false);;
+		ImageView towerStatsBg = new ImageView(new Image("tower_bg_stats.png", 150, 350, false, false));
+		//towerStatsBg.setVisible(false);
+		Label tName = new Label();
+		Label tDmg = new Label();
+		Label tSell = new Label();
+		Label tCoords = new Label();
+		tName.setTextFill(Color.web("#ffffff", 1));
+		tDmg.setTextFill(Color.web("#ffffff", 1));
+		tSell.setTextFill(Color.web("#ffffff", 1));
+		tCoords.setTextFill(Color.web("#ffffff", 1));
+		gp.add(tName, 1, 1);
+		gp.add(tDmg, 1, 2);
+		gp.add(tSell, 1, 3);
+		gp.add(tCoords, 1, 5);
 		
+		gp.setVgap(30.00);
+		towerStatsBg.setVisible(false);
+		gp.setVisible(false);
+		
+		tSell.setOnMouseClicked((event) -> {
+			System.out.println("SELL");
+			if (towerView != null) {
+				controller.sellTower(towerView);
+				towerStatsBg.setVisible(false);
+				gp.setVisible(false);
+			}
+		});
 		
 		
 
@@ -109,13 +142,13 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 				
 				if (prevCol != col || prevRow != row) {
 					if (highlighted == true) {
-						System.out.println("remov");
+						//System.out.println("remov");
 						highlighted = false;
 						gc2.clearRect(50*prevCol, 50*prevRow, 50, 50);
 					}
 					
 					if (tile.getIsPath() == false && highlighted == false) {
-						System.out.println("drawn new sq");
+						//System.out.println("drawn new sq");
 						highlighted = true;
 						String imagePath;
 						if (tile.getIsPlaceable() && tile.getPlacedTower() == null) {
@@ -130,7 +163,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 				}		
 				
 			} else if (highlighted == true) {
-				System.out.println("remove prev sq");
+				//System.out.println("remove prev sq");
 				highlighted = false;
 				gc2.clearRect(50*prevCol, 50*prevRow, 50, 50);
 			}
@@ -140,7 +173,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		controller.getEnemyPath();
 		
 		togglePlacement = false;
-		selectedTower = controller.getTowerType(1); // temp
+		//selectedTower = controller.getTowerType(1); // temp
 
 		root.getChildren().add(canvas);
 		root.getChildren().add(enemies);
@@ -152,9 +185,12 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		base.setLeftAnchor(currency, 200.00);
 		
 		// Code for tower statisTAK
-		base.getChildren().add(towerView);
-		AnchorPane.setLeftAnchor(towerView, 0.00);
-		AnchorPane.setTopAnchor(towerView, 350.00);
+		base.getChildren().add(towerStatsBg);
+		base.getChildren().add(gp);
+		AnchorPane.setLeftAnchor(towerStatsBg, 0.00);
+		AnchorPane.setTopAnchor(towerStatsBg, 350.00);
+		AnchorPane.setLeftAnchor(gp, 25.00);
+		AnchorPane.setTopAnchor(gp, 385.00);
 		
 		setUpTowerMenu();
 		Scene scene = new Scene(base, 1400, 1000);
@@ -167,8 +203,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 			System.out.println("ROW " + row + " COL " + col);
 
-			// Check tower on this spot
-			controller.checkTower(row, col);
 
 			// Used to stop placement on Right Click
 			if (event.getButton() == MouseButton.SECONDARY && togglePlacement == true) {
@@ -177,17 +211,34 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 					gc2.clearRect(50*prevCol, 50*prevRow, 50, 50);
 				}
 				System.out.println("Tower Placement disabled!");
-			}
+			} else
 
 			// Tower Placement logic
-			int temp = 15; // depending on where the store menu starts graphically
-			if (togglePlacement == true && row < temp) {
-				boolean isPlaced = controller.placeTower(row, col, selectedTower);
+			//int temp = 15; // depending on where the store menu starts graphically
+			if (togglePlacement == true) {
+				Tower tower = controller.getTowerType(selectedTowerType);
+				boolean isPlaced = controller.placeTower(row, col, tower);
 				if (isPlaced) {
 					//money = model.getGold();
+					gc2.clearRect(50*col, 50*row, 50, 50);
+					gc2.drawImage(new Image("red-sq.png"), 50 * col, 50 * row, 50, 50);
 					System.out.println("Tower has been placed!");
 				} else {
 					System.out.println("Cannot place on this spot or insufficient funds");
+				}
+			} else {
+				// Check tower on this spot
+				towerView = controller.checkTower(row, col);
+				if (towerView != null) {
+					tName.setText(towerView.toString());
+					tDmg.setText("DPS: " + towerView.getAttackPower());
+					tSell.setText("Sell for " + towerView.getSellPrice() + "?");
+					tCoords.setText("Row:" + towerView.getRow() + " Col: " + towerView.getCol());
+					towerStatsBg.setVisible(true);
+					gp.setVisible(true);
+				} else {
+					towerStatsBg.setVisible(false);
+					gp.setVisible(false);
 				}
 			}
 		});
@@ -289,22 +340,22 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			System.out.println("Tower Placement enabled: " + togglePlacement);
 
 			if (event.getSource().equals(stone)) {
-				selectedTower = controller.getTowerType(1);
+				selectedTowerType = 1;
 				System.out.println("Selected Stone tower");
 			} else if (event.getSource().equals(fire)) {
-				selectedTower = controller.getTowerType(2);
+				selectedTowerType = 2;
 				System.out.println("Selected Fire tower");
 			} else if (event.getSource().equals(ice)) {
-				selectedTower = controller.getTowerType(3);
+				selectedTowerType = 3;
 				System.out.println("Selected Ice tower");
 			} else if (event.getSource().equals(heavy)) {
-				selectedTower = controller.getTowerType(4);
+				selectedTowerType = 4;
 				System.out.println("Selected Heavy tower");
 			} else if (event.getSource().equals(lightning)) {
-				selectedTower = controller.getTowerType(5);
+				selectedTowerType = 5;
 				System.out.println("Selected Lightning tower");
 			} else if (event.getSource().equals(magic)) {
-				selectedTower = controller.getTowerType(6);
+				selectedTowerType = 6;
 				System.out.println("Selected Magic tower");
 			} else if (event.getSource().equals(slowdown)) {
 				System.out.println("Unimplemented Ability 1");
@@ -322,6 +373,13 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			
 			frameUpdateCurrency(msg.getCurrency());
 			frameUpdateGUI(msg.getGrid(), msg.getTick(), msg.getZombie());	
+		} else if (arg instanceof int[]) {
+			int[] coordinates = (int[]) arg;
+			//coordinates not used
+			towerView = null;
+			gc2.clearRect(0, 0, 1400, 1000);
+			System.out.println("cleared rect");
+			
 		}
 	}
 }

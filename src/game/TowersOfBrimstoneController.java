@@ -101,25 +101,23 @@ public class TowersOfBrimstoneController {
 		if (!tile.getIsPath() && tile.getIsPlaceable() && tile.getPlacedTower() == null) {
 			int price = tower.getCost();
 			if (price <= model.getGold()) {
-				tower.setPlacementCoordinates(row, col);
-				tile.placeTower(tower);
-				model.spendGold(price);
-				model.updateTowerMap(tower);
-				return true;
+				//tower.setPlacementCoordinates(row, col);
+				return model.placeTower(row, col, tower);
 			}
 		}
 		return false;
 	}
 	
-	public void checkTower(int row, int col) {
+	public Tower checkTower(int row, int col) {
 		ArrayList<ArrayList<Tile>> board = model.getGrid();
 		Tile tile = board.get(row).get(col);
 		
 		if (tile.getPlacedTower() != null) {
-			Tower tower = tile.getPlacedTower();
-			System.out.println("The price of this " + String.valueOf(tower.getCost()) + " gold "
-					+ "and it is placed on Row: " + tower.getRow() + " and Col:" + tower.getCol());
+			return tile.getPlacedTower();
+//			System.out.println("The price of this " + String.valueOf(tower.getCost()) + " gold "
+//					+ "and it is placed on Row: " + tower.getRow() + " and Col:" + tower.getCol());
 		}
+		return null;
 		
 	}
 	
@@ -139,6 +137,14 @@ public class TowersOfBrimstoneController {
 			tower = new MagicTower();
 		}
 		return tower;
+	}
+	
+	public void sellTower(Tower tower) {
+		int row = tower.getRow();
+		int col = tower.getCol();
+		System.out.println("remove from row:"+ row + " col:" + col);
+		int sellback = tower.getSellPrice();
+		model.removeTower(row, col, sellback);
 	}
 	
 	public void frameUpdate(int tick, Zombie zomb) {

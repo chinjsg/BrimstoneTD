@@ -11,4 +11,8 @@ public class LightningTower extends Tower {
 		//  - X/Y coordinates will be set when it is placed
 		super(15, 1, false, 275, 0, 0, 5);
 	}
+	
+	public String toString() {
+		return "Lightning Tower";
+	}
 }

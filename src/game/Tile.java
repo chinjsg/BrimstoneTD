@@ -55,10 +55,11 @@ public class Tile {
 		texture = new Image(PLACE);
 	}
 	public void placeTower(Tower tower) {
-		//if(isPlaceable) {
-			this.tower = tower;
-		//}
-		//return isPlaceable;
+		this.tower = tower;
+	}
+	
+	public void removeTower() {
+		this.tower = null;
 	}
 	
 	public void removeEnemy() {

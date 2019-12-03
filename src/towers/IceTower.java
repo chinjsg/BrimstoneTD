@@ -11,4 +11,8 @@ public class IceTower extends Tower {
 		//  - X/Y coordinates will be set when it is placed
 		super(15, 1, false, 250, 0, 0, 3);
 	}
+	
+	public String toString() {
+		return "Ice Tower";
+	}
 }

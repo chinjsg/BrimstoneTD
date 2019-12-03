@@ -35,6 +35,10 @@ public class TowersOfBrimstoneModel extends Observable {
 		return column;
 	}
 	
+	public Tile getTile(int row, int col) {
+		return grid.get(row).get(col);
+	} 
+	
 	public ArrayList<ArrayList<Tile>> getGrid() {
 		return grid;
 	}
@@ -51,11 +55,11 @@ public class TowersOfBrimstoneModel extends Observable {
 		return grid;
 	}
 	
-	public void addGold(int amount) {
+	private void addGold(int amount) {
 		gold = gold + amount;
 	} 
 	
-	public boolean spendGold(int amount) {
+	private boolean spendGold(int amount) {
 		if (amount > gold) {
 			return false;
 		}
@@ -73,6 +77,33 @@ public class TowersOfBrimstoneModel extends Observable {
 		return gold;
 	}
 
+	public boolean placeTower(int row, int col, Tower tower) {
+		tower.setPlacementCoordinates(row, col);
+		boolean valid = spendGold(tower.getCost());
+		if (valid) {
+			Tile tile = getTile(row, col);
+			tile.placeTower(tower);
+			//updateTowerMap()
+			return true;
+		}
+		return false;
+	}
+	
+	public void removeTower(int row, int col, int sellback) {
+		Tile tile = getTile(row, col);
+		tile.removeTower();
+		addGold(sellback);
+		//updateTowerMap()
+		System.out.println("Tower sold for " + sellback + " gold");
+		//System.out.println(tile.getPlacedTower().getRow());
+		
+		int[] temp = new int[2];
+		temp[0] = row;
+		temp[1] = col;
+		setChanged();
+		notifyObservers(temp);
+	}
+	
 	public void updateTowerMap(Tower tower) {
 		towerMap.addTower(tower);
 	}

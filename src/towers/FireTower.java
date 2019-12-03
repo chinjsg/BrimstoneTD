@@ -13,4 +13,8 @@ public class FireTower extends Tower {
 		//  - X/Y coordinates will be set when it is placed
 		super(15, 1, false, 150, 0, 0, 2);
 	}
+	
+	public String toString() {
+		return "Fire Tower";
+	}
 }
