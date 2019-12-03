@@ -3,12 +3,15 @@ package game;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import enemies.Enemy;
 import enemies.Zombie;
 import towers.Tower;
 import towers.TowerMap;
 
 public class TowersOfBrimstoneModel extends Observable {
 	private ArrayList<ArrayList<Tile>> grid;
+	private ArrayList<Tower> towers;
+	private ArrayList<Enemy> enemies;
 	private Tile endingTile;
 	private int gold;
 	private TowerMap towerMap;
@@ -91,6 +94,8 @@ public class TowersOfBrimstoneModel extends Observable {
 	
 	public void removeTower(int row, int col, int sellback) {
 		Tile tile = getTile(row, col);
+		Tower tower = tile.getPlacedTower();
+		towers.remove(tower);
 		tile.removeTower();
 		addGold(sellback);
 		//updateTowerMap()
@@ -101,6 +106,16 @@ public class TowersOfBrimstoneModel extends Observable {
 		temp[1] = col;
 		setChanged();
 		notifyObservers(temp);
+	}
+	public void addEnemy(Enemy enemy) {
+		enemies.add(enemy);
+		notifyObservers(enemy);
+	}
+	public ArrayList<Tower> getTowers(){
+		return towers;
+	}
+	public ArrayList<Enemy> getEnemy(){
+		return enemies;
 	}
 	
 	public void updateTowerMap(Tower tower) {
