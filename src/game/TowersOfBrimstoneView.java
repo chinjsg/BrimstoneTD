@@ -8,6 +8,8 @@ import enemies.Enemy;
 import enemies.Zombie;
 import experimenting.ImageButton;
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -32,6 +34,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import towers.Tower;
 
 public class TowersOfBrimstoneView extends Application implements Observer {
@@ -80,6 +83,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private ImageButton forward = new ImageButton("fastforward.png", 110, 90);
     int forwardCount = 1;
     int frames = 60;
+    Timeline timeline ;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -230,6 +234,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		    gc2.clearRect(50 * col, 50 * row, 50, 50);
 		    gc2.drawImage(new Image("red-sq.png"), 50 * col, 50 * row, 50, 50);
 		    System.out.println("Tower has been placed!");
+		    controller.frameUpdate(tick, zomb);
 		} else {
 		    System.out.println("Cannot place on this spot or insufficient funds");
 		}
@@ -251,39 +256,64 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	});
 
 	// Animation Timer - handles ticking of game clock
-	new AnimationTimer() {
-	    long lastUpdate = 0;
-	    int tick = 0;
-	   
-	    
+	timeline = new Timeline(new KeyFrame(Duration.millis(20), event -> {
+	    controller.frameUpdate(tick, zomb);
+	}));
+	play.setOnAction(e -> {
+	    isPaused = false;
+	    timeline.play();
 
-	    @Override
-	    public void handle(long now) {
-		play.setOnAction(event->{
-		    this.start();
-		});
-		
-		pause.setOnAction(event->{
-		    this.stop();
-		});
-		
-		forward.setOnAction(event->{
-		    forwardCount++;
-		    if(forwardCount > 4) {
-			forwardCount = 1;
-			
-		    }
-		    System.out.println(forwardCount);
-		    frames = 60 * forwardCount;
-		});
-		// TODO Auto-generated method stub
-		long timeSec = (now - lastUpdate) / (1000000000 / frames); // 60 Frames every 1 sec.
-		if (timeSec >= 1) {
-		    controller.frameUpdate(tick, zomb);
-		    lastUpdate = now;
-		}
+	});
+
+	pause.setOnAction(e -> {
+	    if (!isPaused) {
+		timeline.stop();
 	    }
-	}.start();
+
+	});
+
+	forward.setOnAction(e -> {
+	    forwardCount++;
+	    if (forwardCount > 4) {
+		forwardCount = 1;
+
+	    }
+	    timeline.setRate(forwardCount);
+
+	});
+//	new AnimationTimer() {
+//	    long lastUpdate = 0;
+//	    int tick = 0;
+//	   
+//	    
+//
+//	    @Override
+//	    public void handle(long now) {
+//		play.setOnAction(event->{
+//		    this.start();
+//		});
+//		
+//		pause.setOnAction(event->{
+//		    this.stop();
+//		});
+//		
+//		forward.setOnAction(event->{
+//		    forwardCount++;
+//		    if(forwardCount > 4) {
+//			forwardCount = 1;
+//			
+//		    }
+//		    System.out.println(forwardCount);
+//		    frames = 60 * forwardCount;
+//		});
+//		// TODO Auto-generated method stub
+//		long timeSec = (now - lastUpdate) / (1000000000 / frames); // 60 Frames every 1 sec.
+//		if (timeSec >= 1) {
+//		    
+//		    lastUpdate = now;
+//		}
+//	    }
+//	}.start();
 
 	// Display the scene
 	Scene scene = new Scene(base, 1400, 1000);
@@ -385,7 +415,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		selectedTowerType = 6;
 		System.out.println("Selected Magic tower");
 	    } else if (event.getSource().equals(slowdown)) {
-		frames = 30;
+		timeline.setRate(timeline.getRate()/2);
 		System.out.println("Unimplemented Ability 1");
 	    } else if (event.getSource().equals(damageboost)) {
 		System.out.println("Unimplemented Ability 2");
