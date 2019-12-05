@@ -7,6 +7,7 @@ import java.util.Observer;
 import enemies.Enemy;
 import enemies.Zombie;
 import experimenting.ImageButton;
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -48,6 +49,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     ImageButton slowdown;
     ImageButton damageboost;
 
+//    int gold;
+
     private TowersOfBrimstoneModel model;
     private TowersOfBrimstoneController controller;
     private static final int WIDTH = 1400;
@@ -58,8 +61,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private int selectedTowerType;
 
     private GraphicsContext enemyGc;
-    private GraphicsContext gc;
-    private GraphicsContext gc2;
+    private GraphicsContext baseContext;
+    private GraphicsContext selectionContext;
+    private GraphicsContext towerContext;
     private GraphicsContext towerMenuLayer;
     private Label currency;
     private int tick;
@@ -74,16 +78,16 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private ImageView towerStatsBg; // temp till GUI available
     private GridPane towerStatsgp; // temp till GUI available
 
-    private boolean isPaused = false;
+    private boolean isPaused = true;
     ImageView healthBar;
     ImageView goldBar;
     ImageView barView;
+
     private ImageButton play = new ImageButton("play.png", 110, 90);
     private ImageButton pause = new ImageButton("pause.png", 110, 90);
     private ImageButton forward = new ImageButton("fastforward.png", 110, 90);
     int forwardCount = 1;
-    int frames = 60;
-    Timeline timeline ;
+    Timeline timeline;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -103,19 +107,27 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	StackPane root = new StackPane();
 	Canvas canvas = new Canvas(1400, 1000);
 	Canvas selectionCanvas = new Canvas(1400, 1000);
+	Canvas towerCanvas = new Canvas(1400, 1000);
 	Canvas enemies = new Canvas(1400, 1000);
+	towerContext = towerCanvas.getGraphicsContext2D();
 	enemyGc = enemies.getGraphicsContext2D();
-	gc = canvas.getGraphicsContext2D();
-	gc2 = selectionCanvas.getGraphicsContext2D();
-	gc.drawImage(new Image("mediumMap.png", 1400, 1000, false, false), 0, 0);
+	baseContext = canvas.getGraphicsContext2D();
+	selectionContext = selectionCanvas.getGraphicsContext2D();
+	baseContext.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
+
 	healthBar = new ImageView(new Image("healthBar.png", 150, 15, false, false));
 	goldBar = new ImageView(new Image("goldBar.png", 150, 15, false, false));
 	barView = new ImageView(new Image("barMenu.png", 200, 150, false, false));
 	towerMenuLayer = canvas.getGraphicsContext2D();
 
 	root.getChildren().add(canvas);
+
+	root.getChildren().add(towerCanvas);
 	root.getChildren().add(enemies);
 	root.getChildren().add(selectionCanvas);
+
+	canvas.toBack();
+	selectionCanvas.toFront();
 	base.getChildren().add(root);
 
 	base.setLeftAnchor(currency, 59.00);
@@ -167,6 +179,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	tSell.setOnMouseClicked((event) -> {
 	    if (towerView != null) {
 		controller.sellTower(towerView);
+		// UPdate gold bar i
+//		frameUpdateCurrency(gold +towerView.getSellPrice());
 		towerStatsBg.setVisible(false);
 		towerStatsgp.setVisible(false);
 	    }
@@ -183,7 +197,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		if (prevCol != col || prevRow != row) {
 		    if (highlighted == true) {
 			highlighted = false;
-			gc2.clearRect(50 * prevCol, 50 * prevRow, 50, 50);
+			// hover effect
+			selectionContext.clearRect(50 * prevCol, 50 * prevRow, 50, 50);
 		    }
 
 		    if (tile.getIsPath() == false && highlighted == false) {
@@ -194,7 +209,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			} else {
 			    imagePath = "red-sq.png";
 			}
-			gc2.drawImage(new Image(imagePath), 50 * col, 50 * row, 50, 50);
+			selectionContext.drawImage(new Image(imagePath), 50 * col, 50 * row, 50, 50);
 			prevCol = col;
 			prevRow = row;
 		    }
@@ -202,7 +217,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 	    } else if (highlighted == true) {
 		highlighted = false;
-		gc2.clearRect(50 * prevCol, 50 * prevRow, 50, 50);
+		selectionContext.clearRect(50 * prevCol, 50 * prevRow, 50, 50);
 	    }
 
 	});
@@ -220,7 +235,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    if (event.getButton() == MouseButton.SECONDARY && togglePlacement == true) {
 		togglePlacement = false;
 		if (highlighted == true) {
-		    gc2.clearRect(50 * prevCol, 50 * prevRow, 50, 50);
+		    towerContext.clearRect(50 * prevCol, 50 * prevRow, 50, 50);
 		}
 		System.out.println("Tower Placement disabled!");
 	    } else
@@ -231,8 +246,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		Tower tower = controller.getTowerType(selectedTowerType);
 		boolean isPlaced = controller.placeTower(row, col, tower);
 		if (isPlaced) {
-		    gc2.clearRect(50 * col, 50 * row, 50, 50);
-		    gc2.drawImage(new Image("red-sq.png"), 50 * col, 50 * row, 50, 50);
+		    selectionContext.clearRect(50 * col, 50 * row, 50, 50);
+		    selectionContext.drawImage(new Image("red-sq.png"), 50 * col, 50 * row, 50, 50);
 		    System.out.println("Tower has been placed!");
 		    controller.frameUpdate(tick, zomb);
 		} else {
@@ -259,8 +274,10 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	timeline = new Timeline(new KeyFrame(Duration.millis(20), event -> {
 	    controller.frameUpdate(tick, zomb);
 	}));
+	timeline.setCycleCount(Animation.INDEFINITE);
 	play.setOnAction(e -> {
 	    isPaused = false;
+	    System.out.println("Game is being played!" + isPaused);
 	    timeline.play();
 
 	});
@@ -268,6 +285,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	pause.setOnAction(e -> {
 	    if (!isPaused) {
 		timeline.stop();
+		System.out.println("Game is paused!");
+		isPaused = true;
 	    }
 
 	});
@@ -278,6 +297,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		forwardCount = 1;
 
 	    }
+	    System.out.println("Rate of the game is:" + forwardCount);
 	    timeline.setRate(forwardCount);
 
 	});
@@ -317,14 +337,24 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 	// Display the scene
 	Scene scene = new Scene(base, 1400, 1000);
+	primaryStage.setMaxWidth(1400);
+	primaryStage.setMaxHeight(1000);
+	primaryStage.setMinWidth(1400);
+	primaryStage.setMinHeight(1000);
 	primaryStage.setScene(scene);
 	primaryStage.show();
     }
 
     private void updateEnemy(Enemy enemy, GraphicsContext d) {
 	d.clearRect(0, 0, WIDTH, HEIGHT);
-	enemy.move(enemy.getSpeed() * enemy.getDirection().getX(), enemy.getSpeed() * enemy.getDirection().getY());
-	d.drawImage(enemy.getImage(), enemy.getPos().getX() - 25, enemy.getPos().getY() - 25);
+	if (!isPaused) {
+	    d.drawImage(enemy.getImage(), enemy.getPos().getX() - 25, enemy.getPos().getY() - 25);
+	    enemy.move(enemy.getSpeed() * enemy.getDirection().getX(), enemy.getSpeed() * enemy.getDirection().getY());
+//	    d.clearRect(0, 0, WIDTH, HEIGHT);
+
+	}
+
+//	d.drawImage(enemy.getImage(), enemy.getPos().getX() - 25, enemy.getPos().getY() - 25);
 
     }
 
@@ -415,7 +445,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		selectedTowerType = 6;
 		System.out.println("Selected Magic tower");
 	    } else if (event.getSource().equals(slowdown)) {
-		timeline.setRate(timeline.getRate()/2);
+		timeline.setRate(timeline.getRate() / 2);
 		System.out.println("Unimplemented Ability 1");
 	    } else if (event.getSource().equals(damageboost)) {
 		System.out.println("Unimplemented Ability 2");
@@ -430,7 +460,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		Tile tile = grid.get(row).get(col);
 		if (tile.getPlacedTower() != null) {
 		    Tower tower = tile.getPlacedTower();
-		    gc2.drawImage(tower.getImage(), 50 * col - 4, 50 * row - 15, 65, 65);
+		    towerContext.drawImage(tower.getImage(), 50 * col - 4, 50 * row - 15, 65, 65);
 		}
 	    }
 	    if (tick % 20 == 0) {
@@ -458,14 +488,16 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    // form: "frameDoSomething() {}"
 	    FrameMessage msg = (FrameMessage) arg;
 	    // TODO: add code for animating healthbar
+//	    gold = msg.getCurrency();
 	    frameUpdateCurrency(msg.getCurrency());
 	    frameUpdateGUI(msg.getGrid(), msg.getTick(), msg.getZombie());
 	} else if (arg instanceof int[]) {
 	    // int[] coordinates = (int[]) arg;
 	    // coordinates not used
 	    // Removes tower from GUI after selling
+	    int[] arr = (int[]) arg;
 	    towerView = null;
-	    gc2.clearRect(0, 0, 1400, 1000);
+	    towerContext.clearRect(50 * arr[1] - 4, 50 * arr[0] - 15, 65, 65);
 
 	}
     }
