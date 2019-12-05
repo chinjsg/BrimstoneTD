@@ -31,7 +31,7 @@ public class DesertEnimies extends Enemy{
 		
 		if (enemy == 0) {
 			this.texture = new Image("DesertCommon.png");
-		} else if (enemy == 1) {
+		}else if (enemy == 1) {
 			image_pathAttack = "desert1Attack.png";
 			image_pathDie    = "desert1Die.png";
 			image_pathHurt   = "desert1Hurt.png";
@@ -96,6 +96,7 @@ public class DesertEnimies extends Enemy{
 	@Override
 	public Image getImageAttack() {
 		this.texture = new Image(image_pathAttack);
+		System.out.println(texture.isError());
 		return texture;
 	}
 
