@@ -3,6 +3,8 @@ package game;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import enemies.Enemy;
 import enemies.Zombie;
@@ -86,8 +88,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private ImageButton play = new ImageButton("play.png", 110, 90);
     private ImageButton pause = new ImageButton("pause.png", 110, 90);
     private ImageButton forward = new ImageButton("fastforward.png", 110, 90);
+    ImageButton sellButton = new ImageButton("sell.png", 60, 50);
     int forwardCount = 1;
-    Timeline timeline;
+    volatile Timeline timeline;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -103,6 +106,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	// These GUI setup components below should be placed into a function in the
 	// future
 	base = new AnchorPane();
+	base.getStylesheets().add("test.css");
 	time = 1;
 	StackPane root = new StackPane();
 	Canvas canvas = new Canvas(1400, 1000);
@@ -121,10 +125,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	towerMenuLayer = canvas.getGraphicsContext2D();
 
 	root.getChildren().add(canvas);
-
+	root.getChildren().add(selectionCanvas);
 	root.getChildren().add(towerCanvas);
 	root.getChildren().add(enemies);
-	root.getChildren().add(selectionCanvas);
 
 	canvas.toBack();
 	selectionCanvas.toFront();
@@ -165,24 +168,46 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 	// TEMP Code for Tower Statistic Display until GUI available - will be removed
 	base.getChildren().add(towerStatsBg); // background
-	base.getChildren().add(towerStatsgp); // label display
-	AnchorPane.setLeftAnchor(towerStatsBg, 0.00);
-	AnchorPane.setTopAnchor(towerStatsBg, 350.00);
-	AnchorPane.setLeftAnchor(towerStatsgp, 25.00);
-	AnchorPane.setTopAnchor(towerStatsgp, 385.00);
+//	base.getChildren().add(towerStatsgp); // label display
+	sellButton.setVisible(false);
+	base.getChildren().add(sellButton);
+	base.getChildren().add(tDmg);
+	base.getChildren().add(tName);
+	base.getChildren().add(tSell);
+	base.getChildren().add(tCoords);
+	AnchorPane.setRightAnchor(towerStatsBg, 100.00);
+	AnchorPane.setTopAnchor(towerStatsBg, -50.00);
+	AnchorPane.setRightAnchor(sellButton, 265.00);
+	AnchorPane.setTopAnchor(sellButton, 150.50);
+	AnchorPane.setTopAnchor(tDmg, 100.00);
+	AnchorPane.setRightAnchor(tDmg, 155.00);
 
+	AnchorPane.setTopAnchor(tName, 60.00);
+	AnchorPane.setRightAnchor(tName, 250.00);
+
+	AnchorPane.setTopAnchor(tSell, 90.00);
+	AnchorPane.setRightAnchor(tSell, 270.00);
+
+	AnchorPane.setTopAnchor(tCoords, 90.00);
+	AnchorPane.setRightAnchor(tCoords, 380.00);
 	ArrayList<ArrayList<Tile>> grid = model.getGrid();
 	controller.getEnemyPath();
 	Zombie zomb = new Zombie(0, 6, controller.getEnemyPath());
 
 	// Temp Label to sell Selected towers
-	tSell.setOnMouseClicked((event) -> {
+	sellButton.setOnMouseClicked((event) -> {
 	    if (towerView != null) {
 		controller.sellTower(towerView);
 		// UPdate gold bar i
 //		frameUpdateCurrency(gold +towerView.getSellPrice());
-		towerStatsBg.setVisible(false);
-		towerStatsgp.setVisible(false);
+//		towerStatsBg.setVisible(false);
+//		sellButton.setVisible(false);
+//		tName.setVisible(false);
+//		tDmg.setVisible(false);
+//		tSell.setVisible(false);
+//		tCoords.setVisible(false);
+		hideTowerInfo();
+
 	    }
 	});
 
@@ -257,15 +282,30 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		// Check tower on this spot
 		towerView = controller.checkTower(row, col);
 		if (towerView != null) {
+		    tDmg.getStyleClass().add("shopLabel");
+		    tName.getStyleClass().add("shopLabel");
+		    tSell.getStyleClass().add("shopLabel");
+		    tCoords.getStyleClass().add("shopLabel");
 		    tName.setText(towerView.toString());
 		    tDmg.setText("DPS: " + towerView.getAttackPower());
-		    tSell.setText("Sell for " + towerView.getSellPrice() + "?");
-		    tCoords.setText("Row:" + towerView.getRow() + " Col: " + towerView.getCol());
-		    towerStatsBg.setVisible(true);
-		    towerStatsgp.setVisible(true);
+		    tSell.setText("Sell for\n" + towerView.getSellPrice() + "?");
+		    tCoords.setText("Row:" + towerView.getRow() + "\nCol: " + towerView.getCol());
+//		    towerStatsBg.setVisible(true);
+//		    sellButton.setVisible(true);
+//		    tName.setVisible(true);
+//		    tDmg.setVisible(true);
+//		    tSell.setVisible(true);
+//		    tCoords.setVisible(true);
+		    showTowerInfo();
 		} else {
-		    towerStatsBg.setVisible(false);
-		    towerStatsgp.setVisible(false);
+//		    towerStatsBg.setVisible(false);
+//		    sellButton.setVisible(false);
+//		    tName.setVisible(false);
+//		    tDmg.setVisible(false);
+//		    tSell.setVisible(false);
+//		    tCoords.setVisible(false);
+		    hideTowerInfo();
+		    
 		}
 	    }
 	});
@@ -277,7 +317,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	timeline.setCycleCount(Animation.INDEFINITE);
 	play.setOnAction(e -> {
 	    isPaused = false;
-	    System.out.println("Game is being played!" + isPaused);
+	    System.out.println("Game is being played!");
 	    timeline.play();
 
 	});
@@ -358,28 +398,36 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
     }
 
+    private void hideTowerInfo() {
+	towerStatsBg.setVisible(false);
+	sellButton.setVisible(false);
+	tName.setVisible(false);
+	tDmg.setVisible(false);
+	tSell.setVisible(false);
+	tCoords.setVisible(false);
+    }
+
+    private void showTowerInfo() {
+	towerStatsBg.setVisible(true);
+	sellButton.setVisible(true);
+	tName.setVisible(true);
+	tDmg.setVisible(true);
+	tSell.setVisible(true);
+	tCoords.setVisible(true);
+    }
+
     public void generateTowerStatsView() {
 	// Temporary GUI for displaying tower statistics
 	towerView = null;
 	towerStatsgp = new GridPane();
-	towerStatsBg = new ImageView(new Image("tower_bg_stats.png", 150, 350, false, false));
+	towerStatsBg = new ImageView(new Image("shopMenu_1.png", 400, 250, false, false));
 	towerStatsBg.setVisible(false);
 	tName = new Label();
 	tDmg = new Label();
 	tSell = new Label();
 	tCoords = new Label();
-	tName.setTextFill(Color.web("#ffffff", 1));
-	tDmg.setTextFill(Color.web("#ffffff", 1));
-	tSell.setTextFill(Color.web("#ffffff", 1));
-	tCoords.setTextFill(Color.web("#ffffff", 1));
-	towerStatsgp.add(tName, 1, 1);
-	towerStatsgp.add(tDmg, 1, 2);
-	towerStatsgp.add(tSell, 1, 3);
-	towerStatsgp.add(tCoords, 1, 5);
+	hideTowerInfo();
 
-	towerStatsgp.setVgap(30.00);
-	towerStatsBg.setVisible(false);
-	towerStatsgp.setVisible(false);
     }
 
     private void setUpTowerMenu() {
@@ -445,8 +493,32 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		selectedTowerType = 6;
 		System.out.println("Selected Magic tower");
 	    } else if (event.getSource().equals(slowdown)) {
-		timeline.setRate(timeline.getRate() / 2);
-		System.out.println("Unimplemented Ability 1");
+		double temp = timeline.getRate();
+		new Thread(new Runnable() {
+		    @Override
+		    public void run() {
+			timeline.setRate(timeline.getRate() / 2);
+
+			try {
+			    Thread.sleep(5000);
+			} catch (InterruptedException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			}
+
+			timeline.setRate(temp);
+		    }
+		}).start();
+//		Timer timer = new Timer();
+//		    timer.schedule(new TimerTask(){
+//		        @Override
+//		        public void run() {
+//		            timeline.setRate(timeline.getRate() / 2);
+//		        }
+//		    }, 3000);
+
+//		timeline.setRate(temp);
+		System.out.println("Slowdown Enemies for 5 seconds");
 	    } else if (event.getSource().equals(damageboost)) {
 		System.out.println("Unimplemented Ability 2");
 	    }

@@ -9,10 +9,12 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -28,7 +30,13 @@ public class GUI extends Application {
 
     public Scene scene;
 
-    ImageButton play = new ImageButton("play.png", 110, 90);
+    private Text tName = new Text("Defence Tower"); // temp till GUI available
+    
+    private Text tDmg = new Text("DPS: 50"); ; // temp till GUI available
+    
+    private Text tSell = new Text("Sell for: \n 220"); ; // temp till GUI available //clickable label to sell tower
+    private Text tCoords = new Text("Row - 0,\nCol - 0"); ; // temp till GUI available
+    ImageButton sell = new ImageButton("sell.png", 110, 90);
     ImageButton pause = new ImageButton("pause.png", 110, 90);
     ImageButton forward = new ImageButton("fastforward.png", 110, 90);
 
@@ -38,42 +46,66 @@ public class GUI extends Application {
 
     public void start(Stage primaryStage) {
 	StackPane root = new StackPane();
-
+	root.getStylesheets().add("test.css");
+	tDmg.getStyleClass().add("shopLabel");
+	tName.getStyleClass().add("shopLabel");
+	tSell.getStyleClass().add("shopLabel");
+	tCoords.getStyleClass().add("shopLabel");
 	AnchorPane menuBars = new AnchorPane();
-	ImageView imageView = new ImageView(new Image("barMenu.png", 200, 150, false, false));
-	ImageView healthBar = new ImageView(new Image("healthBar.png", 150, 15, false, false));
-	healthBar.setOnMouseClicked(EventHandler -> {
-	    width -= 5;
-
-	    healthBar.setViewport(new Rectangle2D(0, 0, width, HEIGHT));
-
+	ImageView imageView = new ImageView(new Image("shopMenuBlank.png", 400, 250, false, false));
+	ImageButton sellButton = new ImageButton("sell.png", 60, 50);
+	sellButton.setOnAction(event->{
+	    System.out.print("lalalallala");
 	});
+	
 	ImageView goldBar = new ImageView(new Image("goldBar.png", 150, 15, false, false));
 	primaryStage.setTitle("The Horse in Motion");
 
 	menuBars.getChildren().add(imageView);
-	menuBars.getChildren().add(healthBar);
-	menuBars.getChildren().add(goldBar);
+	menuBars.getChildren().add(sellButton);
+	menuBars.getChildren().add(tDmg);
+	menuBars.getChildren().add(tName);
+	menuBars.getChildren().add(tSell);
+	menuBars.getChildren().add(tCoords);
+//	menuBars.getChildren().add(healthBar);
+//	menuBars.getChildren().add(goldBar);
+	AnchorPane.setRightAnchor(imageView,100.00);
+	AnchorPane.setRightAnchor(sellButton,265.00);
+	AnchorPane.setTopAnchor(sellButton, 192.50);
+	AnchorPane.setTopAnchor(tDmg, 160.50);
+	AnchorPane.setRightAnchor(tDmg, 155.00);
+	
+	AnchorPane.setTopAnchor(tName, 110.00);
+	AnchorPane.setRightAnchor(tName, 240.00);
+	
+	AnchorPane.setTopAnchor(tSell, 140.50);
+	AnchorPane.setRightAnchor(tSell, 255.00);
+	
+	AnchorPane.setTopAnchor(tCoords, 140.50);
+	AnchorPane.setRightAnchor(tCoords, 380.00);
+	
+	
+	
+	
+//	menuBars.getChildren().add(sell);
+//	menuBars.getChildren().add(pause)
+//	menuBars.getChildren().add(forward);
+//
+//	AnchorPane.setLeftAnchor(goldBar, 59.00);
+//	AnchorPane.setTopAnchor(goldBar, 60.00);
+//	AnchorPane.setLeftAnchor(healthBar, 59.00);
+//	AnchorPane.setTopAnchor(healthBar, 120.00);
+//	AnchorPane.setLeftAnchor(imageView, 25.00);
+//	AnchorPane.setTopAnchor(imageView, 25.00);
 
-	menuBars.getChildren().add(play);
-	menuBars.getChildren().add(pause);
-	menuBars.getChildren().add(forward);
-
-	AnchorPane.setLeftAnchor(goldBar, 59.00);
-	AnchorPane.setTopAnchor(goldBar, 60.00);
-	AnchorPane.setLeftAnchor(healthBar, 59.00);
-	AnchorPane.setTopAnchor(healthBar, 120.00);
-	AnchorPane.setLeftAnchor(imageView, 25.00);
-	AnchorPane.setTopAnchor(imageView, 25.00);
-
-	AnchorPane.setRightAnchor(play, 50.00);
-	AnchorPane.setBottomAnchor(play, 200.00);
-
-	AnchorPane.setRightAnchor(pause, 50.00);
-	AnchorPane.setBottomAnchor(pause, 100.00);
-
-	AnchorPane.setRightAnchor(forward, 50.00);
-	AnchorPane.setBottomAnchor(forward, 300.00);
+//	AnchorPane.setRightAnchor(sell, 50.00);
+//	AnchorPane.setBottomAnchor(sell, 200.00);
+//
+//	AnchorPane.setRightAnchor(pause, 50.00);
+//	AnchorPane.setBottomAnchor(pause, 100.00);
+//
+//	AnchorPane.setRightAnchor(forward, 50.00);
+//	AnchorPane.setBottomAnchor(forward, 300.00);
 
 	root.getChildren().add(menuBars);
 	AnimationTimer clock = new Clock();
@@ -109,27 +141,12 @@ public class GUI extends Application {
 
 	@Override
 	public void handle(long now) {
-	    play.setOnAction(event -> {
+	    sell.setOnAction(event -> {
 		isPaused = false;
 		this.start();
 	    });
 
-	    pause.setOnAction(event -> {
-		this.stop();
-		isPaused = true;
-	    });
-
-	    forward.setOnAction(event -> {
-		forwardCount++;
-		if (forwardCount > 4) {
-		    forwardCount = 1;
-
-		}
-		System.out.println(forwardCount);
-		frames = 60 * forwardCount;
-	    });
-	    // TODO Auto-generated method stub
-	    long timeSec = (now - lastUpdate) / (1000000000 / frames); // 60 Frames every 1 sec.
+	  
 	    if (!isPaused) {
 
 		lastUpdate = now;
