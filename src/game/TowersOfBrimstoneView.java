@@ -33,6 +33,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import towers.Tower;
+import towers.Tower.Projectile;
 
 public class TowersOfBrimstoneView extends Application implements Observer {
 
@@ -206,8 +207,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			// Tower Placement logic
 			//int temp = 15;
 			if (togglePlacement == true) {
-				Tower tower = controller.getTowerType(selectedTowerType);
-				boolean isPlaced = controller.placeTower(row, col, tower);
+				boolean isPlaced = controller.placeTower(row, col, selectedTowerType);
 				if (isPlaced) {
 					gc2.clearRect(50*col, 50*row, 50, 50);
 					gc2.drawImage(new Image("red-sq.png"), 50 * col, 50 * row, 50, 50);
@@ -243,6 +243,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 				if(timeSec >= 1) {
 					controller.frameUpdate(tick, zomb);			
 					lastUpdate = now;
+					tick++;
 				}				
 			}
 		}.start();
@@ -356,7 +357,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     }
 	
 	// Normal GUI frame updates go here
-	private void frameUpdateGUI(ArrayList<ArrayList<Tile>> grid, int tick, Zombie zomb) {
+	private void frameUpdateGUI(ArrayList<ArrayList<Tile>> grid, int tick, Zombie zomb, TowersOfBrimstoneModel model) {
 		for (int row = 0; row < grid.size(); row++) {
 			for (int col = 0; col < grid.get(0).size(); col++) {
 				Tile tile = grid.get(row).get(col);
@@ -367,11 +368,25 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			}
 			if(tick%20 == 0) {
 				updateEnemy(zomb, enemyGc);
+				updateProjectiles(model.getTowers(), enemyGc);
 			}
 			tick++;
 		}
 	}
 	
+	private void updateProjectiles(ArrayList<Tower> towers, GraphicsContext enemyBackground) {
+		for(Tower tower : towers) {
+			for(Projectile projectile : tower.getProjectiles()) {
+				Image image = projectile.getImage();
+				int xpos = (int) projectile.getPos().getX();
+				int ypos = (int) projectile.getPos().getY();
+				enemyBackground.drawImage(image, xpos, ypos);
+			}
+		}
+		
+	}
+
+
 	private void frameUpdateCurrency(int newVal) {
 		String str = "Gold: " + newVal;
 		currency.setText(str);
@@ -390,7 +405,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			FrameMessage msg = (FrameMessage) arg;
 			
 			frameUpdateCurrency(msg.getCurrency());
-			frameUpdateGUI(msg.getGrid(), msg.getTick(), msg.getZombie());	
+			frameUpdateGUI(msg.getGrid(), msg.getTick(), msg.getZombie(), (TowersOfBrimstoneModel) o);	
 		} else if (arg instanceof int[]) {
 			//int[] coordinates = (int[]) arg;
 			//coordinates not used

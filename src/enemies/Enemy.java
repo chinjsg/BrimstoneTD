@@ -40,6 +40,10 @@ public abstract class Enemy {
 	public Point2D getPos() {
 		return position;
 	}
+	public void removeHealth(int damage) {
+		health -= damage;
+		System.out.println("health: " + health);
+	}
 	public Point2D getDirection() {
 		Tile targetTile = path.get(TileIndex);
 		Point2D direction = targetTile.getPos().subtract(position);
@@ -50,8 +54,10 @@ public abstract class Enemy {
 		direction = direction.normalize();
 		return direction;
 	}
+	
 	public void move(double d, double e) {
 		position = new Point2D(position.getX()+d, position.getY()+e);
+		
 		
 	}
 	public abstract Image getImage();

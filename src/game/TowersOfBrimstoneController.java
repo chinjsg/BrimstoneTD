@@ -16,6 +16,7 @@ public class TowersOfBrimstoneController {
 	
 	private TowersOfBrimstoneModel model;
 	private ArrayList<Tile> enemyPath;
+	private Zombie zomb;
 	
 	public TowersOfBrimstoneController(TowersOfBrimstoneModel model) {
 		this.model = model;
@@ -93,10 +94,10 @@ public class TowersOfBrimstoneController {
 		return enemyPath;
 	}
 	
-	public boolean placeTower(int row, int col, Tower tower) {
+	public boolean placeTower(int row, int col, int selectedTowerType) {
 		ArrayList<ArrayList<Tile>> board = model.getGrid();
 		Tile tile = board.get(row).get(col);
-		
+		Tower tower = getTowerType(row, col, selectedTowerType);
 		// Check that the selected grid is not a path, isPlaceable and no tower has already been placed
 		if (!tile.getIsPath() && tile.getIsPlaceable() && tile.getPlacedTower() == null) {
 			int price = tower.getCost();
@@ -106,7 +107,7 @@ public class TowersOfBrimstoneController {
 		}
 		return false;
 	}
-	
+
 	public Tower checkTower(int row, int col) {
 		ArrayList<ArrayList<Tile>> board = model.getGrid();
 		Tile tile = board.get(row).get(col);
@@ -118,20 +119,20 @@ public class TowersOfBrimstoneController {
 		
 	}
 	
-	public Tower getTowerType(int towerNum) {
+	private Tower getTowerType(int row, int col, int towerNum) {
 		Tower tower = null;
 		if (towerNum == 1) {
-			tower = new StoneTower();
+			tower = new StoneTower(row, col);
 		} else if (towerNum == 2) {
-			tower = new FireTower();
+			tower = new FireTower(row, col);
 		} else if (towerNum == 3) {
-			tower = new IceTower();
+			tower = new IceTower(row, col);
 		} else if (towerNum == 4) {
-			tower = new HeavyTower();
+			tower = new HeavyTower(row, col);
 		} else if (towerNum == 5) {
-			tower = new LightningTower();
+			tower = new LightningTower(row, col);
 		} else if (towerNum == 6) {
-			tower = new MagicTower();
+			tower = new MagicTower(row, col);
 		}
 		return tower;
 	}
@@ -143,7 +144,26 @@ public class TowersOfBrimstoneController {
 		model.removeTower(row, col, sellback);
 	}
 	
+	private void collisionDetection(int tick) {
+		ArrayList<Tower> towers = model.getTowers();
+		int range;
+		for(Tower tower : towers) {
+			range = tower.getRange();
+			double distance = tower.getPos().distance(zomb.getPos());
+			if(distance <= range && tick % 10 == 0) {
+				tower.fire(zomb);
+			}
+			tower.updateProjectiles();
+		}
+	}
+	
+	
+	
 	public void frameUpdate(int tick, Zombie zomb) {
+		this.zomb = zomb;
+		collisionDetection(tick);
 		model.updateFrame(tick, zomb);
+		
+		
 	}
 }

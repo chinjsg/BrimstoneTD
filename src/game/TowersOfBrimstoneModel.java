@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 
 import enemies.Enemy;
@@ -19,6 +20,7 @@ public class TowersOfBrimstoneModel extends Observable {
 	public TowersOfBrimstoneModel() {
 		grid = createBlankMap();
 		towerMap = new TowerMap();
+		towers = new ArrayList<Tower>();
 		gold = 2000;
 	}
 	
@@ -69,9 +71,11 @@ public class TowersOfBrimstoneModel extends Observable {
 		gold = gold - amount;
 		return true;
 	}
+	
 	public void setEnd(int row, int col) {
 		endingTile = grid.get(row).get(col);
 	}
+	
 	public Tile getEnd() {
 		return endingTile;
 	}
@@ -81,11 +85,11 @@ public class TowersOfBrimstoneModel extends Observable {
 	}
 
 	public boolean placeTower(int row, int col, Tower tower) {
-		tower.setPlacementCoordinates(row, col);
 		boolean valid = subtractGold(tower.getCost());
 		if (valid) {
 			Tile tile = getTile(row, col);
 			tile.placeTower(tower);
+			towers.add(tower);
 			//updateTowerMap()
 			return true;
 		}
@@ -97,6 +101,7 @@ public class TowersOfBrimstoneModel extends Observable {
 		Tower tower = tile.getPlacedTower();
 		towers.remove(tower);
 		tile.removeTower();
+		towers.remove(tower);
 		addGold(sellback);
 		//updateTowerMap()
 		System.out.println("Tower sold for " + sellback + " gold");
