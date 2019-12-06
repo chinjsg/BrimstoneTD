@@ -30,7 +30,7 @@ public class IceEnemies extends Enemy{
 		super(health, speed, goldReward, row, col, pathToFollow);
 		
 		if (enemy == 0) {
-			this.texture = new Image("IceCommon.png");
+			this.texture = new Image("assets/ice/enemies/IceCommon.png");
 		} else if (enemy == 1) {
 			image_pathAttack = "assets/ice/enemies/1/ice1Attack.png";
 			image_pathDie    = "assets/ice/enemies/1/ice1Die.png";

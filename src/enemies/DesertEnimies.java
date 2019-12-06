@@ -30,7 +30,7 @@ public class DesertEnimies extends Enemy{
 		super(health, speed, goldReward, row, col, pathToFollow);
 		
 		if (enemy == 0) {
-			this.texture = new Image("DesertCommon.png");
+			this.texture = new Image("assets/desert/enemies/DesertCommon.png");
 		}else if (enemy == 1) {
 			image_pathAttack = "assets/desert/enemies/1/desert1Attack.png";
 			image_pathDie    = "assets/desert/enemies/1/desert1Die.png";

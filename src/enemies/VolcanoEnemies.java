@@ -30,7 +30,7 @@ public class VolcanoEnemies extends Enemy{
 		super(health, speed, goldReward, row, col, pathToFollow);
 		
 		if (enemy == 0) {
-			this.texture = new Image("VolcanoCommon.png");
+			this.texture = new Image("assets/volcano/enemies/VolcanoCommon.png");
 		} else if (enemy == 1) {
 			image_pathAttack = "assets/volcano/enemies/1/volcano1Attack.png";
 			image_pathDie    = "assets/volcano/enemies/1/volcano1Die.png";
