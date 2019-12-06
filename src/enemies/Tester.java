@@ -63,7 +63,7 @@ public class Tester extends Application {
         
         // IMAGE = desert.getImageAttack();
         System.out.println("HEHEHE---");
-        IMAGE = new Image("src/assets/desert/enemies/1/desert1Attack.png");
+        IMAGE = new Image("assets/desert/enemies/1/desert1Attack.png");
         System.out.println("HEHEHE");
         
         COLUMNS = desert.columns();

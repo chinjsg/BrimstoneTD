@@ -32,56 +32,56 @@ public class DesertEnimies extends Enemy{
 		if (enemy == 0) {
 			this.texture = new Image("DesertCommon.png");
 		}else if (enemy == 1) {
-			image_pathAttack = "desert1Attack.png";
-			image_pathDie    = "desert1Die.png";
-			image_pathHurt   = "desert1Hurt.png";
-			image_pathRun    = "desert1run.png";
-			image_pathWalk   = "desert1Walk.png";
+			image_pathAttack = "assets/desert/enemies/1/desert1Attack.png";
+			image_pathDie    = "assets/desert/enemies/1/desert1Die.png";
+			image_pathHurt   = "assets/desert/enemies/1/desert1Hurt.png";
+			image_pathRun    = "assets/desert/enemies/1/desert1run.png";
+			image_pathWalk   = "assets/desert/enemies/1/desert1Walk.png";
 			width   = 337;
 			height  = 294;
 			count   = 20;
 		} else if (enemy == 2) {
-			image_pathAttack = "desert2Attack.png";
-			image_pathDie    = "desert2Die.png";
-			image_pathHurt   = "desert2Hurt.png";
-			image_pathRun    = "desert2run.png";
-			image_pathWalk   = "desert2Walk.png";
+			image_pathAttack = "assets/desert/enemies/2/desert2Attack.png";
+			image_pathDie    = "assets/desert/enemies/2/desert2Die.png";
+			image_pathHurt   = "assets/desert/enemies/2/desert2Hurt.png";
+			image_pathRun    = "assets/desert/enemies/2/desert2run.png";
+			image_pathWalk   = "assets/desert/enemies/2/desert2Walk.png";
 			width  = 331;
 			height = 299;
 			count  = 20;
 		} else if (enemy == 3) {
-			image_pathAttack = "desert3Attack.png";
-			image_pathDie    = "desert3Die.png";
-			image_pathHurt   = "desert3Hurt.png";
-			image_pathRun    = "desert3run.png";
-			image_pathWalk   = "desert3Walk.png";
+			image_pathAttack = "assets/desert/enemies/3/desert3Attack.png";
+			image_pathDie    = "assets/desert/enemies/3/desert3Die.png";
+			image_pathHurt   = "assets/desert/enemies/3/desert3Hurt.png";
+			image_pathRun    = "assets/desert/enemies/3/desert3run.png";
+			image_pathWalk   = "assets/desert/enemies/3/desert3Walk.png";
 			width  = 346;
 			height = 370;
 			count  = 10;
 		} else if (enemy == 4) {
-			image_pathAttack = "desert4Attack.png";
-			image_pathDie    = "desert4Die.png";
-			image_pathHurt   = "desert4Hurt.png";
-			image_pathRun    = "desert4run.png";
-			image_pathWalk   = "desert4Walk.png";
+			image_pathAttack = "assets/desert/enemies/4/desert4Attack.png";
+			image_pathDie    = "assets/desert/enemies/4/desert4Die.png";
+			image_pathHurt   = "assets/desert/enemies/4/desert4Hurt.png";
+			image_pathRun    = "assets/desert/enemies/4/desert4run.png";
+			image_pathWalk   = "assets/desert/enemies/4/desert4Walk.png";
 			width  = 320;
 			height = 323;
 			count  = 10;
 		} else if (enemy == 5) {
-			image_pathAttack = "desert5Attack.png";
-			image_pathDie    = "desert5Die.png";
-			image_pathHurt   = "desert5Hurt.png";
-			image_pathRun    = "desert5run.png";
-			image_pathWalk   = "desert5Walk.png";
+			image_pathAttack = "assets/desert/enemies/5/desert5Attack.png";
+			image_pathDie    = "assets/desert/enemies/5/desert5Die.png";
+			image_pathHurt   = "assets/desert/enemies/5/desert5Hurt.png";
+			image_pathRun    = "assets/desert/enemies/5/desert5run.png";
+			image_pathWalk   = "assets/desert/enemies/5/desert5Walk.png";
 			width  = 349;
 			height = 291;
 			count  = 20;
 		}else if (enemy == 6){
-			image_pathAttack = "desert6Attack.png";
-			image_pathDie    = "desert6Die.png";
-			image_pathHurt   = "desert6Hurt.png";
-			image_pathRun    = "desert6run.png";
-			image_pathWalk   = "desert6Walk.png";
+			image_pathAttack = "assets/desert/enemies/6/desert6Attack.png";
+			image_pathDie    = "assets/desert/enemies/6/desert6Die.png";
+			image_pathHurt   = "assets/desert/enemies/6/desert6Hurt.png";
+			image_pathRun    = "assets/desert/enemies/6/desert6run.png";
+			image_pathWalk   = "assets/desert/enemies/6/desert6Walk.png";
 			width  = 254;
 			height = 205;
 			count  = 20;
