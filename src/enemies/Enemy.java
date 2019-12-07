@@ -55,8 +55,8 @@ public abstract class Enemy {
 		return direction;
 	}
 	
-	public void move(double d, double e) {
-		position = new Point2D(position.getX()+d, position.getY()+e);
+	public void move(double dx, double dy) {
+		position = new Point2D(position.getX()+dx, position.getY()+dy);
 		
 		
 	}

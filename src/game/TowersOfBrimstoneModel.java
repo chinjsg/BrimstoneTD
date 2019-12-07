@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.Queue;
 
 import enemies.Enemy;
 import enemies.Zombie;
@@ -13,6 +14,8 @@ public class TowersOfBrimstoneModel extends Observable {
 	private ArrayList<ArrayList<Tile>> grid;
 	private ArrayList<Tower> towers;
 	private ArrayList<Enemy> enemies;
+	private	ArrayList<Queue<Enemy>> waves;
+	private int waveNum;
 	private Tile endingTile;
 	private int gold;
 	private TowerMap towerMap;
@@ -21,6 +24,8 @@ public class TowersOfBrimstoneModel extends Observable {
 		grid = createBlankMap();
 		towerMap = new TowerMap();
 		towers = new ArrayList<Tower>();
+		enemies = new ArrayList<Enemy>();
+		waveNum = 0;
 		gold = 2000;
 	}
 	
@@ -112,6 +117,18 @@ public class TowersOfBrimstoneModel extends Observable {
 		setChanged();
 		notifyObservers(temp);
 	}
+	public void setWaves(ArrayList<Queue<Enemy>> waves) {
+		this.waves = waves;
+	}
+	public ArrayList<Queue<Enemy>> getWaves(){
+		return waves;
+	}
+	public int getWaveNum() {
+		return waveNum;
+	}
+	public void incrementWaveNum() {
+		waveNum++;
+	}
 	public void addEnemy(Enemy enemy) {
 		enemies.add(enemy);
 		notifyObservers(enemy);
@@ -129,7 +146,6 @@ public class TowersOfBrimstoneModel extends Observable {
 	
 	public void updateFrame(int tick, Zombie zomb) {
 		FrameMessage update = new FrameMessage(getGrid(), tick, getGold(), zomb);
-		
 		setChanged();
 		notifyObservers(update);
 	}

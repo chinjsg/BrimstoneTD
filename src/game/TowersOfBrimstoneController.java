@@ -1,7 +1,9 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Queue;
 
+import enemies.Enemy;
 import enemies.Zombie;
 import towers.StoneTower;
 import towers.FireTower;
@@ -17,6 +19,8 @@ public class TowersOfBrimstoneController {
 	private TowersOfBrimstoneModel model;
 	private ArrayList<Tile> enemyPath;
 	private Zombie zomb;
+	
+
 	
 	public TowersOfBrimstoneController(TowersOfBrimstoneModel model) {
 		this.model = model;
@@ -146,14 +150,38 @@ public class TowersOfBrimstoneController {
 	
 	private void collisionDetection(int tick) {
 		ArrayList<Tower> towers = model.getTowers();
+		ArrayList<Enemy> enemies = model.getEnemy();
 		int range;
 		for(Tower tower : towers) {
-			range = tower.getRange();
-			double distance = tower.getPos().distance(zomb.getPos());
-			if(distance <= range && tick % 10 == 0) {
-				tower.fire(zomb);
+			for(Enemy enemy: enemies) {
+				range = tower.getRange();
+				double distance = tower.getPos().distance(enemy.getPos());
+				if(distance <= range && tick % 10 == 0) {
+					tower.fire(enemy);
+					tower.updateProjectiles();
+					break;
+				}
+				else {
+					tower.updateProjectiles();
+				}
 			}
-			tower.updateProjectiles();
+		}
+	}
+	
+	private void updateWave() {
+		ArrayList<Queue<Enemy>> waves = model.getWaves();
+		ArrayList<Enemy> enemies = model.getEnemy();
+		int waveNum = model.getWaveNum();
+		if(enemies.size() == 0) {
+			if(waves.size() == 0) {
+								//Beat level
+			}
+			else if(waves.get(waveNum).size() != 0) {
+				
+			}
+			else {
+				model.incrementWaveNum();
+			}
 		}
 	}
 	
