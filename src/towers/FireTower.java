@@ -1,5 +1,7 @@
 package towers;
 
+import javafx.scene.image.Image;
+
 public class FireTower extends Tower {
 	
 	
@@ -12,7 +14,8 @@ public class FireTower extends Tower {
 		//  - Cost         = 150 gold
 		//  - Range        = 200
 		//  - X/Y coordinates will be set when it is placed
-		super(25, 1, false, 150, 200, row, col, 2);
+		super(25, 1, false, 150, 200, row, col);
+		texture = new Image("tower_fire.png");
 	}
 	
 	public String toString() {

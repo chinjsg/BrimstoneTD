@@ -1,5 +1,7 @@
 package towers;
 
+import javafx.scene.image.Image;
+
 public class LightningTower extends Tower {
 	
 	public LightningTower(int row, int col) {
@@ -10,7 +12,8 @@ public class LightningTower extends Tower {
 		//  - Cost         = 275 gold
 		//  - Range        = 200
 		//  - X/Y coordinates will be set when it is placed
-		super(25, 1, false, 275, 200, row, col, 5);
+		super(25, 1, false, 275, 200, row, col);
+		texture = new Image("tower_lightning.png");
 	}
 	
 	public String toString() {

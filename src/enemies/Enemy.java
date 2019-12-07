@@ -15,12 +15,12 @@ public abstract class Enemy {
 	protected ArrayList<Tile> path;
 	//protected Title tile;
 	
-	public Enemy(int health, int speed, int goldReward, int row, int col, ArrayList<Tile> pathToFollow) {
+	public Enemy(int health, int speed, int goldReward, ArrayList<Tile> pathToFollow) {
 		this.health = health;
 		this.speed = speed;
 		this.goldReward = goldReward;
-		int xPos = row*50+25;
-		int yPos = col*50+25;
+		int xPos = (int) pathToFollow.get(0).getPos().getX();
+		int yPos = (int) pathToFollow.get(0).getPos().getY();
 		path = pathToFollow;
 		TileIndex = 0;
 		position = new Point2D(xPos, yPos);

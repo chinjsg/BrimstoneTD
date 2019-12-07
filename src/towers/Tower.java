@@ -17,12 +17,12 @@ public abstract class Tower {
 	protected int col;
 	protected int range;
 	protected ArrayList<Projectile> projectiles;
-	private Image texture;
-	protected String image_path;
+	protected Image texture;
+	
 	//protected image image;
 	//protected Title tile;
 	
-	public Tower(int attackPower, int rateOfFire, boolean areaDamage, int cost, int range, int row, int col, int imageNum) {
+	public Tower(int attackPower, int rateOfFire, boolean areaDamage, int cost, int range, int row, int col) {
 		this.attackPower = attackPower;
 		this.rateOfFire = rateOfFire;
 		this.areaDamage = areaDamage;
@@ -34,20 +34,6 @@ public abstract class Tower {
 		
 		pos = new Point2D(col*50+25, row*50+25);
 		
-		if (imageNum == 1) {
-			image_path = "tower_stone.png";
-		} else if (imageNum == 2) {
-			image_path = "tower_fire.png";
-		} else if (imageNum == 3) {
-			image_path = "tower_ice.png";
-		} else if (imageNum == 4) {
-			image_path = "tower_heavy.png";
-		} else if (imageNum == 5) {
-			image_path = "tower_lightning.png";
-		} else {
-			image_path = "tower_magic.png";
-		}
-		this.texture = new Image(image_path);
 	}
 	
 	public int getAttackPower() {
@@ -113,7 +99,7 @@ public abstract class Tower {
 	public class Projectile {
 		private Point2D projPoint;
 		private Enemy enemy;
-		private int speed = 10;
+		private int speed = 5;
 		private Projectile(Enemy target) {
 			projPoint = pos;
 			enemy = target;

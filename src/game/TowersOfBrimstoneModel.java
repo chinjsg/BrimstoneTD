@@ -133,6 +133,11 @@ public class TowersOfBrimstoneModel extends Observable {
 		enemies.add(enemy);
 		notifyObservers(enemy);
 	}
+	public void removeEnemy(Enemy enemy) {
+		enemies.remove(enemy);
+		System.out.println("ENEMIES: " + enemies);
+		
+	}
 	public ArrayList<Tower> getTowers(){
 		return towers;
 	}
@@ -144,8 +149,8 @@ public class TowersOfBrimstoneModel extends Observable {
 		towerMap.addTower(tower);
 	}
 	
-	public void updateFrame(int tick, Zombie zomb) {
-		FrameMessage update = new FrameMessage(getGrid(), tick, getGold(), zomb);
+	public void updateFrame(int tick) {
+		FrameMessage update = new FrameMessage(getGrid(), tick, getGold(), enemies);
 		setChanged();
 		notifyObservers(update);
 	}

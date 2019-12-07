@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
+import enemies.Enemy;
 import enemies.Zombie;
 
 public class FrameMessage {
@@ -9,13 +10,13 @@ public class FrameMessage {
 	private ArrayList<ArrayList<Tile>> grid;
 	private int tick;
 	private int currency;
-	private Zombie zomb;
+	private ArrayList<Enemy> enemies;
 	
-	public FrameMessage(ArrayList<ArrayList<Tile>> grid, int tick, int currency, Zombie zomb) {
+	public FrameMessage(ArrayList<ArrayList<Tile>> grid, int tick, int currency, ArrayList<Enemy> enemies) {
     	this.grid = grid;
     	this.tick = tick;
     	this.currency = currency;
-    	this.zomb = zomb;
+    	this.enemies = enemies;
     	// we can also use setter methods if the parameters gets too lengthy
     }
 	
@@ -31,7 +32,7 @@ public class FrameMessage {
 		return currency;
     }
 	
-	public Zombie getZombie() {
-		return zomb;
+	public ArrayList<Enemy> getEnemies() {
+		return enemies;
     }
 }

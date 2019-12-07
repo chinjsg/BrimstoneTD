@@ -1,6 +1,9 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Queue;
 
 import enemies.Enemy;
@@ -12,15 +15,11 @@ import towers.IceTower;
 import towers.LightningTower;
 import towers.MagicTower;
 import towers.Tower;
-import towers.TowerMap;
 
 public class TowersOfBrimstoneController {
 	
 	private TowersOfBrimstoneModel model;
 	private ArrayList<Tile> enemyPath;
-	private Zombie zomb;
-	
-
 	
 	public TowersOfBrimstoneController(TowersOfBrimstoneModel model) {
 		this.model = model;
@@ -29,7 +28,7 @@ public class TowersOfBrimstoneController {
 	public void createMap() {
 		enemyPath = new ArrayList<Tile>();
 		ArrayList<ArrayList<Tile>> board = model.getGrid();
-	
+		
 		int[][] path = 
 		{ 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -66,6 +65,32 @@ public class TowersOfBrimstoneController {
 		}
 		model.setEnd(4, 27);
 		createPath(6, 0);
+		model.setWaves(createWaveMap1());
+	}
+	private ArrayList<Queue<Enemy>> createWaveMap1(){
+		ArrayList<Queue<Enemy>> waves = new ArrayList<Queue<Enemy>>();
+
+		Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
+		Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
+		Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
+		
+		waves.add(wave1);
+		waves.add(wave2);
+		waves.add(wave3);
+		return waves;
+	}
+	
+	private Queue<Enemy> createEnemyObjects(ArrayList<Integer> enemies, ArrayList<Tile> path){
+		Queue<Enemy> wave = new LinkedList<Enemy>();
+		for(Integer enemyType: enemies) {
+			if(enemyType == 1) {
+				wave.add(new Zombie(path));
+			}
+			if(enemyType == 2) {
+				//other enemy
+			}
+		}
+		return wave;
 	}
 	public boolean createPath(int row, int col) {
 		boolean found = false;
@@ -150,48 +175,59 @@ public class TowersOfBrimstoneController {
 	
 	private void collisionDetection(int tick) {
 		ArrayList<Tower> towers = model.getTowers();
-		ArrayList<Enemy> enemies = model.getEnemy();
 		int range;
-		for(Tower tower : towers) {
-			for(Enemy enemy: enemies) {
-				range = tower.getRange();
-				double distance = tower.getPos().distance(enemy.getPos());
-				if(distance <= range && tick % 10 == 0) {
-					tower.fire(enemy);
-					tower.updateProjectiles();
-					break;
+		double distance;
+		for(Tower tower: towers) {
+			ArrayList<Enemy> enemies = model.getEnemy();
+			Iterator<Enemy> iterator = enemies.iterator();
+			while(iterator.hasNext()) {
+				Enemy enemy = iterator.next();
+				if(enemy.getHealth() <= 0) {
+					iterator.remove();
 				}
-				else {
-					tower.updateProjectiles();
+				else if((enemy.getHealth() - tower.getAttackPower()) > tower.getAttackPower()){
+					range = tower.getRange();
+					distance = tower.getPos().distance(enemy.getPos());
+					if(distance <= range) {
+						tower.fire(enemy);
+						tower.updateProjectiles();
+						break;
+					}
+				}
+				tower.updateProjectiles();
+
+				distance = model.getEnd().getPos().distance(enemy.getPos());
+				if(distance < 10) {
+					
+					iterator.remove();
 				}
 			}
 		}
-	}
+		}
+
 	
-	private void updateWave() {
+	
+	private void updateWave(int tick) {
 		ArrayList<Queue<Enemy>> waves = model.getWaves();
 		ArrayList<Enemy> enemies = model.getEnemy();
 		int waveNum = model.getWaveNum();
-		if(enemies.size() == 0) {
-			if(waves.size() == 0) {
-								//Beat level
+			if(waves.size() == waveNum) {
+				System.out.println("GAME WON");									// IF IT REACHES HERE LEVEL HAS COMPLETED
+				System.exit(0);
 			}
-			else if(waves.get(waveNum).size() != 0) {
-				
+			Queue<Enemy> curWave = waves.get(waveNum);
+			if(curWave.size() != 0) {											// Pop queue
+				model.addEnemy(curWave.remove());
 			}
-			else {
+			else if(enemies.size() == 0) {
 				model.incrementWaveNum();
 			}
-		}
 	}
 	
 	
-	
-	public void frameUpdate(int tick, Zombie zomb) {
-		this.zomb = zomb;
+	public void frameUpdate(int tick) {
+		updateWave(tick);
 		collisionDetection(tick);
-		model.updateFrame(tick, zomb);
-		
-		
+		model.updateFrame(tick);
 	}
 }

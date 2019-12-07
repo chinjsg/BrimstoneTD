@@ -136,10 +136,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		AnchorPane.setLeftAnchor(towerStatsgp, 25.00);
 		AnchorPane.setTopAnchor(towerStatsgp, 385.00);
 		
-		ArrayList<ArrayList<Tile>> grid = model.getGrid();
-		controller.getEnemyPath();
-		Zombie zomb = new Zombie(0,6, controller.getEnemyPath());
-		
+		ArrayList<ArrayList<Tile>> grid = model.getGrid();		
 		
 		// Temp Label to sell Selected towers
 		tSell.setOnMouseClicked((event) -> {
@@ -241,7 +238,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 				// TODO Auto-generated method stub
 				long timeSec = (now - lastUpdate)/(1000000000/60);		// 60 Frames every 1 sec.
 				if(timeSec >= 1) {
-					controller.frameUpdate(tick, zomb);			
+					controller.frameUpdate(tick);			
 					lastUpdate = now;
 					tick++;
 				}				
@@ -255,11 +252,12 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	}
 	
 						
-	private void updateEnemy(Enemy enemy, GraphicsContext d) {
+	private void updateEnemies(ArrayList<Enemy> enemies, GraphicsContext d) {
 		d.clearRect(0, 0, WIDTH, HEIGHT);
-		enemy.move(enemy.getSpeed()*enemy.getDirection().getX(), enemy.getSpeed()*enemy.getDirection().getY());
-		d.drawImage(enemy.getImage(), enemy.getPos().getX()-25, enemy.getPos().getY()-25);
-		
+		for(Enemy enemy: enemies) {
+			enemy.move(enemy.getSpeed()*enemy.getDirection().getX(), enemy.getSpeed()*enemy.getDirection().getY());
+			d.drawImage(enemy.getImage(), enemy.getPos().getX()-25, enemy.getPos().getY()-25);
+		}
 	}
 	
 	public void generateTowerStatsView() {
@@ -357,7 +355,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     }
 	
 	// Normal GUI frame updates go here
-	private void frameUpdateGUI(ArrayList<ArrayList<Tile>> grid, int tick, Zombie zomb, TowersOfBrimstoneModel model) {
+	private void frameUpdateGUI(ArrayList<ArrayList<Tile>> grid, int tick, ArrayList<Enemy> enemies, TowersOfBrimstoneModel model) {
 		for (int row = 0; row < grid.size(); row++) {
 			for (int col = 0; col < grid.get(0).size(); col++) {
 				Tile tile = grid.get(row).get(col);
@@ -367,7 +365,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 				}
 			}
 			if(tick%20 == 0) {
-				updateEnemy(zomb, enemyGc);
+				updateEnemies(enemies, enemyGc);
 				updateProjectiles(model.getTowers(), enemyGc);
 			}
 			tick++;
@@ -405,7 +403,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			FrameMessage msg = (FrameMessage) arg;
 			
 			frameUpdateCurrency(msg.getCurrency());
-			frameUpdateGUI(msg.getGrid(), msg.getTick(), msg.getZombie(), (TowersOfBrimstoneModel) o);	
+			frameUpdateGUI(msg.getGrid(), msg.getTick(), msg.getEnemies(), (TowersOfBrimstoneModel) o);	
 		} else if (arg instanceof int[]) {
 			//int[] coordinates = (int[]) arg;
 			//coordinates not used
