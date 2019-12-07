@@ -1,0 +1,21 @@
+.shopLabel{
+	-fx-font-size: 15pt;
+	-fx-font-weight: 900 ;
+	-fx-font-family: "Marker Felt";
+	-fx-text-fill: #FAE90F;
+	
+}
+
+.levelButton{
+	-fx-border-color:black;
+    -fx-border-width: 5 5 5 5;
+}
+
+.levelLabel{
+	-fx-font-size: 25pt;
+	-fx-font-weight: 900 ;
+	-fx-font-family: "Marker Felt";
+	-fx-text-fill: #FAE90F;
+	
+	
+}
