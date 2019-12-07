@@ -5,6 +5,11 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import org.omg.CORBA.PRIVATE_MEMBER;
 
 import enemies.Enemy;
 import enemies.Zombie;
@@ -20,6 +25,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -28,11 +34,15 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -52,6 +62,13 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     ImageButton damageboost;
 
 //    int gold;
+    public AnchorPane mainScreen;
+    public BorderPane levelScreen;
+    AnchorPane levelPane = new AnchorPane();
+    Scene mainscreen;
+    Scene levelSelection;
+    Scene game;
+    Stage window;
 
     private TowersOfBrimstoneModel model;
     private TowersOfBrimstoneController controller;
@@ -62,6 +79,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private boolean togglePlacement;
     private int selectedTowerType;
 
+    private ArrayList<Enemy> enemiesList = new ArrayList<>();
     private GraphicsContext enemyGc;
     private GraphicsContext baseContext;
     private GraphicsContext selectionContext;
@@ -94,6 +112,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+	window = primaryStage;
+	makeMainScreen();
+	
 	model = new TowersOfBrimstoneModel();
 	model.addObserver(this);
 	controller = new TowersOfBrimstoneController(model);
@@ -117,12 +138,13 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	enemyGc = enemies.getGraphicsContext2D();
 	baseContext = canvas.getGraphicsContext2D();
 	selectionContext = selectionCanvas.getGraphicsContext2D();
-	baseContext.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
+	
 
 	healthBar = new ImageView(new Image("healthBar.png", 150, 15, false, false));
 	goldBar = new ImageView(new Image("goldBar.png", 150, 15, false, false));
 	barView = new ImageView(new Image("barMenu.png", 200, 150, false, false));
-	towerMenuLayer = canvas.getGraphicsContext2D();
+	
+	towerMenuLayer = selectionCanvas.getGraphicsContext2D();
 
 	root.getChildren().add(canvas);
 	root.getChildren().add(selectionCanvas);
@@ -192,8 +214,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	AnchorPane.setRightAnchor(tCoords, 380.00);
 	ArrayList<ArrayList<Tile>> grid = model.getGrid();
 	controller.getEnemyPath();
-	Zombie zomb = new Zombie(0, 6, controller.getEnemyPath());
 
+	Zombie zomb = new Zombie(0, 6, controller.getEnemyPath());
+//	 enemiesList.add(zomb);
 	// Temp Label to sell Selected towers
 	sellButton.setOnMouseClicked((event) -> {
 	    if (towerView != null) {
@@ -289,42 +312,38 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		    tName.setText(towerView.toString());
 		    tDmg.setText("DPS: " + towerView.getAttackPower());
 		    tSell.setText("Sell for\n" + towerView.getSellPrice() + "?");
-		    tCoords.setText("Row:" + towerView.getRow() + "\nCol: " + towerView.getCol());
-//		    towerStatsBg.setVisible(true);
-//		    sellButton.setVisible(true);
-//		    tName.setVisible(true);
-//		    tDmg.setVisible(true);
-//		    tSell.setVisible(true);
-//		    tCoords.setVisible(true);
+		    tCoords.setText("Row - " +towerView.getRow()+"\n Col - "+towerView.getCol());
+
 		    showTowerInfo();
 		} else {
-//		    towerStatsBg.setVisible(false);
-//		    sellButton.setVisible(false);
-//		    tName.setVisible(false);
-//		    tDmg.setVisible(false);
-//		    tSell.setVisible(false);
-//		    tCoords.setVisible(false);
+
 		    hideTowerInfo();
-		    
+
 		}
 	    }
 	});
-
+	    
+	    
 	// Animation Timer - handles ticking of game clock
-	timeline = new Timeline(new KeyFrame(Duration.millis(20), event -> {
+	timeline = new Timeline(new KeyFrame(Duration.millis(30), event -> {
+	   
 	    controller.frameUpdate(tick, zomb);
-	}));
+	    
+	    }));
+
 	timeline.setCycleCount(Animation.INDEFINITE);
 	play.setOnAction(e -> {
 	    isPaused = false;
 	    System.out.println("Game is being played!");
 	    timeline.play();
-
+	    
 	});
 
 	pause.setOnAction(e -> {
 	    if (!isPaused) {
 		timeline.stop();
+		timeline.stop();	
+
 		System.out.println("Game is paused!");
 		isPaused = true;
 	    }
@@ -341,60 +360,24 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    timeline.setRate(forwardCount);
 
 	});
-//	new AnimationTimer() {
-//	    long lastUpdate = 0;
-//	    int tick = 0;
-//	   
-//	    
-//
-//	    @Override
-//	    public void handle(long now) {
-//		play.setOnAction(event->{
-//		    this.start();
-//		});
-//		
-//		pause.setOnAction(event->{
-//		    this.stop();
-//		});
-//		
-//		forward.setOnAction(event->{
-//		    forwardCount++;
-//		    if(forwardCount > 4) {
-//			forwardCount = 1;
-//			
-//		    }
-//		    System.out.println(forwardCount);
-//		    frames = 60 * forwardCount;
-//		});
-//		// TODO Auto-generated method stub
-//		long timeSec = (now - lastUpdate) / (1000000000 / frames); // 60 Frames every 1 sec.
-//		if (timeSec >= 1) {
-//		    
-//		    lastUpdate = now;
-//		}
-//	    }
-//	}.start();
 
 	// Display the scene
-	Scene scene = new Scene(base, 1400, 1000);
+	game = new Scene(base, 1400, 1000);
 	primaryStage.setMaxWidth(1400);
 	primaryStage.setMaxHeight(1000);
 	primaryStage.setMinWidth(1400);
 	primaryStage.setMinHeight(1000);
-	primaryStage.setScene(scene);
+	primaryStage.setScene(mainscreen);
 	primaryStage.show();
     }
 
     private void updateEnemy(Enemy enemy, GraphicsContext d) {
-	d.clearRect(0, 0, WIDTH, HEIGHT);
+
 	if (!isPaused) {
+	    d.clearRect(0, 0, WIDTH, HEIGHT);
 	    d.drawImage(enemy.getImage(), enemy.getPos().getX() - 25, enemy.getPos().getY() - 25);
 	    enemy.move(enemy.getSpeed() * enemy.getDirection().getX(), enemy.getSpeed() * enemy.getDirection().getY());
-//	    d.clearRect(0, 0, WIDTH, HEIGHT);
-
 	}
-
-//	d.drawImage(enemy.getImage(), enemy.getPos().getX() - 25, enemy.getPos().getY() - 25);
 
     }
 
@@ -462,6 +445,175 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    ((ImageButton) btn).setOnAction(new ButtonListener());
 	}
     }
+    
+public void setUpLevelPane() {
+	
+	Label l1 = new Label("LEVEL 1");
+	l1.getStyleClass().add("levelLabel");
+	Label l2 = new Label("LEVEL 2");
+	l2.getStyleClass().add("levelLabel");
+	Label l3 = new Label("LEVEL 3");
+	l3.getStyleClass().add("levelLabel");
+	Label l4 = new Label("LEVEL 4");
+	l4.getStyleClass().add("levelLabel");
+	Label l5 = new Label("LEVEL 5");
+	l5.getStyleClass().add("levelLabel");
+	Label l6 = new Label("LEVEL 6");
+	l6.getStyleClass().add("levelLabel");
+	
+	ImageButton level1 = new ImageButton("desertTab.png", 280, 250);
+	level1.getStyleClass().add("levelButton");
+	ImageButton level2 = new ImageButton("iceTab.png", 280, 250);
+	level2.getStyleClass().add("levelButton");
+	ImageButton level3 = new ImageButton("volcanoTab.png", 280, 250);
+	level3.getStyleClass().add("levelButton");
+	ImageButton level4 = new ImageButton("oasis.png", 280, 250);
+	level4.getStyleClass().add("levelButton");
+	ImageButton level5 = new ImageButton("acidForest.png", 280, 250);
+	level5.getStyleClass().add("levelButton");
+	ImageButton level6 = new ImageButton("farm.png", 280, 250);
+	level6.getStyleClass().add("levelButton");
+	ImageView imageView = new ImageView(new Image("levelSelectionMenu-01.png", 1400, 1000, false, false));
+	
+	level1.setOnAction(event->{
+	    baseContext.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
+	    setUpTowerMenu();
+	    window.setScene(game);
+	});
+	
+	level2.setOnAction(event->{
+	    baseContext.drawImage(new Image("mediumMap.png", 1400, 1000, false, false), 0, 0);
+	    setUpTowerMenu();
+	    window.setScene(game);
+	});
+	
+	level3.setOnAction(event->{
+	    baseContext.drawImage(new Image("hardMap.png", 1400, 1000, false, false), 0, 0);
+	    setUpTowerMenu();
+	    window.setScene(game);
+	});
+	
+	level4.setOnAction(event->{
+	    baseContext.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
+	    setUpTowerMenu();
+	    window.setScene(game);
+	});
+	
+	level5.setOnAction(event->{
+	    baseContext.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
+	    setUpTowerMenu();
+	    window.setScene(game);
+	});
+	
+	level6.setOnAction(event->{
+	    baseContext.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
+	    setUpTowerMenu();
+	    window.setScene(game);
+	});
+	
+	HBox hBox1 = new HBox();
+	HBox hBoxLabel1 = new HBox();
+	HBox hBox2 = new HBox();
+	HBox hBoxLabel2 = new HBox();
+	
+	hBox1.setPadding(new Insets(0,0,0,120));
+	hBox1.setSpacing(115);
+	hBoxLabel1.setPadding(new Insets(0,0,0,220));
+	
+	hBoxLabel1.setSpacing(300);
+	hBox1.getChildren().add(level1);
+	hBox1.getChildren().add(level2);
+	hBox1.getChildren().add(level3);
+	hBoxLabel1.getChildren().add(l1);
+	hBoxLabel1.getChildren().add(l2);
+	hBoxLabel1.getChildren().add(l3);
+	hBoxLabel1.setAlignment(Pos.CENTER);
+	
+	hBox2.setPadding(new Insets(0,0,0,120));
+	hBox2.setSpacing(115);
+	hBoxLabel2.setPadding(new Insets(0,0,0,220));
+//	hBoxLabel2.setAlignment(Pos.CENTER);
+	hBoxLabel2.setSpacing(300);
+	hBox2.getChildren().add(level4);
+	hBox2.getChildren().add(level5);
+	hBox2.getChildren().add(level6);
+	hBoxLabel2.getChildren().add(l4);
+	hBoxLabel2.getChildren().add(l5);
+	hBoxLabel2.getChildren().add(l6);
+	hBoxLabel2.setAlignment(Pos.CENTER);
+	levelPane.getStylesheets().add("test.css");
+	levelPane.getChildren().add(imageView);
+	levelPane.getChildren().add(hBoxLabel1);
+	levelPane.getChildren().add(hBoxLabel2);
+	levelPane.getChildren().add(hBox1);
+	levelPane.getChildren().add(hBox2);
+
+	
+	
+	AnchorPane.setTopAnchor(hBox1, 140.00);
+	AnchorPane.setTopAnchor(hBoxLabel1, 350.00);
+	AnchorPane.setTopAnchor(hBox2, 550.00);
+	AnchorPane.setTopAnchor(hBoxLabel2, 780.00);	
+	
+    }
+   
+    public void makeMainScreen() {
+   	mainScreen = new AnchorPane();
+//   	VBox menuItems = new VBox();
+//   	menuItems.setAlignment(Pos.CENTER);
+//   	menuItems.setMaxWidth(900);
+//   	menuItems.setMaxHeight(300);
+//   	menuItems.setSpacing(0.0);
+//   	menuItems.setPadding(new Insets(100, 100, 100, 100));
+   	ImageView gameName = new ImageView("gameTitle.png");
+   	gameName.setFitWidth(1000);
+   	gameName.setFitHeight(550);
+   	ImageButton newGame = new ImageButton("playNow.png",900,500);
+//   	newGame.setPreserveRatio(true);
+   	
+
+   	Image image = new Image("bg.png",1400, 1000, false, false);
+   	
+   	BackgroundImage background = new BackgroundImage(image, null, null, null, null);
+   	
+   	Background background2 = new Background(background);
+   	
+   	
+//   	menuItems.getChildren().add(newGame);
+   	
+   	mainScreen.setMaxWidth(1400);
+   	mainScreen.setMaxHeight(1000);
+   	mainScreen.setBackground(background2);
+   	mainScreen.getChildren().add(gameName);
+   	mainScreen.getChildren().add(newGame);
+   	AnchorPane.setTopAnchor(gameName, 0.00);
+   	AnchorPane.setLeftAnchor(gameName, 200.00);
+   	AnchorPane.setTopAnchor(newGame, 320.00);
+	AnchorPane.setLeftAnchor(newGame, 350.00);
+   
+	mainscreen = new Scene(mainScreen);
+   	 newGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
+   		// setting a mouseEvent on the column in the grid
+   		@Override
+   		public void handle(MouseEvent event) {
+   		    setUpLevelPane();
+   		    levelSelection = new Scene(levelPane);
+   		   window.setScene(levelSelection);
+
+   		}
+   	    });
+
+       }
+       
+       public void setupImageView(ImageView imgView) {
+   	imgView.setPreserveRatio(true);
+   	imgView.setFitWidth(500);
+   	imgView.setFitHeight(300);
+   	
+       }
+    
+    
+    
 
     private class ButtonListener implements EventHandler<ActionEvent> {
 	/**
@@ -509,15 +661,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			timeline.setRate(temp);
 		    }
 		}).start();
-//		Timer timer = new Timer();
-//		    timer.schedule(new TimerTask(){
-//		        @Override
-//		        public void run() {
-//		            timeline.setRate(timeline.getRate() / 2);
-//		        }
-//		    }, 3000);
-
-//		timeline.setRate(temp);
 		System.out.println("Slowdown Enemies for 5 seconds");
 	    } else if (event.getSource().equals(damageboost)) {
 		System.out.println("Unimplemented Ability 2");
@@ -535,6 +678,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		    towerContext.drawImage(tower.getImage(), 50 * col - 4, 50 * row - 15, 65, 65);
 		}
 	    }
+
 	    if (tick % 20 == 0) {
 		updateEnemy(zomb, enemyGc);
 	    }
@@ -562,7 +706,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    // TODO: add code for animating healthbar
 //	    gold = msg.getCurrency();
 	    frameUpdateCurrency(msg.getCurrency());
+//	    for (Enemy en : enemiesList) {
 	    frameUpdateGUI(msg.getGrid(), msg.getTick(), msg.getZombie());
+//	    }
 	} else if (arg instanceof int[]) {
 	    // int[] coordinates = (int[]) arg;
 	    // coordinates not used
