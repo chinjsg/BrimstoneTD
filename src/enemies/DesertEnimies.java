@@ -96,7 +96,6 @@ public class DesertEnimies extends Enemy{
 	@Override
 	public Image getImageAttack() {
 		this.texture = new Image(image_pathAttack);
-		System.out.println(texture.isError());
 		return texture;
 	}
 

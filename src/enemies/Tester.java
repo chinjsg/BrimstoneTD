@@ -57,15 +57,9 @@ public class Tester extends Application {
         //TowersOfBrimstoneController df = new TowersOfBrimstoneController(null);
         //enemyPath = df.getEnemyPath();
         
-        DesertEnimies desert = new DesertEnimies(0,1,10,10,10,enemyPath,2);
-        
-        // IMAGE IS NOT BEING FETCHED. getClass().getResource
-        
-        // IMAGE = desert.getImageAttack();
-        System.out.println("HEHEHE---");
-        IMAGE = new Image("assets/desert/enemies/1/desert1Attack.png");
-        System.out.println("HEHEHE");
-        
+        DesertEnimies desert = new DesertEnimies(0,1,10,10,10,enemyPath,4);  
+        IMAGE = desert.getImageAttack();
+       
         COLUMNS = desert.columns();
         COUNT   = desert.count();
         WIDTH   = desert.image_width();

@@ -49,11 +49,8 @@ public class Animator extends Transition {
             imageView.setFitHeight(50); 
             imageView.setFitWidth(50);
             lastIndex = index;
-//            if (ii %  50 == 0) {
-//            	imageView.setX(enemy.getSpeed()*enemy.getDirection().getX());
-//            	imageView.setY( enemy.getSpeed()*enemy.getDirection().getY());
-//            }
-//            ii += 1;
+//            imageView.setX(enemy.getSpeed()*enemy.getDirection().getX());
+//            imageView.setY(enemy.getSpeed()*enemy.getDirection().getY());
         }
     }
 }
