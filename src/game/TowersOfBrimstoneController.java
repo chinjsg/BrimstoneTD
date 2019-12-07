@@ -185,7 +185,7 @@ public class TowersOfBrimstoneController {
 				if(enemy.getHealth() <= 0) {
 					iterator.remove();
 				}
-				else if((enemy.getHealth() - tower.getAttackPower()) > tower.getAttackPower()){
+				else if((enemy.getHealth() - tower.getAttackPower()) > tower.getAttackPower() && tick % 10 == 0){
 					range = tower.getRange();
 					distance = tower.getPos().distance(enemy.getPos());
 					if(distance <= range) {
@@ -196,9 +196,9 @@ public class TowersOfBrimstoneController {
 				}
 				tower.updateProjectiles();
 
-				distance = model.getEnd().getPos().distance(enemy.getPos());
+				distance = (model.getEnd().getPos()).distance(enemy.getPos());
 				if(distance < 10) {
-					
+					// model subtract health
 					iterator.remove();
 				}
 			}
@@ -226,8 +226,20 @@ public class TowersOfBrimstoneController {
 	
 	
 	public void frameUpdate(int tick) {
-		updateWave(tick);
+		if(tick % 100 == 0) {
+			updateWave(tick);
+
+		}
+		moveEnemy();
 		collisionDetection(tick);
+		System.out.println("TEST");
 		model.updateFrame(tick);
+	}
+
+	private void moveEnemy() {
+		// TODO Auto-generated method stub
+		for(Enemy enemy: model.getEnemy()) {
+			enemy.move(enemy.getSpeed() * enemy.getDirection().getX(), enemy.getSpeed() * enemy.getDirection().getY());
+		}
 	}
 }

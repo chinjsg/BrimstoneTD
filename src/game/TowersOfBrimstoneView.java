@@ -338,9 +338,10 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		});
 
 		// Animation Timer - handles ticking of game clock
-		timeline = new Timeline(new KeyFrame(Duration.millis(30), event -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
 
 			controller.frameUpdate(tick);
+			tick++;
 
 		}));
 
@@ -388,8 +389,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		if (!isPaused) {
 			d.clearRect(0, 0, WIDTH, HEIGHT);
 			for (Enemy enemy : enemies) {
-				enemy.move(enemy.getSpeed() * enemy.getDirection().getX(),
-						enemy.getSpeed() * enemy.getDirection().getY());
+				
 				d.drawImage(enemy.getImage(), enemy.getPos().getX() - 25,
 						enemy.getPos().getY() - 25);
 			}
@@ -711,11 +711,10 @@ public void setUpLevelPane() {
 							65, 65);
 				}
 			}
-			if (tick % 20 == 0) {
+	
 				updateEnemies(enemies, enemyGc);
 				updateProjectiles(model.getTowers(), enemyGc);
-			}
-			tick++;
+			
 		}
 	}
 
