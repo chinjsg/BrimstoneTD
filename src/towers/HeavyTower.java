@@ -14,6 +14,7 @@ public class HeavyTower extends Tower {
 		//  - X/Y coordinates will be set when it is placed
 		super(50, 1, false, 300, 200, row, col);
 		texture = new Image("tower_heavy.png");
+		ammo = new Image("heavyammo.png");
 	}
 	
 	public String toString() {

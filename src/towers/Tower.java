@@ -18,6 +18,7 @@ public abstract class Tower {
 	protected int range;
 	protected ArrayList<Projectile> projectiles;
 	protected Image texture;
+	protected Image ammo;
 	
 	//protected image image;
 	//protected Title tile;
@@ -99,7 +100,7 @@ public abstract class Tower {
 	public class Projectile {
 		private Point2D projPoint;
 		private Enemy enemy;
-		private int speed = 5;
+		private int speed = 4;
 		private Projectile(Enemy target) {
 			projPoint = pos;
 			enemy = target;
@@ -116,7 +117,7 @@ public abstract class Tower {
 			return false;
 		}
 		public Image getImage() {
-			return new Image("fireball.png");
+			return ammo;
 		}
 		public Point2D getPos() {
 			return projPoint;
