@@ -18,5 +18,50 @@ public class Zombie extends Enemy{
 		return "ZOMBIE";
 		
 	}
+	@Override
+	public Image getImageAttack() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Image getImageDie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Image getImageHurt() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Image getImageRun() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Image getImageWalk() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int image_width() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int image_height() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int columns() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }
