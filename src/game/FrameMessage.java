@@ -12,7 +12,7 @@ public class FrameMessage {
 	private int currency;
 	private ArrayList<Enemy> enemies;
 	
-	public FrameMessage(ArrayList<ArrayList<Tile>> grid, int tick, int currency, ArrayList<Enemy> enemies) {
+	public FrameMessage(ArrayList<ArrayList<Tile>> grid, int currency, ArrayList<Enemy> enemies) {
     	this.grid = grid;
     	this.tick = tick;
     	this.currency = currency;
