@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import enemies.DesertEnimies;
 import enemies.Enemy;
 import enemies.Zombie;
 import towers.StoneTower;
@@ -68,13 +69,16 @@ public class TowersOfBrimstoneController {
     private ArrayList<Queue<Enemy>> createWaveMap1() {
 	ArrayList<Queue<Enemy>> waves = new ArrayList<Queue<Enemy>>();
 
-	Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
-	Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
-	Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
+	//Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
+	//Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
+	//Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
+	// Testing with animation
+	Queue<Enemy> wave4 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(2, 2, 2, 2, 2, 2, 2)), enemyPath);
 
-	waves.add(wave1);
-	waves.add(wave2);
-	waves.add(wave3);
+	//waves.add(wave1);
+	//waves.add(wave2);
+	//waves.add(wave3);
+	waves.add(wave4);
 	return waves;
     }
 
@@ -85,7 +89,7 @@ public class TowersOfBrimstoneController {
 		wave.add(new Zombie(path));
 	    }
 	    if (enemyType == 2) {
-		// other enemy
+		wave.add(new DesertEnimies(path, 1));
 	    }
 	}
 	return wave;

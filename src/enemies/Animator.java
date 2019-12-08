@@ -18,8 +18,8 @@ public class Animator extends Transition {
     private final int offsetY;
     private final int width;
     private final int height;
-    private int x;
-    private int y;
+    private double x;
+    private double y;
 
     private int lastIndex;
 
@@ -29,7 +29,7 @@ public class Animator extends Transition {
             int count,   int columns,
             int offsetX, int offsetY,
             int width,   int height,
-    		int x , int y
+    		Double x , double y
     		) {
         this.imageView = imageView;
         this.count     = count;

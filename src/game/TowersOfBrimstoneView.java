@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.omg.CORBA.PRIVATE_MEMBER;
 
+import enemies.Animator;
 import enemies.Enemy;
 import enemies.Zombie;
 import experimenting.ImageButton;
@@ -376,8 +377,20 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	if (!isPaused) {
 	    d.clearRect(0, 0, WIDTH, HEIGHT);
 	    for (Enemy enemy : enemies) {
-
-		d.drawImage(enemy.getImage(), enemy.getPos().getX() - 25, enemy.getPos().getY() - 25);
+	    	ImageView imageView = new ImageView(enemy.getImageAttack());
+	    	imageView.setViewport(new Rectangle2D(0, 0, enemy.image_width(), enemy.image_height()));
+	    	final Animation animation = new Animator(
+	                imageView,
+	                Duration.millis(50),
+	                enemy.count(), enemy.columns(),
+	                0, 0,
+	                enemy.image_width(),enemy.image_height(),
+	                enemy.getPos().getX()- 25 , enemy.getPos().getY() - 25
+	                // desert.getPos().getX() , desert.getPos().gety()
+	        );
+	    	animation.setCycleCount(2);
+	    	animation.play();
+		//d.drawImage(enemy.getImage(), enemy.getPos().getX() - 25, enemy.getPos().getY() - 25);
 	    }
 	}
     }
