@@ -375,28 +375,26 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	if (!isPaused) {
 	    d.clearRect(0, 0, WIDTH, HEIGHT);
 	    for (Enemy enemy : enemies) {
-	    	System.out.println("heheheh-----");
-	    	anime( enemy ,d);  
-		//d.drawImage(enemy.getImage(), enemy.getPos().getX() - 25, enemy.getPos().getY() - 25);
+	    	d.drawImage(enemy.getImage(), enemy.getPos().getX() - 25, enemy.getPos().getY() - 25);
+	    	//anime( enemy ,d); 
 	    }
 	}
     }
     
-    private void anime( Enemy enemy ,GraphicsContext d) {
-    	final ImageView imageView = new ImageView(enemy.getImageAttack());
-    	imageView.setViewport(new Rectangle2D(0, 0, enemy.image_width(), enemy.image_height()));
-    	final Animation animation = new Animator(
-                imageView,
-                Duration.millis(20),
-                enemy.count(), enemy.columns(),
-                0, 0,
-                enemy.image_width(),enemy.image_height(),
-                enemy.getPos().getX()- 25 , enemy.getPos().getY() - 25
-                // desert.getPos().getX() , desert.getPos().gety()
-        );
-    	animation.setCycleCount(1);
-    	animation.play();
-    }
+//    private void anime( Enemy enemy ,GraphicsContext d) {
+//    	final ImageView imageView = new ImageView(enemy.getImageAttack());
+//    	imageView.setViewport(new Rectangle2D(0, 0, enemy.image_width(), enemy.image_height()));
+//    	final Animation animation = new Animator(
+//                imageView,
+//                Duration.millis(50),
+//                enemy.count(), enemy.columns(),
+//                0, 0,
+//                enemy.image_width(),enemy.image_height(),
+//                enemy.getPos().getX()- 25 , enemy.getPos().getY() - 25,d
+//        );
+//    	animation.setCycleCount(1);
+//    	animation.play();
+//    }
 
     private void hideTowerInfo() {
 	towerStatsBg.setVisible(false);

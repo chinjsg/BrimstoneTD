@@ -8,6 +8,13 @@ import java.util.Queue;
 
 import enemies.DesertEnimies;
 import enemies.Enemy;
+import enemies.Enemy1;
+import enemies.Enemy2;
+import enemies.Enemy3;
+import enemies.Enemy4;
+import enemies.Enemy5;
+import enemies.Enemy6;
+import enemies.Map1Enemy;
 import enemies.Zombie;
 import towers.StoneTower;
 import towers.FireTower;
@@ -69,16 +76,16 @@ public class TowersOfBrimstoneController {
     private ArrayList<Queue<Enemy>> createWaveMap1() {
 	ArrayList<Queue<Enemy>> waves = new ArrayList<Queue<Enemy>>();
 
-	//Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
+	Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 1)), enemyPath);
 	//Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
 	//Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
 	// Testing with animation
-	Queue<Enemy> wave4 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(2, 2, 2, 2, 2, 2, 2)), enemyPath);
+	//Queue<Enemy> wave4 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(2, 2, 2, 2, 2, 2, 2)), enemyPath);
 
-	//waves.add(wave1);
+	waves.add(wave1);
 	//waves.add(wave2);
 	//waves.add(wave3);
-	waves.add(wave4);
+	//waves.add(wave4);
 	return waves;
     }
 
@@ -86,11 +93,28 @@ public class TowersOfBrimstoneController {
 	Queue<Enemy> wave = new LinkedList<Enemy>();
 	for (Integer enemyType : enemies) {
 	    if (enemyType == 1) {
-		wave.add(new Zombie(path));
+	    	wave.add(new Enemy1(path));
+		//wave.add(new Map1Enemy(100, 2, 20, path, 1));
 	    }
 	    if (enemyType == 2) {
-		wave.add(new DesertEnimies(path, 1));
+	    	wave.add(new Enemy2(path));
+	    //wave.add(new Map1Enemy(105, 2, 25, path, 2));
 	    }
+	    if (enemyType == 3) {
+	    	wave.add(new Enemy3(path));
+		//wave.add(new Map1Enemy(110, 2, 27, path, 3));
+		}
+	    if (enemyType == 4) {
+	    	wave.add(new Enemy4(path));
+	    //wave.add(new Map1Enemy(115, 2, 30, path, 4));
+		}
+		if (enemyType == 5) {
+			wave.add(new Enemy5(path));
+		//wave.add(new Map1Enemy(120, 2, 32, path, 5));
+		} if (enemyType == 6) {
+			wave.add(new Enemy6(path));
+		//wave.add(new Map1Enemy(130, 2, 35, path, 6));
+		}
 	}
 	return wave;
     }

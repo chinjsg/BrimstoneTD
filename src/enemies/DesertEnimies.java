@@ -16,6 +16,8 @@ public class DesertEnimies extends Enemy{
 	private   int height;
 	private   int count;
 	private   int columns = 5;
+	private   double x;
+	private   double y;
 		
 	// Pass 0 for enemy if you don't want a specific one
 	// Pass 1 for enemy if you want Enemy 1
@@ -27,9 +29,11 @@ public class DesertEnimies extends Enemy{
 	
 	public DesertEnimies( ArrayList<Tile> pathToFollow , int enemy) {
 		super(100, 2, 20, pathToFollow);
-		
+		x = 0;
+		y = 0;		
 		if (enemy == 0) {
-			this.texture = new Image("assets/desert/enemies/DesertCommon.png");
+			this.texture = new Image("DesertCommon.png");
+			System.out.println(texture.isError());
 		}else if (enemy == 1) {
 			image_pathAttack = "assets/desert/enemies/1/desert1Attack.png";
 			image_pathDie    = "assets/desert/enemies/1/desert1Die.png";
@@ -92,55 +96,68 @@ public class DesertEnimies extends Enemy{
 		return texture;
 	}
 	
-	@Override
+	
 	public Image getImageAttack() {
 		this.texture = new Image(image_pathAttack);
 		return texture;
 	}
 
-	@Override
+	
 	public Image getImageDie() {
 		this.texture = new Image(image_pathDie);
 		return texture;
 	}
 
-	@Override
+	
 	public Image getImageHurt() {
 		this.texture = new Image(image_pathHurt);
 		return texture;
 	}
 
-	@Override
+	
 	public Image getImageRun() {
 		this.texture = new Image(image_pathRun);
 		return texture;
 	}
 
-	@Override
+	
 	public Image getImageWalk() {
 		this.texture = new Image(image_pathWalk);
 		return texture;
 	}
 
-	@Override
+	
 	public int image_width() {
 		return width;
 	}
 
-	@Override
+	
 	public int image_height() {
 		return height;
 	}
 
-	
-	
-	@Override
 	public int count() {
 		return count;
 	}
 
-	@Override
+	
 	public int columns() {
 		return columns;
+	}
+
+	public double preX() {
+		return x;
+	}
+
+	public double prey() {
+		return y;
+	}
+
+	public void setX(double x) {
+		this.x = x ;
+	}
+
+	public void setY(double y) {
+		this.y = y;
 	}	
 }

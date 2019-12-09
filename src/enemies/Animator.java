@@ -1,10 +1,8 @@
 package enemies;
-import java.sql.Time;
-import java.util.concurrent.TimeUnit;
-
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -20,6 +18,7 @@ public class Animator extends Transition {
     private final int height;
     private double x;
     private double y;
+    private GraphicsContext d;
 
     private int lastIndex;
 
@@ -29,7 +28,8 @@ public class Animator extends Transition {
             int count,   int columns,
             int offsetX, int offsetY,
             int width,   int height,
-    		Double x , double y
+    		Double x , double y,
+    		GraphicsContext d
     		) {
         this.imageView = imageView;
         this.count     = count;
@@ -40,6 +40,7 @@ public class Animator extends Transition {
         this.height    = height;
         this.x = x;
         this.y = y;
+        this.d = d;
         setCycleDuration(duration);
         setInterpolator(Interpolator.LINEAR);
     }
@@ -54,6 +55,7 @@ public class Animator extends Transition {
             imageView.setViewport(new Rectangle2D(x, y, width, height));
             imageView.setFitHeight(50); 
             imageView.setFitWidth(50);
+            //d.drawImage(imag,this.x,this.y);
             lastIndex = index;
             imageView.setX(this.x);
             imageView.setY(this.y);

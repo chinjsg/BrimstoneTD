@@ -6,7 +6,6 @@ import java.util.Observable;
 import java.util.Queue;
 
 import enemies.Enemy;
-import enemies.Zombie;
 import towers.Tower;
 import towers.TowerMap;
 

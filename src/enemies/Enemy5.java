@@ -5,19 +5,18 @@ import java.util.ArrayList;
 import game.Tile;
 import javafx.scene.image.Image;
 
-public class Zombie extends Enemy{
-	private   double x;
-	private   double y;
+public class Enemy5 extends Enemy{
 	private Image picture;
-	public Zombie(ArrayList<Tile> path) {
-		super(100, 2, 20, path);
-		picture = new Image("DesertCommon.png");
+	public Enemy5(ArrayList<Tile> path) {
+		super(120, 2, 32, path);
+		picture = new Image("assets/desert/enemies/5/desert5.png");
 	}
+	@Override
 	public Image getImage() {
 		return picture;
 	}
 	public String toString() {
-		return "ZOMBIE";
+		return "Enemy 5";
 		
 	}
 }
