@@ -16,8 +16,11 @@ public class DesertEnimies extends Enemy{
 	private   int height;
 	private   int count;
 	private   int columns = 5;
+<<<<<<< HEAD
 	private   double x;
 	private   double y;
+=======
+>>>>>>> Map_Path_Array
 		
 	// Pass 0 for enemy if you don't want a specific one
 	// Pass 1 for enemy if you want Enemy 1
@@ -27,6 +30,7 @@ public class DesertEnimies extends Enemy{
 	// Pass 5 for enemy if you want Enemy 5
 	// Pass 6 for enemy if you want Enemy 6
 	
+<<<<<<< HEAD
 	public DesertEnimies( ArrayList<Tile> pathToFollow , int enemy) {
 		super(100, 2, 20, pathToFollow);
 		x = 0;
@@ -34,6 +38,14 @@ public class DesertEnimies extends Enemy{
 		if (enemy == 0) {
 			this.texture = new Image("DesertCommon.png");
 			System.out.println(texture.isError());
+=======
+	public DesertEnimies(int health, int speed, int goldReward, int row, int col,
+			ArrayList<Tile> pathToFollow , int enemy) {
+		super(health, speed, goldReward, row, col, pathToFollow);
+		
+		if (enemy == 0) {
+			this.texture = new Image("assets/desert/enemies/DesertCommon.png");
+>>>>>>> Map_Path_Array
 		}else if (enemy == 1) {
 			image_pathAttack = "assets/desert/enemies/1/desert1Attack.png";
 			image_pathDie    = "assets/desert/enemies/1/desert1Die.png";
@@ -96,50 +108,85 @@ public class DesertEnimies extends Enemy{
 		return texture;
 	}
 	
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public Image getImageAttack() {
 		this.texture = new Image(image_pathAttack);
 		return texture;
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public Image getImageDie() {
 		this.texture = new Image(image_pathDie);
 		return texture;
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public Image getImageHurt() {
 		this.texture = new Image(image_pathHurt);
 		return texture;
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public Image getImageRun() {
 		this.texture = new Image(image_pathRun);
 		return texture;
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public Image getImageWalk() {
 		this.texture = new Image(image_pathWalk);
 		return texture;
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public int image_width() {
 		return width;
 	}
 
+<<<<<<< HEAD
 	
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public int image_height() {
 		return height;
 	}
 
+<<<<<<< HEAD
+=======
+	
+	
+	@Override
+>>>>>>> Map_Path_Array
 	public int count() {
 		return count;
 	}
 
+<<<<<<< HEAD
 	
 	public int columns() {
 		return columns;
@@ -161,3 +208,10 @@ public class DesertEnimies extends Enemy{
 		this.y = y;
 	}	
 }
+=======
+	@Override
+	public int columns() {
+		return columns;
+	}	
+}
+>>>>>>> Map_Path_Array

@@ -17,8 +17,11 @@ public class VolcanoEnemies extends Enemy{
 	private   int height;
 	private   int count;
 	private   int columns = 5;
+<<<<<<< HEAD
 	private   double x;
 	private   double y;
+=======
+>>>>>>> Map_Path_Array
 	
 		// Pass 0 for enemy if you don't want a specific one
 		// Pass 1 for enemy if you want Enemy 1
@@ -27,10 +30,17 @@ public class VolcanoEnemies extends Enemy{
 		// Pass 4 for enemy if you want Enemy 4
 		// Pass 5 for enemy if you want Enemy 5
 		// Pass 6 for enemy if you want Enemy 6
+<<<<<<< HEAD
 	public VolcanoEnemies(ArrayList<Tile> pathToFollow , int enemy) {
 		super(150, 2, 60, pathToFollow);
 		x = 0;
 		y = 0;
+=======
+	public VolcanoEnemies(int health, int speed, int goldReward, int row,
+			int col, ArrayList<Tile> pathToFollow , int enemy) {
+		super(health, speed, goldReward, row, col, pathToFollow);
+		
+>>>>>>> Map_Path_Array
 		if (enemy == 0) {
 			this.texture = new Image("assets/volcano/enemies/VolcanoCommon.png");
 		} else if (enemy == 1) {
@@ -92,58 +102,99 @@ public class VolcanoEnemies extends Enemy{
 		
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public Image getImage() {
 		return texture;
 	}
 
+<<<<<<< HEAD
 
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public Image getImageAttack() {
 		this.texture = new Image(image_pathAttack);
 		return texture;
 	}
 
+<<<<<<< HEAD
 
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public Image getImageDie() {
 		this.texture = new Image(image_pathDie);
 		return texture;
 	}
 
+<<<<<<< HEAD
 
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public Image getImageHurt() {
 		this.texture = new Image(image_pathHurt);
 		return texture;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public Image getImageRun() {
 		this.texture = new Image(image_pathRun);
 		return texture;
 	}
 
+<<<<<<< HEAD
 
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public Image getImageWalk() {
 		this.texture = new Image(image_pathWalk);
 		return texture;
 	}
 
+<<<<<<< HEAD
 
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public int image_width() {
 		return width;
 	}
 
+<<<<<<< HEAD
 
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public int image_height() {
 		return height;
 	}
 
+<<<<<<< HEAD
 
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public int count() {
 		return count;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+>>>>>>> Map_Path_Array
 	public int columns() {
 		return columns;
 	}
 
+<<<<<<< HEAD
 	public double preX() {
 		return x;
 	}
@@ -164,3 +215,6 @@ public class VolcanoEnemies extends Enemy{
 	}
 
 }
+=======
+}
+>>>>>>> Map_Path_Array
