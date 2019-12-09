@@ -185,7 +185,7 @@ public class TowersOfBrimstoneController {
 				if(enemy.getHealth() <= 0) {
 					iterator.remove();
 				}
-				else if((enemy.getHealth() - tower.getAttackPower()) > tower.getAttackPower() && tick % 10 == 0){
+				else if(enemy.getHealth() > 0 && tick % 10 == 0){
 					range = tower.getRange();
 					distance = tower.getPos().distance(enemy.getPos());
 					if(distance <= range) {
@@ -194,7 +194,7 @@ public class TowersOfBrimstoneController {
 						break;
 					}
 				}
-				tower.updateProjectiles();
+			
 
 				distance = (model.getEnd().getPos()).distance(enemy.getPos());
 				if(distance < 10) {
@@ -202,6 +202,7 @@ public class TowersOfBrimstoneController {
 					iterator.remove();
 				}
 			}
+			tower.updateProjectiles();
 		}
 		}
 
@@ -212,9 +213,9 @@ public class TowersOfBrimstoneController {
 		ArrayList<Enemy> enemies = model.getEnemy();
 		int waveNum = model.getWaveNum();
 			if(waves.size() == waveNum) {
-				System.out.println("GAME WON");									// IF IT REACHES HERE LEVEL HAS COMPLETED
-				System.exit(0);
+				model.setWon();
 			}
+			else {
 			Queue<Enemy> curWave = waves.get(waveNum);
 			if(curWave.size() != 0) {											// Pop queue
 				model.addEnemy(curWave.remove());
@@ -222,13 +223,13 @@ public class TowersOfBrimstoneController {
 			else if(enemies.size() == 0) {
 				model.incrementWaveNum();
 			}
+			}
 	}
 	
 	
 	public void frameUpdate(int tick) {
-		if(tick % 100 == 0) {
+		if(tick % 100 == 5) {
 			updateWave(tick);
-
 		}
 		moveEnemy();
 		collisionDetection(tick);

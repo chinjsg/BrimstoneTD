@@ -19,6 +19,7 @@ public class TowersOfBrimstoneModel extends Observable {
 	private Tile endingTile;
 	private int gold;
 	private TowerMap towerMap;
+	private boolean won;
 	
 	public TowersOfBrimstoneModel() {
 		grid = createBlankMap();
@@ -26,6 +27,7 @@ public class TowersOfBrimstoneModel extends Observable {
 		towers = new ArrayList<Tower>();
 		enemies = new ArrayList<Enemy>();
 		waveNum = 0;
+		won = false;
 		gold = 2000;
 	}
 	
@@ -153,5 +155,10 @@ public class TowersOfBrimstoneModel extends Observable {
 		FrameMessage update = new FrameMessage(getGrid(), tick, getGold(), enemies);
 		setChanged();
 		notifyObservers(update);
+	}
+	public void setWon() {
+		won = true;
+		setChanged();
+		notifyObservers(true);
 	}
 }

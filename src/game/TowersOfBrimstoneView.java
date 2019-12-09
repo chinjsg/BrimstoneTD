@@ -19,6 +19,7 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -727,10 +728,72 @@ public void setUpLevelPane() {
 		double width = percentage * 150.00;
 		goldBar.setViewport(new Rectangle2D(0, 0, width, HEIGHT));
 	}
+	
+	public void setupWinMenu() {
+		AnchorPane winMenu = new AnchorPane();
+		Image image = new Image("bg.png", 1400, 1000, false, false);
+
+		BackgroundImage background = new BackgroundImage(image, null, null, null, null);
+
+		Background background2 = new Background(background);
+		timeline.stop();
+
+		ImageButton restart = new ImageButton("restart.png", 90, 110);
+		ImageButton menu = new ImageButton("menu.png", 90, 110);
+		winMenu = new AnchorPane();
+		ImageView imageView = new ImageView(new Image("levelWin.png", 650, 800, false, false));
+		winMenu.getChildren().add(imageView);
+		winMenu.getChildren().add(restart);
+		winMenu.getChildren().add(menu);
+		winMenu.setBackground(background2);
+		AnchorPane.setTopAnchor(imageView, 90.00);
+		AnchorPane.setLeftAnchor(imageView, 400.00);
+		AnchorPane.setTopAnchor(restart, 800.00);
+		AnchorPane.setRightAnchor(restart, 520.00);
+		AnchorPane.setTopAnchor(menu, 800.00);
+		AnchorPane.setLeftAnchor(menu, 570.00);
+
+		Scene win = new Scene(winMenu, 1400, 1000);
+		window.setScene(win);
+
+		menu.setOnAction(event -> {
+		    model = new TowersOfBrimstoneModel();
+		    model.addObserver(this);
+		    controller = new TowersOfBrimstoneController(model);
+		    controller.createMap();
+		    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
+		    setUpLevelPane();
+		    window.setScene(levelSelection);
+
+		});
+		restart.setOnAction(event -> {
+
+		    Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+			    try {
+				window = new Stage();
+
+				start(window);
+			    } catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			    }
+
+			}
+
+		    });
+
+//		   
+		});
+
+	    }
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		
 		if (arg instanceof FrameMessage) {
 			// if you create a method that is meant to be updated by ticking,
 			// name it in the
@@ -746,6 +809,8 @@ public void setUpLevelPane() {
 			towerView = null;
 			towerContext.clearRect(50 * arr[1] - 4, 50 * arr[0] - 15, 65, 65);
 
+		} else if((Boolean) arg) {
+			setupWinMenu();
 		}
 	}
 }

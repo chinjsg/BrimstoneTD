@@ -12,7 +12,7 @@ public class StoneTower extends Tower {
 		//  - Range		   = 200
 		//  - Cost         = 100 gold
 		//  - X/Y coordinates will be set when it is placed
-		super(15, 1, false, 100, 200, row, col);
+		super(2, 1, false, 100, 200, row, col);
 		texture = new Image("tower_stone.png");
 	}
 	
