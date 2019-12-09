@@ -63,7 +63,6 @@ public abstract class Enemy {
 		
 	}
 	public abstract Image getImage();
-<<<<<<< HEAD
 //	public abstract Image getImageAttack();
 //	public abstract Image getImageDie();
 //	public abstract Image getImageHurt();
@@ -77,16 +76,5 @@ public abstract class Enemy {
 //	public abstract double prey();
 //	public abstract void setX(double x);
 //	public abstract void setY(double y);
-=======
-	public abstract Image getImageAttack();
-	public abstract Image getImageDie();
-	public abstract Image getImageHurt();
-	public abstract Image getImageRun();
-	public abstract Image getImageWalk();
-	public abstract int  image_width();
-	public abstract int  image_height();
-	public abstract int count();
-	public abstract int columns();
-	
->>>>>>> Map_Path_Array
+
 }

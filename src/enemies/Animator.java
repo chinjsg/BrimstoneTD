@@ -1,17 +1,8 @@
 package enemies;
-<<<<<<< HEAD
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
-=======
-import java.sql.Time;
-import java.util.concurrent.TimeUnit;
-
-import javafx.animation.Interpolator;
-import javafx.animation.Transition;
-import javafx.geometry.Rectangle2D;
->>>>>>> Map_Path_Array
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -25,13 +16,9 @@ public class Animator extends Transition {
     private final int offsetY;
     private final int width;
     private final int height;
-<<<<<<< HEAD
     private double x;
     private double y;
     private GraphicsContext d;
-=======
->>>>>>> Map_Path_Array
-
     private int lastIndex;
 
     public Animator(
@@ -39,14 +26,11 @@ public class Animator extends Transition {
             Duration duration, 
             int count,   int columns,
             int offsetX, int offsetY,
-<<<<<<< HEAD
             int width,   int height,
     		Double x , double y,
     		GraphicsContext d
     		) {
-=======
-            int width,   int height) {
->>>>>>> Map_Path_Array
+
         this.imageView = imageView;
         this.count     = count;
         this.columns   = columns;
@@ -54,12 +38,10 @@ public class Animator extends Transition {
         this.offsetY   = offsetY;
         this.width     = width;
         this.height    = height;
-<<<<<<< HEAD
         this.x = x;
         this.y = y;
         this.d = d;
-=======
->>>>>>> Map_Path_Array
+
         setCycleDuration(duration);
         setInterpolator(Interpolator.LINEAR);
     }
@@ -74,7 +56,6 @@ public class Animator extends Transition {
             imageView.setViewport(new Rectangle2D(x, y, width, height));
             imageView.setFitHeight(50); 
             imageView.setFitWidth(50);
-<<<<<<< HEAD
             //d.drawImage(imag,this.x,this.y);
             lastIndex = index;
             imageView.setX(this.x);
@@ -82,11 +63,4 @@ public class Animator extends Transition {
         }
     }
 }
-=======
-            lastIndex = index;
-//            imageView.setX(enemy.getSpeed()*enemy.getDirection().getX());
-//            imageView.setY(enemy.getSpeed()*enemy.getDirection().getY());
-        }
-    }
-}
->>>>>>> Map_Path_Array
+
