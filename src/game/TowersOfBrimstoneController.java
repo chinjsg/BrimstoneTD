@@ -233,7 +233,6 @@ public class TowersOfBrimstoneController {
 		}
 		moveEnemy();
 		collisionDetection(tick);
-		System.out.println("TEST");
 		model.updateFrame(tick);
 	}
 
