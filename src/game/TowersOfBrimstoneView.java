@@ -527,8 +527,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	hBox1.setPadding(new Insets(0, 0, 0, 120));
 	hBox1.setSpacing(115);
 	hBoxLabel1.setPadding(new Insets(0, 0, 0, 220));
-
 	hBoxLabel1.setSpacing(300);
+	
 	hBox1.getChildren().add(level1);
 	hBox1.getChildren().add(level2);
 	hBox1.getChildren().add(level3);
@@ -540,8 +540,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	hBox2.setPadding(new Insets(0, 0, 0, 120));
 	hBox2.setSpacing(115);
 	hBoxLabel2.setPadding(new Insets(0, 0, 0, 220));
-//	hBoxLabel2.setAlignment(Pos.CENTER);
 	hBoxLabel2.setSpacing(300);
+	
 	hBox2.getChildren().add(level4);
 	hBox2.getChildren().add(level5);
 	hBox2.getChildren().add(level6);
@@ -549,6 +549,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	hBoxLabel2.getChildren().add(l5);
 	hBoxLabel2.getChildren().add(l6);
 	hBoxLabel2.setAlignment(Pos.CENTER);
+	
 	levelPane.getStylesheets().add("test.css");
 	levelPane.getChildren().add(imageView);
 	levelPane.getChildren().add(hBoxLabel1);
@@ -748,7 +749,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    model = new TowersOfBrimstoneModel();
 	    model.addObserver(this);
 	    controller = new TowersOfBrimstoneController(model);
-	    // controller.createMap();
 	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
 	    setUpLevelPane();
 	    window.setScene(levelSelection);
@@ -756,22 +756,12 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	});
 	restart.setOnAction(event -> {
 
-	    Platform.runLater(new Runnable() {
-
-		@Override
-		public void run() {
-		    try {
-			window = new Stage();
-
-			start(window);
-		    } catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		    }
-
-		}
-
-	    });
+	    model = new TowersOfBrimstoneModel();
+	    model.addObserver(this);
+	    controller = new TowersOfBrimstoneController(model);
+	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
+	    makeMainScreen();
+	    window.setScene(mainscreen);
 
 //		   
 	});
