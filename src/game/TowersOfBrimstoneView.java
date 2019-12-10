@@ -521,7 +521,7 @@ public void setUpLevelPane() {
 	level4.setOnAction(event->
 	{
 		controller.createMap(4);
-		baseContext.drawImage(new Image("farmMap.png",
+		baseContext.drawImage(new Image("oasisMap.png",
 				1400, 1000, false, false), 0, 0);
 		setUpTowerMenu();
 		window.setScene(game);
@@ -539,7 +539,7 @@ public void setUpLevelPane() {
 	level6.setOnAction(event->
 	{
 		controller.createMap(6);
-		baseContext.drawImage(new Image("oasisMap.png",
+		baseContext.drawImage(new Image("farmMap.png",
 				1400, 1000, false, false), 0, 0);
 		setUpTowerMenu();
 		window.setScene(game);

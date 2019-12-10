@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+import com.sun.javafx.geom.Point2D;
+
 import enemies.Enemy;
 import enemies.Enemy1;
 import enemies.Enemy2;
@@ -216,12 +218,7 @@ public class TowersOfBrimstoneController {
 				}
 			
 
-				distance = (model.getEnd().getPos()).distance(enemy.getPos());
-				if(distance < 10) {
-					model.subtractHealth(enemy.getDamage());
-					System.out.println("HEALTH:" + model.getHealth());
-					iterator.remove();
-				}
+				
 			}
 			tower.updateProjectiles();
 		}
@@ -257,7 +254,24 @@ public class TowersOfBrimstoneController {
 		}
 		moveEnemy();
 		collisionDetection(tick);
+		enemyAtEnd();
 		model.updateFrame(tick);
+	}
+
+	private void enemyAtEnd() {
+		double distance;
+		ArrayList<Enemy> enemies = model.getEnemy();
+		Iterator<Enemy> iterator = enemies.iterator();
+		while(iterator.hasNext()) {
+			Enemy enemy = iterator.next();
+			distance = (model.getEnd().getPos()).distance(enemy.getPos());
+			if(distance < 10) {
+				model.subtractHealth(enemy.getDamage());
+				System.out.println("HEALTH:" + model.getHealth());
+				iterator.remove();
+			}
+		}
+
 	}
 
 	private void moveEnemy() {
