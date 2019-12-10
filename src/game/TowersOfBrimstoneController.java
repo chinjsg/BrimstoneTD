@@ -202,6 +202,7 @@ public class TowersOfBrimstoneController {
 			while(iterator.hasNext()) {
 				Enemy enemy = iterator.next();
 				if(enemy.getHealth() <= 0) {
+					model.addGold(enemy.getGoldReward());
 					iterator.remove();
 				}
 				else if(enemy.getHealth() > 0 && tick % 10 == 0){

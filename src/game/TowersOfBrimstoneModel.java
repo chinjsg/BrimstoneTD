@@ -68,7 +68,7 @@ public class TowersOfBrimstoneModel extends Observable {
 		return grid;
 	}
 	
-	private void addGold(int amount) {
+	public void addGold(int amount) {
 		gold = gold + amount;
 	} 
 	

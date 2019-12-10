@@ -718,8 +718,7 @@ public void setUpLevelPane() {
 				Tile tile = grid.get(row).get(col);
 				if (tile.getPlacedTower() != null) {
 					Tower tower = tile.getPlacedTower();
-					towerContext.drawImage(tower.getImage(), 50 * col - 4, 50 * row - 15,
-							65, 65);
+					towerContext.drawImage(tower.getImage(), 50 * col - 4, 50 * row - 15);
 				}
 			}
 	
