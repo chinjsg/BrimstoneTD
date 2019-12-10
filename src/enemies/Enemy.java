@@ -24,7 +24,7 @@ public abstract class Enemy {
 		this.goldReward = goldReward;
 		int xPos = (int) pathToFollow.get(0).getPos().getX();
 		int yPos = (int) pathToFollow.get(0).getPos().getY();
-		damage = 10;
+		damage = 50;
 		path = pathToFollow;
 		TileIndex = 0;
 		position = new Point2D(xPos, yPos);

@@ -122,7 +122,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		model = new TowersOfBrimstoneModel();
 		model.addObserver(this);
 		controller = new TowersOfBrimstoneController(model);
-		controller.createMap();
+		//controller.createMap();
 
 		currency = new Label();
 		currency.setTextFill(Color.web("#ffffff", 1));
@@ -222,6 +222,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		AnchorPane.setTopAnchor(tCoords, 90.00);
 		AnchorPane.setRightAnchor(tCoords, 380.00);
 		ArrayList<ArrayList<Tile>> grid = model.getGrid();
+
 
 //	 enemiesList.add(zomb);
 		// Temp Label to sell Selected towers
@@ -493,6 +494,7 @@ public void setUpLevelPane() {
 	ImageView imageView = new ImageView(new Image("levelSelectionMenu-01.png", 1400, 1000, false, false));
 	
 	level1.setOnAction(event->{
+		controller.createMap(1);
 	    baseContext.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
@@ -500,6 +502,7 @@ public void setUpLevelPane() {
 	level2.setOnAction(event->
 
 	{
+		controller.createMap(2);
 		baseContext.drawImage(
 				new Image("mediumMap.png", 1400, 1000, false, false), 0, 0);
 		setUpTowerMenu();
@@ -508,6 +511,7 @@ public void setUpLevelPane() {
 
 	level3.setOnAction(event->
 	{
+		controller.createMap(3);
 		baseContext.drawImage(
 				new Image("hardMap.png", 1400, 1000, false, false), 0, 0);
 		setUpTowerMenu();
@@ -516,6 +520,7 @@ public void setUpLevelPane() {
 
 	level4.setOnAction(event->
 	{
+		controller.createMap(4);
 		baseContext.drawImage(new Image("farmMap.png",
 				1400, 1000, false, false), 0, 0);
 		setUpTowerMenu();
@@ -524,6 +529,7 @@ public void setUpLevelPane() {
 
 	level5.setOnAction(event->
 	{
+		controller.createMap(5);
 		baseContext.drawImage(new Image("forestMap.png",
 				1400, 1000, false, false), 0, 0);
 		setUpTowerMenu();
@@ -532,6 +538,7 @@ public void setUpLevelPane() {
 
 	level6.setOnAction(event->
 	{
+		controller.createMap(6);
 		baseContext.drawImage(new Image("oasisMap.png",
 				1400, 1000, false, false), 0, 0);
 		setUpTowerMenu();
@@ -733,9 +740,17 @@ public void setUpLevelPane() {
 	}
 	
 	private void frameUpdateHealth(int newVal) {
-		double percentage = ((double) newVal) / 100.0;
-		double width = percentage * 150.00;
-		healthBar.setViewport(new Rectangle2D(0, 0, width, HEIGHT));
+		if(newVal > 0) {
+			double percentage = ((double) newVal) / 100.0;
+			double width = percentage * 150.00;
+			System.out.print(width);
+			healthBar.setViewport(new Rectangle2D(0, 0, width, HEIGHT));
+		}
+		else {
+			newVal = 0;
+			healthBar.setVisible(false);;
+		}
+		
 	}
 	
 	public void setupWinMenu() {
@@ -769,7 +784,7 @@ public void setUpLevelPane() {
 		    model = new TowersOfBrimstoneModel();
 		    model.addObserver(this);
 		    controller = new TowersOfBrimstoneController(model);
-		    controller.createMap();
+		    //controller.createMap();
 		    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
 		    setUpLevelPane();
 		    window.setScene(levelSelection);
@@ -823,7 +838,8 @@ public void setUpLevelPane() {
 			setupWinMenu();
 		}
 		else if(!(Boolean) arg){
-			System.out.println("lost");
+			frameUpdateHealth(0);
+			
 			//setupLoseMenu();
 		}
 	}
