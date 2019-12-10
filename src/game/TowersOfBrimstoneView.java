@@ -598,7 +598,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	AnchorPane.setTopAnchor(newGame, 320.00);
 	AnchorPane.setLeftAnchor(newGame, 350.00);
 
-	mainscreen = new Scene(mainScreen);
+	mainscreen = new Scene(mainScreen,1400,1000);
 	newGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
 	    // setting a mouseEvent on the column in the grid
 	    @Override
