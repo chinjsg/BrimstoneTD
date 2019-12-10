@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 
 public abstract class Enemy {
 	protected int health;
+	protected int damage;
 	protected int speed;
 	protected int goldReward;
 	protected Point2D position;
@@ -23,6 +24,7 @@ public abstract class Enemy {
 		this.goldReward = goldReward;
 		int xPos = (int) pathToFollow.get(0).getPos().getX();
 		int yPos = (int) pathToFollow.get(0).getPos().getY();
+		damage = 10;
 		path = pathToFollow;
 		TileIndex = 0;
 		position = new Point2D(xPos, yPos);
@@ -56,7 +58,9 @@ public abstract class Enemy {
 		direction = direction.normalize();
 		return direction;
 	}
-	
+	public int getDamage() {
+		return damage;
+	}
 	public void move(double dx, double dy) {
 		position = new Point2D(position.getX()+dx, position.getY()+dy);
 		

@@ -217,11 +217,15 @@ public class TowersOfBrimstoneController {
 
 				distance = (model.getEnd().getPos()).distance(enemy.getPos());
 				if(distance < 10) {
-					// model subtract health
+					model.subtractHealth(enemy.getDamage());
+					System.out.println("HEALTH:" + model.getHealth());
 					iterator.remove();
 				}
 			}
 			tower.updateProjectiles();
+		}
+		if(model.getHealth() <= 0) {
+			model.setLost();
 		}
 		}
 

@@ -816,5 +816,9 @@ public void setUpLevelPane() {
 		} else if((Boolean) arg) {
 			setupWinMenu();
 		}
+		else {
+			System.out.println("lost");
+			//setupLoseMenu();
+		}
 	}
 }

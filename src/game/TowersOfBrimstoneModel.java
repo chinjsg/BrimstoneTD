@@ -13,6 +13,7 @@ public class TowersOfBrimstoneModel extends Observable {
 	private ArrayList<ArrayList<Tile>> grid;
 	private ArrayList<Tower> towers;
 	private ArrayList<Enemy> enemies;
+	private int health;
 	private	ArrayList<Queue<Enemy>> waves;
 	private int waveNum;
 	private Tile endingTile;
@@ -26,6 +27,7 @@ public class TowersOfBrimstoneModel extends Observable {
 		towers = new ArrayList<Tower>();
 		enemies = new ArrayList<Enemy>();
 		waveNum = 0;
+		health = 100;
 		won = false;
 		gold = 2000;
 	}
@@ -145,7 +147,12 @@ public class TowersOfBrimstoneModel extends Observable {
 	public ArrayList<Enemy> getEnemy(){
 		return enemies;
 	}
-	
+	public void subtractHealth(int damage) {
+		health -= damage;
+	}
+	public int getHealth() {
+		return health;
+	}
 	public void updateTowerMap(Tower tower) {
 		towerMap.addTower(tower);
 	}
@@ -159,5 +166,10 @@ public class TowersOfBrimstoneModel extends Observable {
 		won = true;
 		setChanged();
 		notifyObservers(true);
+	}
+	public void setLost() {
+		won = false;
+		setChanged();
+		notifyObservers(false);
 	}
 }
