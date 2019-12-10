@@ -13,7 +13,7 @@ public class LightningTower extends Tower {
 		//  - Range        = 200
 		//  - X/Y coordinates will be set when it is placed
 		super(25, 1, false, 275, 200, row, col);
-		texture = new Image("tower_lightning.png");
+		texture = new Image("tower_lightning.png",65,65,false,false);
 		ammo = new Image("lightningammo.png",30,30,false,false);
 	}
 	

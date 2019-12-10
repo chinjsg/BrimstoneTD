@@ -13,8 +13,8 @@ public class HeavyTower extends Tower {
 		//  - Range        = 200
 		//  - X/Y coordinates will be set when it is placed
 		super(50, 1, false, 300, 200, row, col);
-		texture = new Image("tower_heavy.png");
-		ammo = new Image("heavyammo.png");
+		texture = new Image("tower_heavy.png",65,65,false,false);
+		ammo = new Image("heavyammo.png",30,20,false,false);
 	}
 	
 	public String toString() {

@@ -15,7 +15,7 @@ public class FireTower extends Tower {
 		//  - Range        = 200
 		//  - X/Y coordinates will be set when it is placed
 		super(25, 1, false, 150, 200, row, col);
-		texture = new Image("tower_fire.png");
+		texture = new Image("tower_fire.png",65,65,false,false);
 		ammo = new Image("fireammo.png",20,20,false,false);
 	}
 	
