@@ -742,7 +742,6 @@ public void setUpLevelPane() {
 		if(newVal > 0) {
 			double percentage = ((double) newVal) / 100.0;
 			double width = percentage * 150.00;
-			System.out.print(width);
 			healthBar.setViewport(new Rectangle2D(0, 0, width, HEIGHT));
 		}
 		else {
