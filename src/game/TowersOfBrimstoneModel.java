@@ -158,7 +158,7 @@ public class TowersOfBrimstoneModel extends Observable {
 	}
 	
 	public void updateFrame(int tick) {
-		FrameMessage update = new FrameMessage(getGrid(), getGold(), enemies);
+		FrameMessage update = new FrameMessage(getGrid(), getGold(), enemies, health);
 		setChanged();
 		notifyObservers(update);
 	}

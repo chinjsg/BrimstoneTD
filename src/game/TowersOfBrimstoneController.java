@@ -138,9 +138,7 @@ public class TowersOfBrimstoneController {
 		return found;
 	}
 
-	public ArrayList<Tile> getEnemyPath(){
-		return enemyPath;
-	}
+	
 	
 	public boolean placeTower(int row, int col, int selectedTowerType) {
 		ArrayList<ArrayList<Tile>> board = model.getGrid();

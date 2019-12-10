@@ -222,7 +222,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		AnchorPane.setTopAnchor(tCoords, 90.00);
 		AnchorPane.setRightAnchor(tCoords, 380.00);
 		ArrayList<ArrayList<Tile>> grid = model.getGrid();
-		controller.getEnemyPath();
 
 //	 enemiesList.add(zomb);
 		// Temp Label to sell Selected towers
@@ -733,6 +732,12 @@ public void setUpLevelPane() {
 		goldBar.setViewport(new Rectangle2D(0, 0, width, HEIGHT));
 	}
 	
+	private void frameUpdateHealth(int newVal) {
+		double percentage = ((double) newVal) / 100.0;
+		double width = percentage * 150.00;
+		healthBar.setViewport(new Rectangle2D(0, 0, width, HEIGHT));
+	}
+	
 	public void setupWinMenu() {
 		AnchorPane winMenu = new AnchorPane();
 		Image image = new Image("bg.png", 1400, 1000, false, false);
@@ -804,6 +809,7 @@ public void setUpLevelPane() {
 			// form: "frameDoSomething() {}"
 			FrameMessage msg = (FrameMessage) arg;
 			frameUpdateCurrency(msg.getCurrency());
+			frameUpdateHealth(msg.getHealth());
 			frameUpdateGUI(msg.getGrid(), msg.getTick(), msg.getEnemies(), (TowersOfBrimstoneModel) o);
 		} else if (arg instanceof int[]) {
 			// int[] coordinates = (int[]) arg;
@@ -816,7 +822,7 @@ public void setUpLevelPane() {
 		} else if((Boolean) arg) {
 			setupWinMenu();
 		}
-		else {
+		else if(!(Boolean) arg){
 			System.out.println("lost");
 			//setupLoseMenu();
 		}
