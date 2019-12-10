@@ -6,7 +6,6 @@ import java.util.Observable;
 import java.util.Queue;
 
 import enemies.Enemy;
-import enemies.Zombie;
 import towers.Tower;
 import towers.TowerMap;
 
@@ -152,7 +151,7 @@ public class TowersOfBrimstoneModel extends Observable {
 	}
 	
 	public void updateFrame(int tick) {
-		FrameMessage update = new FrameMessage(getGrid(), tick, getGold(), enemies);
+		FrameMessage update = new FrameMessage(getGrid(), getGold(), enemies);
 		setChanged();
 		notifyObservers(update);
 	}
