@@ -517,7 +517,7 @@ public void setUpLevelPane() {
 
 	level4.setOnAction(event->
 	{
-		baseContext.drawImage(new Image("test-easyMapSmallerFixedSpots.png",
+		baseContext.drawImage(new Image("farmMap.png",
 				1400, 1000, false, false), 0, 0);
 		setUpTowerMenu();
 		window.setScene(game);
@@ -525,7 +525,7 @@ public void setUpLevelPane() {
 
 	level5.setOnAction(event->
 	{
-		baseContext.drawImage(new Image("test-easyMapSmallerFixedSpots.png",
+		baseContext.drawImage(new Image("forestMap.png",
 				1400, 1000, false, false), 0, 0);
 		setUpTowerMenu();
 		window.setScene(game);
@@ -533,7 +533,7 @@ public void setUpLevelPane() {
 
 	level6.setOnAction(event->
 	{
-		baseContext.drawImage(new Image("test-easyMapSmallerFixedSpots.png",
+		baseContext.drawImage(new Image("oasisMap.png",
 				1400, 1000, false, false), 0, 0);
 		setUpTowerMenu();
 		window.setScene(game);
@@ -543,11 +543,14 @@ public void setUpLevelPane() {
 	HBox hBox2 = new HBox();
 	HBox hBoxLabel2 = new HBox();
 
-	hBox1.setPadding(new Insets(0,0,0,120));hBox1.setSpacing(115);
+	hBox1.setPadding(new Insets(0,0,0,120));
+	hBox1.setSpacing(115);
 	hBoxLabel1.setPadding(new Insets(0,0,0,220));
 
-	hBoxLabel1.setSpacing(300);hBox1.getChildren().add(level1);
-	hBox1.getChildren().add(level2);hBox1.getChildren().add(level3);
+	hBoxLabel1.setSpacing(300);
+	hBox1.getChildren().add(level1);
+	hBox1.getChildren().add(level2);
+	hBox1.getChildren().add(level3);
 	hBoxLabel1.getChildren().add(l1);
 	hBoxLabel1.getChildren().add(l2);
 	hBoxLabel1.getChildren().add(l3);
