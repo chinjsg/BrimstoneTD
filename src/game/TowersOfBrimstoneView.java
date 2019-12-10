@@ -222,7 +222,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		AnchorPane.setTopAnchor(tCoords, 90.00);
 		AnchorPane.setRightAnchor(tCoords, 380.00);
 		ArrayList<ArrayList<Tile>> grid = model.getGrid();
-		controller.getEnemyPath();
+		//controller.getEnemyPath();
 
 //	 enemiesList.add(zomb);
 		// Temp Label to sell Selected towers

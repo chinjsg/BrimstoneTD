@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 import enemies.Enemy;
 import enemies.Enemy1;
@@ -14,6 +15,8 @@ import enemies.Enemy4;
 import enemies.Enemy5;
 import enemies.Enemy6;
 import enemies.Zombie;
+import stages.Map;
+import stages.MapVariant;
 import towers.StoneTower;
 import towers.FireTower;
 import towers.HeavyTower;
@@ -26,6 +29,8 @@ public class TowersOfBrimstoneController {
 	
 	private TowersOfBrimstoneModel model;
 	private ArrayList<Tile> enemyPath;
+	private ArrayList<ArrayList<Tile>> allEnemyPaths;
+	private Map map;
 	
 	public TowersOfBrimstoneController(TowersOfBrimstoneModel model) {
 		this.model = model;
@@ -33,30 +38,35 @@ public class TowersOfBrimstoneController {
 	
 	public void createMap() {
 		enemyPath = new ArrayList<Tile>();
+		allEnemyPaths = new ArrayList<ArrayList<Tile>>();
 		ArrayList<ArrayList<Tile>> board = model.getGrid();
 		
-		int[][] path = 
-		{ 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1},
-			{0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 1, 0, 2, 0, 0},
-			{1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0},
-			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0},
-			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 1, 0, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		};
+		map = new Map();
+		MapVariant mv = map.getMap(3);
+		int[][] path = mv.getPath();
+		
+//		int[][] path = 
+//		{ 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1},
+//			{0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 1, 0, 2, 0, 0},
+//			{1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 1, 0, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//		};
 		
 		for(int row = 0; row < path.length; row++) {
 			for(int col = 0; col < path[0].length; col++) {
@@ -69,16 +79,35 @@ public class TowersOfBrimstoneController {
 				}
 			}
 		}
-		model.setEnd(4, 27);
-		createPath(6, 0);
+		int[] coordEnd = mv.getEnd();
+		System.out.println("eX:" + coordEnd[0] + " eY:" + coordEnd[1]);
+		model.setEnd(coordEnd[0], coordEnd[1]);
+		
+		ArrayList<int[]> possibleSpots = mv.getAllStart();
+		for (int[] coord : possibleSpots) {
+			createPath(coord[0], coord[1]);
+		}
+
+		//int[] coordStart;
+//		if (possibleSpots.size() > 1) {
+//			Random rand = new Random();
+//			coordStart = possibleSpots.get(rand.nextInt(possibleSpots.size()));
+//		} else {
+//			coordStart = possibleSpots.get(0);
+//		}
+		
+		
+		
+		//model.setEnd(4, 27);
+		//createPath(6, 0);
 		model.setWaves(createWaveMap1());
 	}
 	private ArrayList<Queue<Enemy>> createWaveMap1(){
 		ArrayList<Queue<Enemy>> waves = new ArrayList<Queue<Enemy>>();
 
-		Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(6, 1, 2, 3, 4, 5, 1)), enemyPath);
-		Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(2, 2, 1, 1, 1, 1, 1)), enemyPath);
-		Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), enemyPath);
+		Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(6, 1, 2, 3, 4, 5, 1)), allEnemyPaths);
+		Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(2, 2, 1, 1, 1, 1, 1)), allEnemyPaths);
+		Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), allEnemyPaths);
 		
 		waves.add(wave1);
 		waves.add(wave2);
@@ -86,9 +115,11 @@ public class TowersOfBrimstoneController {
 		return waves;
 	}
 	
-	private Queue<Enemy> createEnemyObjects(ArrayList<Integer> enemies, ArrayList<Tile> path){
+	private Queue<Enemy> createEnemyObjects(ArrayList<Integer> enemies, ArrayList<ArrayList<Tile>> allPaths){
 		Queue<Enemy> wave = new LinkedList<Enemy>();
+		Random rand = new Random();
 		for(Integer enemyType: enemies) {
+			ArrayList<Tile> path = allPaths.get(rand.nextInt(allPaths.size()));
 			if(enemyType == 1) {
 				wave.add(new Enemy1(path));
 			}
@@ -115,32 +146,34 @@ public class TowersOfBrimstoneController {
 		boolean found = false;
 		//System.out.println("ROW: "+ row + " COL: " + col);
 		if(col < model.getRow(row).size() && row < model.getCol(col).size()) {
-		if(model.getRow(row).get(col).equals(model.getEnd())) {
-			enemyPath.add(model.getRow(row).get(col));
-			found = true;
-			return found;
-		}
-		if(enemyPath.contains(model.getRow(row).get(col))) {
-			return false;
-		}
-		if(model.getRow(row).get(col).getIsPath()) {
-			enemyPath.add(model.getRow(row).get(col));
-			if(!found)
-				found = createPath(row, col+1);
-			if(!found)
-				found = createPath(row+1, col);
-			if(!found)
-				found = createPath(row-1, col);
-			if(!found)
-				found = createPath(row, col-1);
-		}
+			if(model.getRow(row).get(col).equals(model.getEnd())) {
+				enemyPath.add(model.getRow(row).get(col));
+				found = true;
+				allEnemyPaths.add(enemyPath);
+				enemyPath = new ArrayList<Tile>();
+				return found;
+			}
+			if(enemyPath.contains(model.getRow(row).get(col))) {
+				return false;
+			}
+			if(model.getRow(row).get(col).getIsPath()) {
+				enemyPath.add(model.getRow(row).get(col));
+				if(!found)
+					found = createPath(row, col+1);
+				if(!found)
+					found = createPath(row+1, col);
+				if(!found)
+					found = createPath(row-1, col);
+				if(!found)
+					found = createPath(row, col-1);
+			}
 		}
 		return found;
 	}
 
-	public ArrayList<Tile> getEnemyPath(){
-		return enemyPath;
-	}
+//	public ArrayList<Tile> getEnemyPath(){
+//		return enemyPath;
+//	}
 	
 	public boolean placeTower(int row, int col, int selectedTowerType) {
 		ArrayList<ArrayList<Tile>> board = model.getGrid();
