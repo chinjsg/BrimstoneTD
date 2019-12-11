@@ -206,11 +206,15 @@ public class TowersOfBrimstoneController {
 					model.addGold(enemy.getGoldReward());
 					iterator.remove();
 				}
-				else if(enemy.getHealth() > 0 && tick % 10 == 0){
+				else if(enemy.getHealth() > 0 && tick % 5 == 0){
+					//System.out.println("TD Tick: + " + tick);
 					range = tower.getRange();
 					distance = tower.getPos().distance(enemy.getPos());
 					if(distance <= range) {
-						tower.fire(enemy);
+						if (tower.canFire()) {
+							tower.fire(enemy);
+						}
+						
 						tower.updateProjectiles();
 						break;
 					}

@@ -19,6 +19,8 @@ public abstract class Tower {
 	protected ArrayList<Projectile> projectiles;
 	protected String texture;
 	protected String ammo;
+	protected boolean isOnCooldown;
+	protected int cooldownTick;
 	
 	//protected image image;
 	//protected Title tile;
@@ -32,9 +34,9 @@ public abstract class Tower {
 		this.col = col;
 		this.range = range;
 		projectiles = new ArrayList<Projectile>();
-		
 		pos = new Point2D(col*50+25, row*50+25);
-		
+		isOnCooldown = false;
+		cooldownTick = 0;
 	}
 	
 	public int getAttackPower() {
@@ -96,6 +98,26 @@ public abstract class Tower {
 	public ArrayList<Projectile> getProjectiles() {
 		return projectiles;
 	}
+	
+	public boolean canFire() {
+		System.out.println("TDs Tick: " + cooldownTick);
+		if (isOnCooldown == false && cooldownTick == 0) {
+			System.out.println("no cooldown increment");
+			isOnCooldown = true;
+			cooldownTick++;
+		}
+		if (isOnCooldown == true) {
+			System.out.println("yes cooldown increment");
+			cooldownTick++;
+		}
+		if (cooldownTick % getRateOfFire() == 0) {
+			cooldownTick = 0;
+			isOnCooldown = false;
+		}
+		
+		return isOnCooldown; 
+	}
+	
 	
 	public class Projectile {
 		private Point2D projPoint;
