@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="towers.IceTower" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/towers/IceTower.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="111" x="1319" y="2653"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="game.Tile" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/game/Tile.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="497" width="182" x="824" y="3331"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="stages.Oasis" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/stages/Oasis.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="174" x="47" y="2116"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="towers.StoneTower" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/towers/StoneTower.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="127" x="1470" y="2653"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="game.TowersOfBrimstone" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/game/TowersOfBrimstone.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="157" x="298" y="-212"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="game.TowersOfBrimstoneView.ButtonListener" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/game/TowersOfBrimstoneView.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="160" x="489" y="829"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="stages.Farm" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/stages/Farm.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="174" x="261" y="2116"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="towers.Tower.Projectile" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/towers/Tower.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="173" width="123" x="1637" y="2653"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="towers.TowerMap" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/towers/TowerMap.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="144" x="1472" y="1921"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="enemies.Enemy1" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/enemies/Enemy1.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="189" x="1046" y="3331"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="stages.Desert" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/stages/Desert.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="174" x="475" y="2116"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="game.TowersOfBrimstoneController" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/game/TowersOfBrimstoneController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="335" width="480" x="689" y="829"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="experimenting.ImageButton" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/experimenting/ImageButton.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="167" x="1209" y="829"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="game.FrameMessage" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/game/FrameMessage.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="245" width="394" x="885" y="2653"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <component id="15" language="java" name="src" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="41" width="129" x="767" y="-212"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </component>  
+  <class id="16" language="java" name="towers.MagicTower" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/towers/MagicTower.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="127" x="1800" y="2653"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="towers.HeavyTower" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/towers/HeavyTower.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="129" x="1967" y="2653"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="enemies.Enemy" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/enemies/Enemy.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="353" width="200" x="1566" y="2938"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="stages.Ice" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/stages/Ice.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="174" x="689" y="2116"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="towers.Tower" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/towers/Tower.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="497" width="221" x="1637" y="2116"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="game.TowersOfBrimstoneView" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/game/TowersOfBrimstoneView.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="1001" width="551" x="1209" y="-212"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="enemies.Enemy4" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/enemies/Enemy4.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="189" x="1275" y="3331"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="enemies.Enemy5" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/enemies/Enemy5.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="189" x="1504" y="3331"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="enemies.Enemy2" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/enemies/Enemy2.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="189" x="1733" y="3331"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="enemies.Enemy3" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/enemies/Enemy3.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="189" x="1962" y="3331"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="game.TowersOfBrimstoneModel" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/game/TowersOfBrimstoneModel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="677" width="266" x="1637" y="1204"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="enemies.Enemy6" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/enemies/Enemy6.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="189" x="2191" y="3331"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="stages.AcidForest" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/stages/AcidForest.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="174" x="903" y="2116"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="stages.Volcano" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/stages/Volcano.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="174" x="1117" y="2116"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="stages.Map" project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/stages/Map.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="209" width="151" x="689" y="1204"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="stages.MapVariant" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/stages/MapVariant.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="174" x="689" y="1921"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="enemies.ImageLoader" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/enemies/ImageLoader.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="200" x="1416" y="829"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="towers.LightningTower" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/towers/LightningTower.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="144" x="2136" y="2653"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="towers.FireTower" 
+    project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
+    file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/towers/FireTower.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="116" x="2320" y="2653"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="35">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="36" name="enemy"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="38">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <association id="39">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="40" name="path"/>      
+      <multiplicity id="41" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="42">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="43" name="forward"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="46" name="loader"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="49" name="fire"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="51">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="52">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="53">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <generalization id="54">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="55">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="56">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="57" name="projectiles"/>      
+      <multiplicity id="58" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="59">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="60" name="magic"/>      
+      <multiplicity id="61" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="62">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="63">    
+    <bendpoint x="1646" y="1921"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="64" name="towers"/>      
+      <multiplicity id="65" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="66">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="67" name="enemies"/>      
+      <multiplicity id="68" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="69">    
+    <bendpoint x="1321" y="1921"/>    
+    <bendpoint x="1321" y="2116"/>    
+    <bendpoint x="833" y="2653"/>    
+    <bendpoint x="833" y="2938"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="70" name="endingTile"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="72">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="73">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="74" name="placedTowers"/>      
+      <multiplicity id="75" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="76">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="77">    
+    <bendpoint x="2487" y="829"/>    
+    <bendpoint x="2487" y="1204"/>    
+    <bendpoint x="2487" y="1921"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="78" name="towerView"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="80">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="81" name="sellButton"/>      
+      <multiplicity id="82" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="83">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="84" name="play"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="86">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <nesting id="87">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <association id="88">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="89" name="enemy"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="92" name="heavy"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="94">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="6"/>  
+  </nesting>  
+  <association id="95">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="96" name="map"/>      
+      <multiplicity id="97" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="98">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="99" name="damageboost"/>      
+      <multiplicity id="100" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="102" name="model"/>      
+      <multiplicity id="103" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="104">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="105" name="pause"/>      
+      <multiplicity id="106" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="107">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <generalization id="108">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="109">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="110" name="stone"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <bendpoint x="1646" y="829"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="113" name="model"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="115">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <generalization id="116">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="117">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="118">    
+    <bendpoint x="16" y="1204"/>    
+    <bendpoint x="16" y="1921"/>    
+    <bendpoint x="16" y="2116"/>    
+    <bendpoint x="16" y="2653"/>    
+    <bendpoint x="16" y="2938"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="119" name="enemyPath"/>      
+      <multiplicity id="120" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <bendpoint x="2466" y="1921"/>    
+    <bendpoint x="2466" y="2116"/>    
+    <bendpoint x="2466" y="2653"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="122" name="enemies"/>      
+      <multiplicity id="123" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="124">    
+    <bendpoint x="854" y="2938"/>    
+    <bendpoint x="854" y="2653"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="125" name="tower"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="128" name="ice"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="130">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="131" name="lightning"/>      
+      <multiplicity id="132" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="133">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="134" name="slowdown"/>      
+      <multiplicity id="135" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="136">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="137" name="map"/>      
+      <multiplicity id="138" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="139">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="140">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="141" name="controller"/>      
+      <multiplicity id="142" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="143">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <generalization id="144">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <association id="145">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="146" name="towerMap"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
