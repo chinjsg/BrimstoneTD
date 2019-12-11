@@ -26,6 +26,7 @@ public class TowersOfBrimstoneModel extends Observable {
 	private int gold;
 	private TowerMap towerMap;
 	private boolean won;
+	private int only_frame = 1;
 	/**
 	 * This is the constructor of the model class.
 	 * It will help us to initialize the our basic 
@@ -270,6 +271,14 @@ public class TowersOfBrimstoneModel extends Observable {
 	 */
 	public void updateFrame(int tick) {
 		FrameMessage update = new FrameMessage(getGrid(), getGold(), enemies, health);
+		if (only_frame == 1) {
+			only_frame =2;
+			System.out.println(update.getGrid());
+			System.out.println(update.getHealth());
+			System.out.println(update.getTick());
+			System.out.println(update.getCurrency());
+			System.out.println(update.getEnemies());
+		}
 		setChanged();
 		notifyObservers(update);
 	}
