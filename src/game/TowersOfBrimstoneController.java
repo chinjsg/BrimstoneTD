@@ -25,18 +25,31 @@ import towers.IceTower;
 import towers.LightningTower;
 import towers.MagicTower;
 import towers.Tower;
-
+/**
+ * @author Glen Chin
+ * @author Marko Kreso
+ * @author Abhishek Sharma
+ * @author Abhishek Agarwal
+ *
+ */
 public class TowersOfBrimstoneController {
 	
 	private TowersOfBrimstoneModel model;
 	private ArrayList<Tile> enemyPath;
 	private ArrayList<ArrayList<Tile>> allEnemyPaths;
 	private Map map;
-	
+	/**
+	 * This is the controller of our Game
+	 * @param model
+	 */
 	public TowersOfBrimstoneController(TowersOfBrimstoneModel model) {
 		this.model = model;
 	}
-	
+	/**
+	 * This function will help us to create our map based on the 
+	 * Map number we get when the user select it
+	 * @param mapNum
+	 */
 	public void createMap(int mapNum) {
 		enemyPath = new ArrayList<Tile>();
 		allEnemyPaths = new ArrayList<ArrayList<Tile>>();
@@ -73,6 +86,10 @@ public class TowersOfBrimstoneController {
 		//createPath(6, 0);
 		model.setWaves(createWaveMap1());
 	}
+	/**
+	 * This function will help us to create the wave of enemy
+	 * @return ArrayList<Queue<Enemy>>
+	 */
 	private ArrayList<Queue<Enemy>> createWaveMap1(){
 		ArrayList<Queue<Enemy>> waves = new ArrayList<Queue<Enemy>>();
 
@@ -85,7 +102,13 @@ public class TowersOfBrimstoneController {
 		waves.add(wave3);
 		return waves;
 	}
-	
+	/**
+	 * This function will help us to create the object of the enemy passed in it.
+	 * 
+	 * @param enemies
+	 * @param allPaths
+	 * @return Queue<Enemy>
+	 */
 	private Queue<Enemy> createEnemyObjects(ArrayList<Integer> enemies, ArrayList<ArrayList<Tile>> allPaths){
 		Queue<Enemy> wave = new LinkedList<Enemy>();
 		Random rand = new Random();
@@ -113,6 +136,12 @@ public class TowersOfBrimstoneController {
 		}
 		return wave;
 	}
+	/**
+	 * This will place Tile in the location provided.
+	 * @param row
+	 * @param col
+	 * @return boolean
+	 */
 	public boolean createPath(int row, int col) {
 		boolean found = false;
 		//System.out.println("ROW: "+ row + " COL: " + col);
@@ -141,8 +170,13 @@ public class TowersOfBrimstoneController {
 		}
 		return found;
 	}
-
-	
+	/**
+	 * Check that the selected grid is not a path, isPlaceable and no tower has already been placed
+	 * @param row
+	 * @param col
+	 * @param selectedTowerType
+	 * @return boolean
+	 */
 	public boolean placeTower(int row, int col, int selectedTowerType) {
 		ArrayList<ArrayList<Tile>> board = model.getGrid();
 		Tile tile = board.get(row).get(col);
@@ -156,7 +190,13 @@ public class TowersOfBrimstoneController {
 		}
 		return false;
 	}
-
+	/**
+	 * This will return the tower at the position specified by  row and col.
+	 * 
+	 * @param row
+	 * @param col
+	 * @return Tower
+	 */
 	public Tower checkTower(int row, int col) {
 		ArrayList<ArrayList<Tile>> board = model.getGrid();
 		Tile tile = board.get(row).get(col);
@@ -167,7 +207,13 @@ public class TowersOfBrimstoneController {
 		return null;
 		
 	}
-	
+	/**
+	 * This will help us to get the towertype at a particular position.
+	 * @param row
+	 * @param col
+	 * @param towerNum
+	 * @return Tower
+	 */
 	private Tower getTowerType(int row, int col, int towerNum) {
 		Tower tower = null;
 		if (towerNum == 1) {
@@ -185,14 +231,21 @@ public class TowersOfBrimstoneController {
 		}
 		return tower;
 	}
-	
+	/**
+	 * This function will keep in track the tower sell and remove from the list.
+	 * @param tower
+	 */
 	public void sellTower(Tower tower) {
 		int row = tower.getRow();
 		int col = tower.getCol();
 		int sellback = tower.getSellPrice();
 		model.removeTower(row, col, sellback);
 	}
-	
+	/**
+	 * This function will calculate the distance between two points.
+	 * Basically calculated the distance of the enemy from the tower.
+	 * @param tick
+	 */
 	private void collisionDetection(int tick) {
 		ArrayList<Tower> towers = model.getTowers();
 		int range;
@@ -227,7 +280,10 @@ public class TowersOfBrimstoneController {
 		}
 
 	
-	
+	/**
+	 * This will helps us to update the enemy wave
+	 * @param tick
+	 */
 	private void updateWave(int tick) {
 		ArrayList<Queue<Enemy>> waves = model.getWaves();
 		ArrayList<Enemy> enemies = model.getEnemy();
@@ -246,7 +302,10 @@ public class TowersOfBrimstoneController {
 			}
 	}
 	
-	
+	/**
+	 * This function is literally controlling our Game.
+	 * @param tick
+	 */
 	public void frameUpdate(int tick) {
 		
 		if(tick % 100 == 5) {
@@ -258,7 +317,9 @@ public class TowersOfBrimstoneController {
 		model.updateFrame(tick);
 		
 	}
-
+	/**
+	 * This will check if the enemy is present at the end of the path
+	 */
 	private void enemyAtEnd() {
 		double distance;
 		ArrayList<Enemy> enemies = model.getEnemy();
@@ -274,7 +335,9 @@ public class TowersOfBrimstoneController {
 		}
 
 	}
-
+	/**
+	 * This will update the position of the enemy.
+	 */
 	private void moveEnemy() {
 		// TODO Auto-generated method stub
 		for(Enemy enemy: model.getEnemy()) {
