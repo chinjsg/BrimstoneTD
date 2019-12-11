@@ -53,6 +53,7 @@ public abstract class Tower {
 		cooldownTick = 0;
 		firstFire = true;
 	}
+	
 	/**
 	 * This will return the power of the tower
 	 * @return int 
