@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 
 public abstract class Tower {
 	protected int attackPower;
-	protected int rateOfFire;
+	protected double rateOfFire;
 	protected boolean areaDamage;	// single target - aoe
 	protected int cost;
 	protected Point2D pos;
@@ -21,11 +21,12 @@ public abstract class Tower {
 	protected String ammo;
 	protected boolean isOnCooldown;
 	protected int cooldownTick;
+	protected boolean firstFire;
 	
 	//protected image image;
 	//protected Title tile;
 	
-	public Tower(int attackPower, int rateOfFire, boolean areaDamage, int cost, int range, int row, int col) {
+	public Tower(int attackPower, double rateOfFire, boolean areaDamage, int cost, int range, int row, int col) {
 		this.attackPower = attackPower;
 		this.rateOfFire = rateOfFire;
 		this.areaDamage = areaDamage;
@@ -37,14 +38,15 @@ public abstract class Tower {
 		pos = new Point2D(col*50+25, row*50+25);
 		isOnCooldown = false;
 		cooldownTick = 0;
+		firstFire = true;
 	}
 	
 	public int getAttackPower() {
 		return attackPower;
 	}
 	
-	public int getRateOfFire() {
-		return rateOfFire;
+	public double getRateOfFire() {
+		return rateOfFire * 10;
 	}
 	
 	public boolean getAreaDamage() {
@@ -100,22 +102,20 @@ public abstract class Tower {
 	}
 	
 	public boolean canFire() {
-		System.out.println("TDs Tick: " + cooldownTick);
-		if (isOnCooldown == false && cooldownTick == 0) {
-			System.out.println("no cooldown increment");
+		if (isOnCooldown == false && firstFire == true) {
 			isOnCooldown = true;
-			cooldownTick++;
-		}
-		if (isOnCooldown == true) {
-			System.out.println("yes cooldown increment");
-			cooldownTick++;
-		}
-		if (cooldownTick % getRateOfFire() == 0) {
-			cooldownTick = 0;
-			isOnCooldown = false;
+			firstFire = false;
+			return true;
 		}
 		
-		return isOnCooldown; 
+		cooldownTick++;
+		if (cooldownTick % getRateOfFire() == 0) {
+			System.out.println("Tick Now: " + cooldownTick + " % " + "rof" + getRateOfFire() + " == " + cooldownTick % getRateOfFire());
+			cooldownTick = 0;
+			return true;
+		
+		}
+		return false; 
 	}
 	
 	

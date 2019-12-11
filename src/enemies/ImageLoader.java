@@ -17,7 +17,7 @@ public class ImageLoader {
 		
 		loader.put("stoneammo.png", new Image("stoneammo.png",20,20,false,false));
 		loader.put("magicammo.png",new Image("magicammo.png",20,20,false,false));
-		loader.put("ligtningammo.png", new Image("lightningammo.png",30,30,false,false));
+		loader.put("lightningammo.png", new Image("lightningammo.png",30,30,false,false));
 		loader.put("iceammo.png", new Image("iceammo.png",20,20,false,false));
 		loader.put("heavyammo.png",new Image("heavyammo.png",30,20,false,false));
 		loader.put("fireammo.png", new Image("fireammo.png",20,20,false,false));
