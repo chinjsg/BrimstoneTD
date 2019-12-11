@@ -23,7 +23,7 @@ public class LightningTower extends Tower {
 		// - Cost         = 275 gold
 		// - Range        = 200
 		// - X/Y coordinates will be set when it is placed
-		super(24, 0.2, false, 275, 200, row, col);
+		super(24, 0.2, false, 170, 200, row, col);
 		texture = "tower_lightning.png";
 		ammo = "lightningammo.png";
 	}

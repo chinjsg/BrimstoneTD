@@ -23,7 +23,7 @@ public class IceTower extends Tower {
 		// - Cost         = 250 gold
 		// - Range        = 200
 		// - X/Y coordinates will be set when it is placed
-		super(38, 0.3, false, 250, 250, row, col);
+		super(38, 0.3, false, 180, 250, row, col);
 		texture = "tower_ice.png";
 		ammo = "iceammo.png";
 	}

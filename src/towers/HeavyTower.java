@@ -23,7 +23,7 @@ public class HeavyTower extends Tower {
 		// - Cost         = 300 gold
 		// - Range        = 200
 		// - X/Y coordinates will be set when it is placed
-		super(60, 0.5, false, 300, 200, row, col);
+		super(60, 0.5, false, 210, 200, row, col);
 		texture = "tower_heavy.png";
 		ammo = "heavyammo.png";
 	}

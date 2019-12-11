@@ -22,7 +22,7 @@ public class Enemy2 extends Enemy{
 	 * @param path
 	 */
 	public Enemy2(ArrayList<Tile> path) {
-		super(120, 8, 25, path);
+		super(120, 8, 55, path);
 		picture = getRandomImagePath();
 	}
 	/**

@@ -23,7 +23,7 @@ public class Enemy3 extends Enemy {
 	 */
 	public Enemy3(ArrayList<Tile> path) {
 		// Normal enemy 2
-		super(400, 3, 27, path);
+		super(400, 3, 60, path);
 		picture = getRandomImagePath();
 	}
 	/**

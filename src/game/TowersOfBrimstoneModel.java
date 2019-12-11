@@ -41,7 +41,7 @@ public class TowersOfBrimstoneModel extends Observable {
 	waveNum = 0;
 	health = 300;
 	won = false;
-	gold = 2000;
+	gold = 200;
     }
 
     /**
