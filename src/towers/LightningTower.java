@@ -1,9 +1,19 @@
 package towers;
 
 import javafx.scene.image.Image;
-
+/**
+ * @author Glen Chin
+ * @author Marko Kreso
+ * @author Abhishek Sharma
+ * @author Abhishek Agarwal
+ *
+ */
 public class LightningTower extends Tower {
-	
+	/**
+	 * This is the constructor for the Lightning tower
+	 * @param row
+	 * @param col
+	 */
 	public LightningTower(int row, int col) {
 		// Tower stats
 		//  - Damage       = 25
@@ -16,7 +26,9 @@ public class LightningTower extends Tower {
 		texture = "tower_lightning.png";
 		ammo = "lightningammo.png";
 	}
-	
+	/**
+	 * This will return the String of class.
+	 */
 	public String toString() {
 		return "Lightning Tower";
 	}
