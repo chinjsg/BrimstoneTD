@@ -3,9 +3,19 @@ package enemies;
 import java.util.HashMap;
 
 import javafx.scene.image.Image;
-
+/**
+ * This is the abstract class that represent all the enemy used in the game 
+ * @author Glen Chin
+ * @author Marko Kreso
+ * @author Abhishek Sharma
+ * @author Abhishek Agarwal
+ *
+ */
 public class ImageLoader {
 	HashMap<String, Image> loader;
+	/**
+	 * This is the constructor 
+	 */
 	public ImageLoader() {
 		loader = new HashMap<String, Image>();
 		loader.put("assets/desert/enemies/1/desert1.png", new Image("assets/desert/enemies/1/desert1.png"));
@@ -46,7 +56,10 @@ public class ImageLoader {
 		loader.put("tower_stone.png", new Image("assets/towers/stone/tower_stone.png",65,65,false,false));
 		loader.put("tower_lightning.png", new Image("assets/towers/lightning/tower_lightning.png",65,65,false,false));
 	}
-
+	/**
+	 * This will return the image path
+	 * @return String
+	 */
 	public Image getImage(String path) {
 		return loader.get(path);
 	}
