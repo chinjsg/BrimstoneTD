@@ -263,7 +263,10 @@ public class TowersOfBrimstoneController {
 					range = tower.getRange();
 					distance = tower.getPos().distance(enemy.getPos());
 					if(distance <= range) {
-						tower.fire(enemy);
+						if (tower.canFire() == true) {
+							tower.fire(enemy);
+						}
+						
 						tower.updateProjectiles();
 						break;
 					}

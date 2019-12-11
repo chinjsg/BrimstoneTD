@@ -15,7 +15,7 @@ import javafx.scene.image.Image;
  */
 public abstract class Tower {
 	protected int attackPower;
-	protected int rateOfFire;
+	protected double rateOfFire;
 	protected boolean areaDamage;	// single target - aoe
 	protected int cost;
 	protected Point2D pos;
@@ -25,6 +25,8 @@ public abstract class Tower {
 	protected ArrayList<Projectile> projectiles;
 	protected String texture;
 	protected String ammo;
+	protected int cooldownTick;
+	protected boolean firstFire;
 	
 	//protected image image;
 	//protected Title tile;
@@ -38,7 +40,7 @@ public abstract class Tower {
 	 * @param row
 	 * @param col
 	 */
-	public Tower(int attackPower, int rateOfFire, boolean areaDamage, int cost, int range, int row, int col) {
+	public Tower(int attackPower, double rateOfFire, boolean areaDamage, int cost, int range, int row, int col) {
 		this.attackPower = attackPower;
 		this.rateOfFire = rateOfFire;
 		this.areaDamage = areaDamage;
@@ -47,9 +49,9 @@ public abstract class Tower {
 		this.col = col;
 		this.range = range;
 		projectiles = new ArrayList<Projectile>();
-		
 		pos = new Point2D(col*50+25, row*50+25);
-		
+		cooldownTick = 0;
+		firstFire = true;
 	}
 	/**
 	 * This will return the power of the tower
@@ -58,12 +60,13 @@ public abstract class Tower {
 	public int getAttackPower() {
 		return attackPower;
 	}
+
 	/**
 	 * This will return the RateofFire 
 	 * @return int
 	 */
-	public int getRateOfFire() {
-		return rateOfFire;
+	public double getRateOfFire() {
+		return rateOfFire * 10;
 	}
 	/**
 	 * This is return whether a tower does a area damage or not.
@@ -147,6 +150,23 @@ public abstract class Tower {
 	public ArrayList<Projectile> getProjectiles() {
 		return projectiles;
 	}
+	
+	public boolean canFire() {
+		if (firstFire == true) {
+			firstFire = false;
+			return true;
+		}
+		
+		System.out.println("Tick:" + cooldownTick);
+		cooldownTick++;
+		if (cooldownTick % getRateOfFire() == 0) {
+			cooldownTick = 0;
+			return true;
+		
+		}
+		return false; 
+	}
+	
 	
 	public class Projectile {
 		private Point2D projPoint;
