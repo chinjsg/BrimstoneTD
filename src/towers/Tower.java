@@ -63,7 +63,7 @@ public abstract class Tower {
 
 	/**
 	 * This will return the RateofFire 
-	 * @return int
+	 * @return double
 	 */
 	public double getRateOfFire() {
 		return rateOfFire * 10;
@@ -151,13 +151,16 @@ public abstract class Tower {
 		return projectiles;
 	}
 	
+	/**
+	 *  This will check if the tower is off cooldown and ready to fire
+	 */
 	public boolean canFire() {
 		if (firstFire == true) {
 			firstFire = false;
 			return true;
 		}
 		
-		System.out.println("Tick:" + cooldownTick);
+		// Increment the internal clock of this tower
 		cooldownTick++;
 		if (cooldownTick % getRateOfFire() == 0) {
 			cooldownTick = 0;
@@ -171,7 +174,7 @@ public abstract class Tower {
 	public class Projectile {
 		private Point2D projPoint;
 		private Enemy enemy;
-		private int speed = 4;
+		private int speed = 15;
 		private Projectile(Enemy target) {
 			projPoint = pos;
 			enemy = target;
