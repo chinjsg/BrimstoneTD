@@ -95,6 +95,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private ImageButton pause = new ImageButton("assets/UI/buttons/pause.png", 110, 90);
     private ImageButton forward = new ImageButton("assets/UI/buttons/fastforward.png", 110, 90);
     private ImageButton sellButton = new ImageButton("assets/UI/labels/sell.png", 60, 50);
+    ImageButton restart = new ImageButton("assets/UI/buttons/restart.png", 90, 110);
+    ImageButton menu = new ImageButton("assets/UI/buttons/menu.png", 90, 110);
 
     private volatile Timeline timeline;
 
@@ -342,6 +344,40 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    System.out.println("Rate of the game is:" + forwardCount);
 	    timeline.setRate(forwardCount);
 
+	});
+	
+	menu.setOnAction(event -> {
+	    model = new TowersOfBrimstoneModel();
+	    model.addObserver(this);
+	    healthBar.setVisible(true);
+	    controller = new TowersOfBrimstoneController(model);
+	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
+	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
+	    prevCol = 0;
+	    prevRow = 19;
+	    prevCCol = 0;
+	    prevCRow = 0;
+	    prevCSize = 0;
+	    frameUpdateHealth(model.getHealth());
+	    setUpLevelPane();
+	    window.setScene(levelSelection);
+	});
+
+	restart.setOnAction(event -> {
+	    model = new TowersOfBrimstoneModel();
+	    model.addObserver(this);
+	    healthBar.setVisible(true);
+	    controller = new TowersOfBrimstoneController(model);
+	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
+	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
+	    prevCol = 0;
+	    prevRow = 19;
+	    prevCCol = 0;
+	    prevCRow = 0;
+	    prevCSize = 0;
+	    frameUpdateHealth(model.getHealth());
+	    makeMainScreen();
+	    window.setScene(mainscreen);
 	});
 
 	// Display the scene
@@ -699,8 +735,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	Background background2 = new Background(background);
 	timeline.stop();
 
-	ImageButton restart = new ImageButton("assets/UI/buttons/restart.png", 90, 110);
-	ImageButton menu = new ImageButton("assets/UI/buttons/menu.png", 90, 110);
+	
 	winMenu = new AnchorPane();
 
 	ImageView imageView = new ImageView(new Image("assets/UI/menus/levelWin.png", 650, 800, false, false));
@@ -717,29 +752,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 	Scene win = new Scene(winMenu, WIDTH, HEIGHT);
 	window.setScene(win);
-
-	menu.setOnAction(event -> {
-	    model = new TowersOfBrimstoneModel();
-	    model.addObserver(this);
-	    healthBar.setVisible(true);
-	    controller = new TowersOfBrimstoneController(model);
-	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
-	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
-	    setUpLevelPane();
-	    window.setScene(levelSelection);
-
-	});
-
-	restart.setOnAction(event -> {
-	    model = new TowersOfBrimstoneModel();
-	    model.addObserver(this);
-	    healthBar.setVisible(true);
-	    controller = new TowersOfBrimstoneController(model);
-	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
-	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
-	    makeMainScreen();
-	    window.setScene(mainscreen);
-	});
     }
 
     public void setupLoseMenu() {
@@ -751,8 +763,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	Background background2 = new Background(background);
 	timeline.stop();
 
-	ImageButton restart = new ImageButton("assets/UI/buttons/restart.png", 90, 110);
-	ImageButton menu = new ImageButton("assets/UI/buttons/menu.png", 90, 110);
 	looseMenu = new AnchorPane();
 	ImageView imageView = new ImageView(new Image("assets/UI/menus/levelFail.png", 650, 800, false, false));
 	looseMenu.getChildren().add(imageView);
@@ -769,31 +779,15 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	Scene win = new Scene(looseMenu, WIDTH, HEIGHT);
 	window.setScene(win);
 
-	menu.setOnAction(event -> {
-	    model = new TowersOfBrimstoneModel();
-	    model.addObserver(this);
-	    healthBar.setVisible(true);
-	    controller = new TowersOfBrimstoneController(model);
-	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
-	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
-	    frameUpdateHealth(model.getHealth());
-	    setUpLevelPane();
-	    window.setScene(levelSelection);
-	});
-
-	restart.setOnAction(event -> {
-	    model = new TowersOfBrimstoneModel();
-	    model.addObserver(this);
-	    healthBar.setVisible(true);
-	    controller = new TowersOfBrimstoneController(model);
-	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
-	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
-	    frameUpdateHealth(model.getHealth());
-	    makeMainScreen();
-	    window.setScene(mainscreen);
-	});
+	
     }
 
+    /**
+     * Update.
+     *
+     * @param o the o
+     * @param arg the arg
+     */
     @Override
     public void update(Observable o, Object arg) {
 	// TODO Auto-generated method stub
