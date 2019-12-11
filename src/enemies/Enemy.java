@@ -46,7 +46,7 @@ public abstract class Enemy {
 	}
 	public void removeHealth(int damage) {
 		health -= damage;
-		System.out.println("health: " + health);
+		//System.out.println("health: " + health);
 	}
 	public Point2D getDirection() {
 		Tile targetTile = path.get(TileIndex);

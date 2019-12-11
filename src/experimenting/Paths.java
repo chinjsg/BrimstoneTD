@@ -130,7 +130,7 @@ public class Paths {
 	 * This will call the other method to check the path
 	 * @param agrStrings
 	 */		
-	public  static void main(String[]agrStrings) {
+	public  Paths() {
 		checks_Volcano();
 		System.out.println("---------------------------------------");
 		checks_ice();

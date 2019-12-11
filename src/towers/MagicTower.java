@@ -22,7 +22,7 @@ public class MagicTower extends Tower {
 		//  - Range        = 200
 		//  - Cost         = 550 gold
 		//  - X/Y coordinates will be set when it is placed
-		super(80, 1, false, 550, 200, row, col);
+		super(80, 1, false, 550, 350, row, col);
 		texture = "tower_magic.png";
 		ammo = "magicammo.png";
 	}

@@ -18,7 +18,7 @@ public class FireTower extends Tower {
 		
 		// Tower stats
 		//  - Damage       = 25
-		//  - Rate of Fire = 1;
+		//  - Rate of Fire = 1;  1 ~ 5 sec 0.5 ~ 2.5sec
 		//  - Area Damage  = No
 		//  - Cost         = 150 gold
 		//  - Range        = 200

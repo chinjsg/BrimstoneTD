@@ -15,7 +15,7 @@ import javafx.scene.image.Image;
  */
 public abstract class Tower {
 	protected int attackPower;
-	protected int rateOfFire;
+	protected double rateOfFire;
 	protected boolean areaDamage;	// single target - aoe
 	protected int cost;
 	protected Point2D pos;
@@ -25,6 +25,8 @@ public abstract class Tower {
 	protected ArrayList<Projectile> projectiles;
 	protected String texture;
 	protected String ammo;
+	protected int cooldownTick;
+	protected boolean firstFire;
 	
 	//protected image image;
 	//protected Title tile;
@@ -38,7 +40,7 @@ public abstract class Tower {
 	 * @param row
 	 * @param col
 	 */
-	public Tower(int attackPower, int rateOfFire, boolean areaDamage, int cost, int range, int row, int col) {
+	public Tower(int attackPower, double rateOfFire, boolean areaDamage, int cost, int range, int row, int col) {
 		this.attackPower = attackPower;
 		this.rateOfFire = rateOfFire;
 		this.areaDamage = areaDamage;
@@ -47,10 +49,11 @@ public abstract class Tower {
 		this.col = col;
 		this.range = range;
 		projectiles = new ArrayList<Projectile>();
-		
 		pos = new Point2D(col*50+25, row*50+25);
-		
+		cooldownTick = 0;
+		firstFire = true;
 	}
+	
 	/**
 	 * This will return the power of the tower
 	 * @return int 
@@ -58,12 +61,13 @@ public abstract class Tower {
 	public int getAttackPower() {
 		return attackPower;
 	}
+
 	/**
 	 * This will return the RateofFire 
-	 * @return int
+	 * @return double
 	 */
-	public int getRateOfFire() {
-		return rateOfFire;
+	public double getRateOfFire() {
+		return rateOfFire * 10;
 	}
 	/**
 	 * This is return whether a tower does a area damage or not.
@@ -148,10 +152,30 @@ public abstract class Tower {
 		return projectiles;
 	}
 	
+	/**
+	 *  This will check if the tower is off cooldown and ready to fire
+	 */
+	public boolean canFire() {
+		if (firstFire == true) {
+			firstFire = false;
+			return true;
+		}
+		
+		// Increment the internal clock of this tower
+		cooldownTick++;
+		if (cooldownTick % getRateOfFire() == 0) {
+			cooldownTick = 0;
+			return true;
+		
+		}
+		return false; 
+	}
+	
+	
 	public class Projectile {
 		private Point2D projPoint;
 		private Enemy enemy;
-		private int speed = 4;
+		private int speed = 15;
 		private Projectile(Enemy target) {
 			projPoint = pos;
 			enemy = target;

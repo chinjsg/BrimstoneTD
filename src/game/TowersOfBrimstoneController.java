@@ -263,7 +263,10 @@ public class TowersOfBrimstoneController {
 					range = tower.getRange();
 					distance = tower.getPos().distance(enemy.getPos());
 					if(distance <= range) {
-						tower.fire(enemy);
+						if (tower.canFire() == true) {
+							tower.fire(enemy);
+						}
+						
 						tower.updateProjectiles();
 						break;
 					}
@@ -338,10 +341,10 @@ public class TowersOfBrimstoneController {
 	
 	/**
 	 * It will return the ArrayList of path
-	 * @return ArrayList<Tile> 
+	 * @return ArrayList<ArrayList<Tile>> 
 	 */
-	public ArrayList<Tile> get_path() {
-		return enemyPath;
+	public ArrayList<ArrayList<Tile>>  get_path() {
+		return allEnemyPaths;
 	}
 	
 	/**
