@@ -26,7 +26,6 @@ public class Tile {
 		pos = new Point2D(col*50+25, row*50+25);
 		isPath = false;
 		isPlaceable = false;
-		texture = new Image(GRASS);
 		tower = null;
 	}
 
@@ -38,7 +37,6 @@ public class Tile {
 	}
 	public void setIsPath() {
 		isPath = true;
-		texture = new Image(PATH);
 	}
 	
 	public boolean getContainsEnemy() {
@@ -52,7 +50,6 @@ public class Tile {
 	
 	public void setIsPlaceable() {
 		isPlaceable = true;
-		texture = new Image(PLACE);
 	}
 	public void placeTower(Tower tower) {
 		this.tower = tower;
