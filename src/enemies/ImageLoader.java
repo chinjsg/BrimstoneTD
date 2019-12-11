@@ -9,11 +9,28 @@ public class ImageLoader {
 	public ImageLoader() {
 		loader = new HashMap<String, Image>();
 		loader.put("assets/desert/enemies/1/desert1.png", new Image("assets/desert/enemies/1/desert1.png"));
+		loader.put("assets/ice/enemies/1/ice1.png", new Image("assets/ice/enemies/1/ice1.png"));
+		loader.put("assets/volcano/enemies/1/volcano1.png", new Image("assets/volcano/enemies/1/volcano1.png"));
+		
 		loader.put("assets/desert/enemies/2/desert2.png", new Image("assets/desert/enemies/2/desert2.png"));
+		loader.put("assets/ice/enemies/2/ice2.png", new Image("assets/ice/enemies/2/ice2.png"));
+		loader.put("assets/volcano/enemies/2/volcano2.png", new Image("assets/volcano/enemies/2/volcano2.png"));
+		
 		loader.put("assets/desert/enemies/3/desert3.png", new Image("assets/desert/enemies/3/desert3.png"));
+		loader.put("assets/ice/enemies/3/ice3.png", new Image("assets/ice/enemies/3/ice3.png"));
+		loader.put("assets/volcano/enemies/3/volcano3.png", new Image("assets/volcano/enemies/3/volcano3.png"));
+		
 		loader.put("assets/desert/enemies/4/desert4.png", new Image("assets/desert/enemies/4/desert4.png"));
+		loader.put("assets/ice/enemies/4/ice4.png", new Image("assets/ice/enemies/4/ice4.png"));
+		loader.put("assets/volcano/enemies/4/volcano4.png", new Image("assets/volcano/enemies/4/volcano4.png"));
+		
 		loader.put("assets/desert/enemies/5/desert5.png", new Image("assets/desert/enemies/5/desert5.png"));
+		loader.put("assets/ice/enemies/5/ice5.png", new Image("assets/ice/enemies/5/ice5.png"));
+		loader.put("assets/volcano/enemies/5/volcano5.png", new Image("assets/volcano/enemies/5/volcano5.png"));
+		
 		loader.put("assets/desert/enemies/6/desert6.png", new Image("assets/desert/enemies/6/desert6.png"));
+		loader.put("assets/ice/enemies/6/ice6.png", new Image("assets/ice/enemies/6/ice6.png"));
+		loader.put("assets/volcano/enemies/6/volcano6.png", new Image("assets/volcano/enemies/6/volcano6.png"));
 		
 		loader.put("stoneammo.png", new Image("stoneammo.png",20,20,false,false));
 		loader.put("magicammo.png",new Image("magicammo.png",20,20,false,false));

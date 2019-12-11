@@ -11,7 +11,7 @@ public class Enemy4 extends Enemy{
 	public Enemy4(ArrayList<Tile> path) {
 		super(115, 2, 30, path);
 
-		picture = "assets/desert/enemies/4/desert4.png";
+		picture = getRandomImagePath();
 
 	}
 

@@ -10,7 +10,7 @@ public class Enemy1 extends Enemy{
 	private String picture;
 	public Enemy1(ArrayList<Tile> path) {
 		super(100, 2, 20, path);
-		picture = "assets/desert/enemies/1/desert1.png";
+		picture = getRandomImagePath();
 
 	}
 	
