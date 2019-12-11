@@ -95,6 +95,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private ImageButton pause = new ImageButton("assets/UI/buttons/pause.png", 110, 90);
     private ImageButton forward = new ImageButton("assets/UI/buttons/fastforward.png", 110, 90);
     private ImageButton sellButton = new ImageButton("assets/UI/labels/sell.png", 60, 50);
+    private ImageButton restart = new ImageButton("assets/UI/buttons/restart.png", 90, 110);
+    private ImageButton menu = new ImageButton("assets/UI/buttons/menu.png", 90, 110);
 
     private volatile Timeline timeline;
 
@@ -115,10 +117,10 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	base = new AnchorPane();
 	base.getStylesheets().add("test.css");
 	StackPane root = new StackPane();
-	Canvas canvas = new Canvas(1400, 1000);
-	Canvas selectionCanvas = new Canvas(1400, 1000);
-	Canvas towerCanvas = new Canvas(1400, 1000);
-	Canvas enemies = new Canvas(1400, 1000);
+	Canvas canvas = new Canvas(WIDTH, HEIGHT);
+	Canvas selectionCanvas = new Canvas(WIDTH, HEIGHT);
+	Canvas towerCanvas = new Canvas(WIDTH, HEIGHT);
+	Canvas enemies = new Canvas(WIDTH, HEIGHT);
 	towerContext = towerCanvas.getGraphicsContext2D();
 	enemyGc = enemies.getGraphicsContext2D();
 	baseContext = canvas.getGraphicsContext2D();
@@ -127,9 +129,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	healthBar = new ImageView(new Image("assets/UI/bars/healthBar.png", 150, 15, false, false));
 	goldBar = new ImageView(new Image("assets/UI/bars/goldBar.png", 150, 15, false, false));
 	barView = new ImageView(new Image("assets/UI/menus/barMenu.png", 200, 150, false, false));
-
 	towerMenuL = new ImageView(new Image("assets/UI/menus/menuTowerEmpty.png", 1400, 100, false, false));
 
+	// Adding canvases to StackPane
 	root.getChildren().add(canvas);
 	root.getChildren().add(selectionCanvas);
 	root.getChildren().add(towerCanvas);
@@ -344,12 +346,46 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 	});
 
+	menu.setOnAction(event -> {
+	    model = new TowersOfBrimstoneModel();
+	    model.addObserver(this);
+	    healthBar.setVisible(true);
+	    controller = new TowersOfBrimstoneController(model);
+	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
+	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
+	    prevCol = 0;
+	    prevRow = 19;
+	    prevCCol = 0;
+	    prevCRow = 0;
+	    prevCSize = 0;
+	    frameUpdateHealth(model.getHealth());
+	    setUpLevelPane();
+	    window.setScene(levelSelection);
+	});
+
+	restart.setOnAction(event -> {
+	    model = new TowersOfBrimstoneModel();
+	    model.addObserver(this);
+	    healthBar.setVisible(true);
+	    controller = new TowersOfBrimstoneController(model);
+	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
+	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
+	    prevCol = 0;
+	    prevRow = 19;
+	    prevCCol = 0;
+	    prevCRow = 0;
+	    prevCSize = 0;
+	    frameUpdateHealth(model.getHealth());
+	    makeMainScreen();
+	    window.setScene(mainscreen);
+	});
+
 	// Display the scene
-	game = new Scene(base, 1400, 1000);
-	primaryStage.setMaxWidth(1400);
-	primaryStage.setMaxHeight(1000);
-	primaryStage.setMinWidth(1400);
-	primaryStage.setMinHeight(1000);
+	game = new Scene(base, WIDTH, HEIGHT);
+	primaryStage.setMaxWidth(WIDTH);
+	primaryStage.setMaxHeight(HEIGHT);
+	primaryStage.setMinWidth(WIDTH);
+	primaryStage.setMinHeight(HEIGHT);
 	primaryStage.setScene(mainscreen);
 	primaryStage.show();
     }
@@ -397,8 +433,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	lightning = new ImageButton("assets/UI/buttons/lightning.png", width, height);
 	magic = new ImageButton("assets/UI/buttons/magic.png", width, height);
 	slowdown = new ImageButton("assets/UI/buttons/slowdown.png", width, height);
-	// damageboost = new ImageButton("assets/UI/buttons/damageboost.png", width,
-	// height);
 
 	hBox.setAlignment(Pos.CENTER);
 	hBox.setSpacing(75);
@@ -410,7 +444,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	hBox.getChildren().add(lightning);
 	hBox.getChildren().add(magic);
 	hBox.getChildren().add(slowdown);
-	// hBox.getChildren().add(damageboost);
+
 	base.getChildren().add(hBox);
 
 	AnchorPane.setBottomAnchor(hBox, 25.0);
@@ -449,11 +483,11 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	level6.getStyleClass().add("levelButton");
 
 	ImageView imageView = new ImageView(
-		new Image("assets/UI/menus/levelSelectionMenu-01.png", 1400, 1000, false, false));
+		new Image("assets/UI/menus/levelSelectionMenu-01.png", WIDTH, HEIGHT, false, false));
 
 	level1.setOnAction(event -> {
 	    controller.createMap(1);
-	    baseContext.drawImage(new Image("assets/desert/desertMap.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/desert/desertMap.png", WIDTH, HEIGHT, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
@@ -461,35 +495,35 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 	{
 	    controller.createMap(2);
-	    baseContext.drawImage(new Image("assets/ice/iceMap.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/ice/iceMap.png", WIDTH, HEIGHT, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
 
 	level3.setOnAction(event -> {
 	    controller.createMap(3);
-	    baseContext.drawImage(new Image("assets/volcano/volcanoMap.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/volcano/volcanoMap.png", WIDTH, HEIGHT, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
 
 	level4.setOnAction(event -> {
 	    controller.createMap(4);
-	    baseContext.drawImage(new Image("assets/oasis/oasisMap.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/oasis/oasisMap.png", WIDTH, HEIGHT, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
 
 	level5.setOnAction(event -> {
 	    controller.createMap(5);
-	    baseContext.drawImage(new Image("assets/forest/forestMap.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/forest/forestMap.png", WIDTH, HEIGHT, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
 
 	level6.setOnAction(event -> {
 	    controller.createMap(6);
-	    baseContext.drawImage(new Image("assets/farm/farmMap.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/farm/farmMap.png", WIDTH, HEIGHT, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
@@ -557,12 +591,12 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	gameName.setFitHeight(550);
 
 	ImageButton newGame = new ImageButton("assets/UI/labels/playNow.png", 900, 500);
-	Image image = new Image("assets/UI/bg.png", 1400, 1000, false, false);
+	Image image = new Image("assets/UI/bg.png", WIDTH, HEIGHT, false, false);
 	BackgroundImage background = new BackgroundImage(image, null, null, null, null);
 	Background background2 = new Background(background);
 
-	mainScreen.setMaxWidth(1400);
-	mainScreen.setMaxHeight(1000);
+	mainScreen.setMaxWidth(WIDTH);
+	mainScreen.setMaxHeight(HEIGHT);
 	mainScreen.setBackground(background2);
 	mainScreen.getChildren().add(gameName);
 	mainScreen.getChildren().add(newGame);
@@ -571,7 +605,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	AnchorPane.setTopAnchor(newGame, 320.00);
 	AnchorPane.setLeftAnchor(newGame, 350.00);
 
-	mainscreen = new Scene(mainScreen, 1400, 1000);
+	mainscreen = new Scene(mainScreen, WIDTH, HEIGHT);
 	newGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
 	    // setting a mouseEvent on the column in the grid
 	    @Override
@@ -646,9 +680,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		}).start();
 		System.out.println("Slowdown Enemies for 5 seconds");
 	    }
-//	    } else if (event.getSource().equals(damageboost)) {
-//		System.out.println("Unimplemented Ability 2");
-//	    }
+
 	}
     }
 
@@ -699,8 +731,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	Background background2 = new Background(background);
 	timeline.stop();
 
-	ImageButton restart = new ImageButton("assets/UI/buttons/restart.png", 90, 110);
-	ImageButton menu = new ImageButton("assets/UI/buttons/menu.png", 90, 110);
 	winMenu = new AnchorPane();
 
 	ImageView imageView = new ImageView(new Image("assets/UI/menus/levelWin.png", 650, 800, false, false));
@@ -717,42 +747,17 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 	Scene win = new Scene(winMenu, WIDTH, HEIGHT);
 	window.setScene(win);
-
-	menu.setOnAction(event -> {
-	    model = new TowersOfBrimstoneModel();
-	    model.addObserver(this);
-	    healthBar.setVisible(true);
-	    controller = new TowersOfBrimstoneController(model);
-	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
-	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
-	    setUpLevelPane();
-	    window.setScene(levelSelection);
-
-	});
-
-	restart.setOnAction(event -> {
-	    model = new TowersOfBrimstoneModel();
-	    model.addObserver(this);
-	    healthBar.setVisible(true);
-	    controller = new TowersOfBrimstoneController(model);
-	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
-	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
-	    makeMainScreen();
-	    window.setScene(mainscreen);
-	});
     }
 
     public void setupLoseMenu() {
 	AnchorPane looseMenu = new AnchorPane();
-	Image image = new Image("assets/UI/bg.png", 1400, 1000, false, false);
+	Image image = new Image("assets/UI/bg.png", WIDTH, HEIGHT, false, false);
 
 	BackgroundImage background = new BackgroundImage(image, null, null, null, null);
 
 	Background background2 = new Background(background);
 	timeline.stop();
 
-	ImageButton restart = new ImageButton("assets/UI/buttons/restart.png", 90, 110);
-	ImageButton menu = new ImageButton("assets/UI/buttons/menu.png", 90, 110);
 	looseMenu = new AnchorPane();
 	ImageView imageView = new ImageView(new Image("assets/UI/menus/levelFail.png", 650, 800, false, false));
 	looseMenu.getChildren().add(imageView);
@@ -769,31 +774,14 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	Scene win = new Scene(looseMenu, WIDTH, HEIGHT);
 	window.setScene(win);
 
-	menu.setOnAction(event -> {
-	    model = new TowersOfBrimstoneModel();
-	    model.addObserver(this);
-	    healthBar.setVisible(true);
-	    controller = new TowersOfBrimstoneController(model);
-	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
-	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
-	    frameUpdateHealth(model.getHealth());
-	    setUpLevelPane();
-	    window.setScene(levelSelection);
-	});
-
-	restart.setOnAction(event -> {
-	    model = new TowersOfBrimstoneModel();
-	    model.addObserver(this);
-	    healthBar.setVisible(true);
-	    controller = new TowersOfBrimstoneController(model);
-	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
-	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
-	    frameUpdateHealth(model.getHealth());
-	    makeMainScreen();
-	    window.setScene(mainscreen);
-	});
     }
 
+    /**
+     * Update.
+     *
+     * @param o   the o
+     * @param arg the arg
+     */
     @Override
     public void update(Observable o, Object arg) {
 	// TODO Auto-generated method stub
