@@ -1,6 +1,12 @@
 package experimenting;
 
-
+/**
+ * @author Glen Chin
+ * @author Marko Kreso
+ * @author Abhishek Sharma
+ * @author Abhishek Agarwal
+ *
+ */
 public class Paths {
 	
 		static int[][] path_volcano = 
@@ -120,7 +126,10 @@ public class Paths {
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
 		    };
-			
+	/**
+	 * This will call the other method to check the path
+	 * @param agrStrings
+	 */		
 	public  static void main(String[]agrStrings) {
 		checks_Volcano();
 		System.out.println("---------------------------------------");
@@ -132,6 +141,9 @@ public class Paths {
 		System.out.println("---------------------------------------");
 		check_forest();
 	}
+	/**
+	 * This method will check the volcano path
+	 */
 	public static  void checks_Volcano() {
 		System.out.println("total length of the array " + path_volcano.length);
 		int Count_tower = 0;
@@ -146,7 +158,9 @@ public class Paths {
 		System.out.println();
 		System.out.println("Count of towers on Volcano map "+Count_tower);
 	}
-	
+	/**
+	 *  This will check the ice path
+	 */
 	public static  void checks_ice() {
 		System.out.println("total length of the array " + path_ice.length);
 		int count_ice   = 0; 
@@ -161,7 +175,9 @@ public class Paths {
 		System.out.println();
 		System.out.println("Count of towers on ice map "+count_ice);
 	}
-	
+	/**
+	 * This will check the oasis path
+	 */
 	public static  void checks_oasis() {
 		System.out.println("total length of the array " + path_oasis.length);
 		int count_oasis   = 0; 
@@ -176,7 +192,9 @@ public class Paths {
 		System.out.println();
 		System.out.println("Count of towers on oasis map "+count_oasis);
 	}
-	
+	/**
+	 * This will check the farm path
+	 */
 	public static void check_farm() {
 		System.out.println("total length of the array " + path_farm.length);
 		int count_farm   = 0; 
@@ -191,7 +209,9 @@ public class Paths {
 		System.out.println();
 		System.out.println("Count of towers on farm map "+count_farm );
 	}
-	
+	/**
+	 * This will check the forest path
+	 */
 	public static void check_forest() {
 		System.out.println("total length of the array " + path_forest.length);
 		int count_forest   = 0; 
