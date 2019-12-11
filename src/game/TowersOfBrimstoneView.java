@@ -1,4 +1,3 @@
-
 package game;
 
 import java.util.ArrayList;
@@ -60,7 +59,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private TowersOfBrimstoneModel model;
     private TowersOfBrimstoneController controller;
 
-    private int time;
     private AnchorPane base;
     private boolean togglePlacement;
     private int selectedTowerType;
@@ -108,18 +106,14 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	model = new TowersOfBrimstoneModel();
 	model.addObserver(this);
 	controller = new TowersOfBrimstoneController(model);
-	// controller.createMap();
 
 	currency = new Label();
 	currency.setTextFill(Color.web("#ffffff", 1));
 	togglePlacement = false;
 
-	// These GUI setup components below should be placed into a function in
-	// the
-	// future
+	// GUI setup components
 	base = new AnchorPane();
 	base.getStylesheets().add("test.css");
-	time = 1;
 	StackPane root = new StackPane();
 	Canvas canvas = new Canvas(1400, 1000);
 	Canvas selectionCanvas = new Canvas(1400, 1000);
@@ -203,7 +197,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	AnchorPane.setRightAnchor(tCoords, 380.00);
 	ArrayList<ArrayList<Tile>> grid = model.getGrid();
 
-	// Temp Label to sell Selected towers
+	// Button to sell selected tower
 	sellButton.setOnMouseClicked((event) -> {
 	    if (towerView != null) {
 
@@ -380,7 +374,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     }
 
     public void generateTowerStatsView() {
-	// Temporary GUI for displaying tower statistics
+	// GUI for displaying tower statistics
 	towerView = null;
 	towerStatsBg = new ImageView(new Image("assets/UI/menus/shopMenu_1.png", 400, 250, false, false));
 	towerStatsBg.setVisible(false);
@@ -389,7 +383,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	tSell = new Label();
 	tCoords = new Label();
 	hideTowerInfo();
-
     }
 
     private void setUpTowerMenu() {
@@ -404,7 +397,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	lightning = new ImageButton("assets/UI/buttons/lightning.png", width, height);
 	magic = new ImageButton("assets/UI/buttons/magic.png", width, height);
 	slowdown = new ImageButton("assets/UI/buttons/slowdown.png", width, height);
-//	damageboost = new ImageButton("assets/UI/buttons/damageboost.png", width, height);
+	// damageboost = new ImageButton("assets/UI/buttons/damageboost.png", width,
+	// height);
 
 	hBox.setAlignment(Pos.CENTER);
 	hBox.setSpacing(75);
@@ -416,7 +410,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	hBox.getChildren().add(lightning);
 	hBox.getChildren().add(magic);
 	hBox.getChildren().add(slowdown);
-//	hBox.getChildren().add(damageboost);
+	// hBox.getChildren().add(damageboost);
 	base.getChildren().add(hBox);
 
 	AnchorPane.setBottomAnchor(hBox, 25.0);
@@ -499,6 +493,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
+
 	HBox hBox1 = new HBox();
 	HBox hBoxLabel1 = new HBox();
 	HBox hBox2 = new HBox();
@@ -541,7 +536,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	AnchorPane.setTopAnchor(hBoxLabel1, 350.00);
 	AnchorPane.setTopAnchor(hBox2, 550.00);
 	AnchorPane.setTopAnchor(hBoxLabel2, 780.00);
-
     }
 
     private void updateProjectiles(ArrayList<Tower> towers, GraphicsContext enemyBackground) {
@@ -553,7 +547,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		enemyBackground.drawImage(image, xpos, ypos);
 	    }
 	}
-
     }
 
     public void makeMainScreen() {
@@ -589,9 +582,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		} else if (levelSelection.getRoot() == null) {
 		    levelSelection = new Scene(levelPane);
 		}
-
 		window.setScene(levelSelection);
-
 	    }
 	});
 
@@ -644,14 +635,12 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		    @Override
 		    public void run() {
 			timeline.setRate(timeline.getRate() / 2);
-
 			try {
 			    Thread.sleep(5000);
 			} catch (InterruptedException e) {
 			    // TODO Auto-generated catch block
 			    e.printStackTrace();
 			}
-
 			timeline.setRate(temp);
 		    }
 		}).start();
@@ -675,10 +664,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		    towerContext.drawImage(loader.getImage(tower.getImage()), 50 * col - 4, 50 * row - 15);
 		}
 	    }
-
 	    updateEnemies(enemies, enemyGc);
 	    updateProjectiles(model.getTowers(), enemyGc);
-
 	}
     }
 
@@ -686,23 +673,21 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	String str = "Gold: " + newVal;
 	currency.setText(str);
 
-	// double percentage = ((double)money) / 2000.00;
 	double percentage = ((double) newVal) / 2000.00;
 	double width = percentage * 150.00;
 	goldBar.setViewport(new Rectangle2D(0, 0, width, HEIGHT));
     }
 
     private void frameUpdateHealth(int newVal) {
+
 	if (newVal > 0) {
 	    double percentage = ((double) newVal) / 300.0;
 	    double width = percentage * 150.00;
 	    healthBar.setViewport(new Rectangle2D(0, 0, width, HEIGHT));
 	} else {
 	    newVal = 0;
-//	    healthBar.setVisible(false);
-	    ;
-	}
 
+	}
     }
 
     public void setupWinMenu() {
@@ -744,8 +729,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    window.setScene(levelSelection);
 
 	});
-	restart.setOnAction(event -> {
 
+	restart.setOnAction(event -> {
 	    model = new TowersOfBrimstoneModel();
 	    model.addObserver(this);
 	    healthBar.setVisible(true);
@@ -754,10 +739,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
 	    makeMainScreen();
 	    window.setScene(mainscreen);
-
-//		   
 	});
-
     }
 
     public void setupLoseMenu() {
@@ -797,10 +779,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    frameUpdateHealth(model.getHealth());
 	    setUpLevelPane();
 	    window.setScene(levelSelection);
-
 	});
-	restart.setOnAction(event -> {
 
+	restart.setOnAction(event -> {
 	    model = new TowersOfBrimstoneModel();
 	    model.addObserver(this);
 	    healthBar.setVisible(true);
@@ -810,27 +791,18 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    frameUpdateHealth(model.getHealth());
 	    makeMainScreen();
 	    window.setScene(mainscreen);
-
-//		   
 	});
     }
 
     @Override
     public void update(Observable o, Object arg) {
 	// TODO Auto-generated method stub
-
 	if (arg instanceof FrameMessage) {
-	    // if you create a method that is meant to be updated by ticking,
-	    // name it in the
-	    // form: "frameDoSomething() {}"
 	    FrameMessage msg = (FrameMessage) arg;
 	    frameUpdateCurrency(msg.getCurrency());
 	    frameUpdateHealth(msg.getHealth());
 	    frameUpdateGUI(msg.getGrid(), msg.getTick(), msg.getEnemies(), (TowersOfBrimstoneModel) o);
 	} else if (arg instanceof int[]) {
-	    // int[] coordinates = (int[]) arg;
-	    // coordinates not used
-	    // Removes tower from GUI after selling
 	    int[] arr = (int[]) arg;
 	    towerView = null;
 	    towerContext.clearRect(50 * arr[1] - 4, 50 * arr[0] - 15, 65, 65);
@@ -839,7 +811,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    setupWinMenu();
 	} else if (!(Boolean) arg) {
 	    frameUpdateHealth(0);
-
 	    setupLoseMenu();
 	}
     }
@@ -848,7 +819,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	if (!isPaused) {
 	    d.clearRect(0, 0, WIDTH, HEIGHT);
 	    for (Enemy enemy : enemies) {
-
 		d.drawImage(loader.getImage(enemy.getImage()), enemy.getPos().getX() - 25, enemy.getPos().getY() - 25);
 	    }
 	}
