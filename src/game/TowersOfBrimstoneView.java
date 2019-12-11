@@ -5,7 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 import enemies.Enemy;
 import enemies.ImageLoader;
-import experimenting.ImageButton;
+import game.ImageButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

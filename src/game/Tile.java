@@ -12,18 +12,12 @@ import towers.Tower;
  *
  */
 public class Tile {
-	public static final String GRASS = "grass.jpeg";
-	public static final String PLACE = "brick.jpeg";
-	public static final String PATH = "sand.png";
 	private int row;
 	private int col;
-	private Enemy enemy;
 	private Tower tower;
 	private Point2D pos;
-	private boolean ContainsEnemy;
 	private boolean isPath;
 	private boolean isPlaceable;
-	private Image texture;
 	
 	/**
 	 * This is the constructor for tile class.
@@ -40,13 +34,7 @@ public class Tile {
 		tower = null;
 	}
 	
-	/**
-	 * @return Image
-	 */
-	
-	public Image getTexture() {
-		return texture;
-	}
+
 	/**
 	 * This will return a boolean result if there is a path at a location or no.
 	 * @return boolean
@@ -60,21 +48,7 @@ public class Tile {
 	public void setIsPath() {
 		isPath = true;
 	}
-	/**
-	 * This will tells us whether a enemy is present on the location or no.
-	 * @return boolean
-	 */
-	public boolean getContainsEnemy() {
-		return ContainsEnemy;
-	}
-	/**
-	 * This will place the enemy at the location 
-	 * @param enemy
-	 */
-	public void placeEnemy(Enemy enemy) {
-		this.enemy = enemy;
-		ContainsEnemy = true;
-	}
+
 	/**
 	 * This will help us to identify if we can place the tower at the location or not.
 	 */
@@ -94,13 +68,7 @@ public class Tile {
 	public void removeTower() {
 		this.tower = null;
 	}
-	/**
-	 * This will help us to remove the enemy
-	 */
-	public void removeEnemy() {
-		enemy = null;
-		ContainsEnemy = false;
-	}
+
 	/**
 	 * This will return the position
 	 * @return Point2D
@@ -114,6 +82,7 @@ public class Tile {
 	public String toString() {
 		return "row: " + row + " col: " + col;
 	}
+	
 	/**
 	 * It will return the tower placed.
 	 * @return Tower

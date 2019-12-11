@@ -56,6 +56,42 @@ public class unit_testing {
 //		enemyPath.add(model.getRow(0).get(0));
 //		System.out.println(enemyPath);
 	}
+	
+	@Test
+	public void test2() {
+
+		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
+		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
+		controller.createMap(1);
+		System.out.println("PATH");
+		System.out.println(controller.get_path());
+		
+//		model.setEnd(4, 27);
+//		model.setEndingTile(4, 27);
+		
+		assertTrue(controller.placeTower(5, 4, 1));
+		assertTrue(controller.placeTower(12, 6, 2));
+		assertTrue(controller.placeTower(12, 7, 3));
+		assertTrue(controller.placeTower(7, 23, 4));
+		assertTrue(controller.placeTower(5, 25, 5));
+		assertTrue(controller.placeTower(5, 18, 6));
+		assertFalse(controller.placeTower(0, 0, 1));
+		for (int i = 0 ; i < 200000 ; i++) {
+			controller.frameUpdate(i);
+		}		
+		System.out.println(controller.checkTower(0, 0));
+		System.out.println("---");
+		System.out.println(controller.checkTower(5, 4));
+		System.out.println(controller.checkTower(12, 6));
+		System.out.println(controller.checkTower(12, 7));
+		System.out.println(controller.checkTower(7, 23));
+		System.out.println(controller.checkTower(5, 25));
+		System.out.println(controller.checkTower(5, 18));
+		System.out.println(controller.checkTower(5, 2));
+//		ArrayList<Tile> enemyPath = null;
+//		enemyPath.add(model.getRow(0).get(0));
+//		System.out.println(enemyPath);
+	}
 	@Test
 	public void test10() {
 
@@ -100,16 +136,7 @@ public class unit_testing {
 		System.out.println(mv6.getAllStart() + " " + mv6.getEnd());
 	}
 	
-	@Test
-	public void test2() {
-		Tile t = new Tile(0,0);
-		t.removeEnemy();
-		t.getContainsEnemy();
-		System.out.println(t.getTexture());
-		System.out.println(t);
-		Paths paths = new Paths();
-	}
-	
+
 	@Test
 	public void test3() {
 		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
@@ -129,12 +156,13 @@ public class unit_testing {
 		assertEquals("Enemy 5", five.toString());
 		Enemy six   = new Enemy6(pathArrayList);
 		assertEquals("Enemy 6", six.toString());
-		System.out.println(one.getImage());
-		System.out.println(two.getImage());
-		System.out.println(three.getImage());
-		System.out.println(four.getImage());
-		System.out.println(five.getImage());
-		System.out.println(six.getImage());
+		assertTrue(one.getImage().contains("1"));
+		assertTrue(two.getImage().contains("2"));
+		assertTrue(three.getImage().contains("3"));
+		assertTrue(four.getImage().contains("4"));
+		assertTrue(five.getImage().contains("5"));
+		assertTrue(six.getImage().contains("6"));
+
 		
 	}
 

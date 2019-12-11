@@ -1,4 +1,4 @@
-package experimenting;
+package game;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
