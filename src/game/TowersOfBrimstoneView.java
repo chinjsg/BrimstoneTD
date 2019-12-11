@@ -292,7 +292,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		    prevCCol = coordCol;
 		    prevCRow = coordRow;
 		    prevCSize = size;
-		    selectionContext.drawImage(new Image("assets/UI/towerSelection/selection-highlight.png"), coordCol, coordRow, size, size);
+		    selectionContext.drawImage(new Image("assets/UI/towerSelection/selection-highlight.png",50,50,false,false), coordCol, coordRow, size, size);
 		    tDmg.getStyleClass().add("shopLabel");
 		    tName.getStyleClass().add("shopLabel");
 		    tSell.getStyleClass().add("shopLabel");
