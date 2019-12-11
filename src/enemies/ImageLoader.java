@@ -34,11 +34,10 @@ public class ImageLoader {
 		
 		loader.put("stoneammo.png", new Image("assets/towers/stone/stoneammo.png",20,20,false,false));
 		loader.put("magicammo.png",new Image("assets/towers/magic/magicammo.png",20,20,false,false));
-		loader.put("ligtningammo.png", new Image("assets/towers/lightning/lightningammo.png",30,30,false,false));
+		loader.put("lightningammo.png", new Image("assets/towers/lightning/lightningammo.png",30,30,false,false));
 		loader.put("iceammo.png", new Image("assets/towers/ice/iceammo.png",20,20,false,false));
 		loader.put("heavyammo.png",new Image("assets/towers/heavy/heavyammo.png",30,20,false,false));
-		loader.put("fireammo.png", new Image("assets/towers/fire/fireammo.png",20,20,false,false));
-		
+		loader.put("fireammo.png", new Image("assets/towers/fire/fireammo.png",20,20,false,false));	
 		
 		loader.put("tower_fire.png", new Image("assets/towers/fire/tower_fire.png",65,65,false,false));	
 		loader.put("tower_heavy.png", new Image("assets/towers/heavy/tower_heavy.png",65,65,false,false));
