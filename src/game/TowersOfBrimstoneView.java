@@ -38,10 +38,9 @@ import towers.Tower.Projectile;
 
 public class TowersOfBrimstoneView extends Application implements Observer {
 
-    
     private static final int WIDTH = 1400;
     private static final int HEIGHT = 1000;
-    
+
     private ImageButton stone;
     private ImageButton fire;
     private ImageButton ice;
@@ -60,7 +59,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private ImageLoader loader;
     private TowersOfBrimstoneModel model;
     private TowersOfBrimstoneController controller;
-   
+
     private int time;
     private AnchorPane base;
     private boolean togglePlacement;
@@ -70,10 +69,10 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private GraphicsContext baseContext;
     private GraphicsContext selectionContext;
     private GraphicsContext towerContext;
-    
+
     private boolean isPaused = true;
     private boolean highlighted = false;
-    
+
     private int forwardCount = 1;
     private int tick;
     private int prevCol = 0;
@@ -83,11 +82,11 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private int prevCSize = 0;
     private Tower towerView;
     private Label currency;
-    private Label tName; 
-    private Label tDmg; 
-    private Label tSell; 
-    private Label tCoords; 
-    private ImageView towerStatsBg; 
+    private Label tName;
+    private Label tDmg;
+    private Label tSell;
+    private Label tCoords;
+    private ImageView towerStatsBg;
 
     private ImageView healthBar;
     private ImageView goldBar;
@@ -98,7 +97,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private ImageButton pause = new ImageButton("assets/UI/buttons/pause.png", 110, 90);
     private ImageButton forward = new ImageButton("assets/UI/buttons/fastforward.png", 110, 90);
     private ImageButton sellButton = new ImageButton("assets/UI/labels/sell.png", 60, 50);
-    
+
     private volatile Timeline timeline;
 
     @Override
@@ -130,13 +129,13 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	enemyGc = enemies.getGraphicsContext2D();
 	baseContext = canvas.getGraphicsContext2D();
 	selectionContext = selectionCanvas.getGraphicsContext2D();
-	
+
 	healthBar = new ImageView(new Image("assets/UI/bars/healthBar.png", 150, 15, false, false));
 	goldBar = new ImageView(new Image("assets/UI/bars/goldBar.png", 150, 15, false, false));
 	barView = new ImageView(new Image("assets/UI/menus/barMenu.png", 200, 150, false, false));
 
 	towerMenuL = new ImageView(new Image("assets/UI/menus/menuTowerEmpty.png", 1400, 100, false, false));
-	
+
 	root.getChildren().add(canvas);
 	root.getChildren().add(selectionCanvas);
 	root.getChildren().add(towerCanvas);
@@ -152,7 +151,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	// Generate GUIs
 	generateTowerStatsView();
 	setUpTowerMenu();
-	
 
 	// BarView
 	base.getChildren().add(barView);
@@ -274,7 +272,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		boolean isPlaced = controller.placeTower(row, col, selectedTowerType);
 		if (isPlaced) {
 		    selectionContext.clearRect(50 * col, 50 * row, 50, 50);
-		    selectionContext.drawImage(new Image("assets/UI/towerSelection/red-sq.png"), 50 * col, 50 * row, 50, 50);
+		    selectionContext.drawImage(new Image("assets/UI/towerSelection/red-sq.png"), 50 * col, 50 * row, 50,
+			    50);
 		    System.out.println("Tower has been placed!");
 		    controller.frameUpdate(tick);
 		} else {
@@ -292,7 +291,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		    prevCCol = coordCol;
 		    prevCRow = coordRow;
 		    prevCSize = size;
-		    selectionContext.drawImage(new Image("assets/UI/towerSelection/selection-highlight.png",50,50,false,false), coordCol, coordRow, size, size);
+		    selectionContext.drawImage(
+			    new Image("assets/UI/towerSelection/selection-highlight.png", 50, 50, false, false),
+			    coordCol, coordRow, size, size);
 		    tDmg.getStyleClass().add("shopLabel");
 		    tName.getStyleClass().add("shopLabel");
 		    tSell.getStyleClass().add("shopLabel");
@@ -395,7 +396,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	int height = 90;
 	int width = 110;
 	HBox hBox = new HBox();
-	
+
 	stone = new ImageButton("assets/UI/buttons/stone.png", width, height);
 	fire = new ImageButton("assets/UI/buttons/fire.png", width, height);
 	ice = new ImageButton("assets/UI/buttons/ice.png", width, height);
@@ -452,8 +453,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	level5.getStyleClass().add("levelButton");
 	ImageButton level6 = new ImageButton("assets/farm/farmTab.png", 280, 250);
 	level6.getStyleClass().add("levelButton");
-	
-	ImageView imageView = new ImageView(new Image("assets/UI/menus/levelSelectionMenu-01.png", 1400, 1000, false, false));
+
+	ImageView imageView = new ImageView(
+		new Image("assets/UI/menus/levelSelectionMenu-01.png", 1400, 1000, false, false));
 
 	level1.setOnAction(event -> {
 	    controller.createMap(1);
@@ -556,7 +558,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
     public void makeMainScreen() {
 	mainScreen = new AnchorPane();
-	
+
 	ImageView gameName = new ImageView("assets/UI/labels/gameTitle.png");
 	gameName.setFitWidth(1000);
 	gameName.setFitHeight(550);
@@ -594,7 +596,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	});
 
     }
-
 
     private class ButtonListener implements EventHandler<ActionEvent> {
 	/**
@@ -716,7 +717,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	ImageButton restart = new ImageButton("assets/UI/buttons/restart.png", 90, 110);
 	ImageButton menu = new ImageButton("assets/UI/buttons/menu.png", 90, 110);
 	winMenu = new AnchorPane();
-	
+
 	ImageView imageView = new ImageView(new Image("assets/UI/menus/levelWin.png", 650, 800, false, false));
 	winMenu.getChildren().add(imageView);
 	winMenu.getChildren().add(restart);
