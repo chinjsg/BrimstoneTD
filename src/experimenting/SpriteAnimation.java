@@ -5,7 +5,13 @@ import javafx.animation.Transition;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-
+/**
+ * @author Glen Chin
+ * @author Marko Kreso
+ * @author Abhishek Sharma
+ * @author Abhishek Agarwal
+ *
+ */
 public class SpriteAnimation extends Transition {
 
     private final ImageView imageView;
@@ -17,7 +23,17 @@ public class SpriteAnimation extends Transition {
     private final int height;
 
     private int lastIndex;
-
+    /**
+     * This class is used to run the sprite 
+     * @param imageView
+     * @param duration
+     * @param count
+     * @param columns
+     * @param offsetX
+     * @param offsetY
+     * @param width
+     * @param height
+     */
     public SpriteAnimation(
             ImageView imageView, 
             Duration duration, 
@@ -34,7 +50,9 @@ public class SpriteAnimation extends Transition {
         setCycleDuration(duration);
         setInterpolator(Interpolator.LINEAR);
     }
-
+    /**
+     *It will read our sprite sheet.
+     */
     protected void interpolate(double k) {
         final int index = Math.min((int) Math.floor(k * count), count - 1);
         if (index != lastIndex) {
