@@ -1,9 +1,19 @@
 package towers;
 
 import javafx.scene.image.Image;
-
+/**
+ * @author Glen Chin
+ * @author Marko Kreso
+ * @author Abhishek Sharma
+ * @author Abhishek Agarwal
+ *
+ */
 public class IceTower extends Tower {
-	
+	/**
+	 * This is the constructor of IceTower
+	 * @param row
+	 * @param col
+	 */
 	public IceTower(int row, int col) {
 		// Tower stats
 		//  - Damage       = 20
@@ -16,7 +26,9 @@ public class IceTower extends Tower {
 		texture = "tower_ice.png";
 		ammo = "iceammo.png";
 	}
-	
+	/**
+	 * This will  return the IceTower String.
+	 */
 	public String toString() {
 		return "Ice Tower";
 	}
