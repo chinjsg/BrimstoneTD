@@ -171,15 +171,32 @@ public abstract class Tower {
 		return false; 
 	}
 	
-	
+	/**
+	 * 
+	 * It represent the project spawn by the tower that targets the enemy
+	 * @author Glen Chin
+	 * @author Marko Kreso
+	 * @author Abhishek Sharma
+	 * @author Abhishek Agarwal
+	 *
+	 */
 	public class Projectile {
 		private Point2D projPoint;
 		private Enemy enemy;
 		private int speed = 15;
+		/**
+		 * This is the constructor 
+		 * @param target
+		 */
 		private Projectile(Enemy target) {
 			projPoint = pos;
 			enemy = target;
 		}
+		/**
+		 * It will help us to identify if we hit the enemy or not and moves the 
+		 * projectile
+		 * @return boolean
+		 */
 		private boolean update() {
 			Point2D direction = (enemy.getPos().subtract(projPoint)).normalize();
 			Point2D velocity = new Point2D(direction.getX()*speed, direction.getY()*speed);
@@ -191,9 +208,17 @@ public abstract class Tower {
 			}
 			return false;
 		}
+		/**
+		 * It will return the path of the image
+		 * @return String
+		 */
 		public String getImage() {
 			return ammo;
 		}
+		/**
+		 * This will position
+		 * @return Point2D
+		 */
 		public Point2D getPos() {
 			return projPoint;
 		}
