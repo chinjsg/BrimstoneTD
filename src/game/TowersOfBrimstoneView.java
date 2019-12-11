@@ -4,34 +4,22 @@ package game;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import org.omg.CORBA.PRIVATE_MEMBER;
-
 import enemies.Enemy;
 import enemies.ImageLoader;
 import experimenting.ImageButton;
 import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,14 +28,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import towers.Tower;
@@ -55,69 +38,69 @@ import towers.Tower.Projectile;
 
 public class TowersOfBrimstoneView extends Application implements Observer {
 
-    ImageButton stone;
-    ImageButton fire;
-    ImageButton ice;
-    ImageButton heavy;
-    ImageButton lightning;
-    ImageButton magic;
-    ImageButton slowdown;
-    ImageButton damageboost;
+    
+    private static final int WIDTH = 1400;
+    private static final int HEIGHT = 1000;
+    
+    private ImageButton stone;
+    private ImageButton fire;
+    private ImageButton ice;
+    private ImageButton heavy;
+    private ImageButton lightning;
+    private ImageButton magic;
+    private ImageButton slowdown;
+    private ImageButton damageboost;
 
-	public AnchorPane mainScreen;
-	public BorderPane levelScreen;
-	AnchorPane levelPane = new AnchorPane();
-	Scene mainscreen;
-	Scene levelSelection;
-	Scene game;
-	Stage window;
-	private ImageLoader loader;
-	private TowersOfBrimstoneModel model;
-	private TowersOfBrimstoneController controller;
-	private static final int WIDTH = 1400;
-	private static final int HEIGHT = 1000;
-	private int time;
-	private AnchorPane base;
-	private boolean togglePlacement;
-	private int selectedTowerType;
+    private AnchorPane mainScreen;
+    private AnchorPane levelPane = new AnchorPane();
+    private Scene mainscreen;
+    private Scene levelSelection;
+    private Scene game;
+    private Stage window;
+    private ImageLoader loader;
+    private TowersOfBrimstoneModel model;
+    private TowersOfBrimstoneController controller;
+   
+    private int time;
+    private AnchorPane base;
+    private boolean togglePlacement;
+    private int selectedTowerType;
 
-	private ArrayList<Enemy> enemiesList = new ArrayList<>();
-	private GraphicsContext enemyGc;
-	private GraphicsContext baseContext;
-	private GraphicsContext selectionContext;
-	private GraphicsContext towerContext;
-	//private GraphicsContext towerMenuLayer;
-	private Label currency;
-	private int tick;
-	private boolean highlighted = false;
-	private int prevCol = 0;
-	private int prevRow = 19;
-	private int prevCCol = 0;
-	private int prevCRow = 0;
-	private int prevCSize = 0;
-	private Tower towerView;
-	private Label tName; // temp till GUI available
-	private Label tDmg; // temp till GUI available
-	private Label tSell; // temp till GUI available //clickable label to sell
-							// tower
-	private Label tCoords; // temp till GUI available
-	private ImageView towerStatsBg; // temp till GUI available
-	private GridPane towerStatsgp; // temp till GUI available
+    private GraphicsContext enemyGc;
+    private GraphicsContext baseContext;
+    private GraphicsContext selectionContext;
+    private GraphicsContext towerContext;
+    
+    private boolean isPaused = true;
+    private boolean highlighted = false;
+    
+    private int forwardCount = 1;
+    private int tick;
+    private int prevCol = 0;
+    private int prevRow = 19;
+    private int prevCCol = 0;
+    private int prevCRow = 0;
+    private int prevCSize = 0;
+    private Tower towerView;
+    private Label currency;
+    private Label tName; 
+    private Label tDmg; 
+    private Label tSell; 
+    private Label tCoords; 
+    private ImageView towerStatsBg; 
 
-	private boolean isPaused = true;
-	private ImageView healthBar;
-	private ImageView goldBar;
-	private ImageView barView;
-	private ImageView towerMenuL;
+    private ImageView healthBar;
+    private ImageView goldBar;
+    private ImageView barView;
+    private ImageView towerMenuL;
 
-	private ImageButton play = new ImageButton("play.png", 110, 90);
-	private ImageButton pause = new ImageButton("pause.png", 110, 90);
-	private ImageButton forward = new ImageButton("fastforward.png", 110, 90);
-	private ImageButton sellButton = new ImageButton("sell.png", 60, 50);
-	int forwardCount = 1;
-	volatile Timeline timeline;
+    private ImageButton play = new ImageButton("assets/UI/buttons/play.png", 110, 90);
+    private ImageButton pause = new ImageButton("assets/UI/buttons/pause.png", 110, 90);
+    private ImageButton forward = new ImageButton("assets/UI/buttons/fastforward.png", 110, 90);
+    private ImageButton sellButton = new ImageButton("assets/UI/labels/sell.png", 60, 50);
+    
+    private volatile Timeline timeline;
 
-	
     @Override
     public void start(Stage primaryStage) throws Exception {
 	window = primaryStage;
@@ -147,12 +130,12 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	enemyGc = enemies.getGraphicsContext2D();
 	baseContext = canvas.getGraphicsContext2D();
 	selectionContext = selectionCanvas.getGraphicsContext2D();
+	
+	healthBar = new ImageView(new Image("assets/UI/bars/healthBar.png", 150, 15, false, false));
+	goldBar = new ImageView(new Image("assets/UI/bars/goldBar.png", 150, 15, false, false));
+	barView = new ImageView(new Image("assets/UI/menus/barMenu.png", 200, 150, false, false));
 
-	healthBar = new ImageView(new Image("healthBar.png", 150, 15, false, false));
-	goldBar = new ImageView(new Image("goldBar.png", 150, 15, false, false));
-	barView = new ImageView(new Image("barMenu.png", 200, 150, false, false));
-	//towerMenuLayer = selectionCanvas.getGraphicsContext2D();
-	towerMenuL = new ImageView(new Image("menuTowerEmpty2.png", 1400, 100, false, false));
+	towerMenuL = new ImageView(new Image("assets/UI/menus/menuTowerEmpty.png", 1400, 100, false, false));
 	
 	root.getChildren().add(canvas);
 	root.getChildren().add(selectionCanvas);
@@ -163,13 +146,13 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	selectionCanvas.toFront();
 	base.getChildren().add(root);
 
-	base.setLeftAnchor(currency, 59.00);
-	base.setTopAnchor(currency, 80.00);
+	AnchorPane.setLeftAnchor(currency, 59.00);
+	AnchorPane.setTopAnchor(currency, 80.00);
 
 	// Generate GUIs
 	generateTowerStatsView();
 	setUpTowerMenu();
-	//towerMenuLayer.drawImage(new Image("menuTowerEmpty2.png"), 0, 900, 1400, 100);
+	
 
 	// BarView
 	base.getChildren().add(barView);
@@ -177,15 +160,14 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	base.getChildren().add(goldBar);
 	base.getChildren().add(currency);
 	base.getChildren().add(towerMenuL);
-	
+
 	AnchorPane.setLeftAnchor(goldBar, 59.00);
 	AnchorPane.setTopAnchor(goldBar, 60.00);
 	AnchorPane.setLeftAnchor(healthBar, 59.00);
 	AnchorPane.setTopAnchor(healthBar, 120.00);
 	AnchorPane.setLeftAnchor(barView, 25.00);
-	AnchorPane.setTopAnchor(barView, 25.00);	
+	AnchorPane.setTopAnchor(barView, 25.00);
 	AnchorPane.setTopAnchor(towerMenuL, 900.00);
-
 
 	// Game buttons
 	base.getChildren().add(play);
@@ -197,7 +179,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	AnchorPane.setBottomAnchor(pause, 350.00);
 	AnchorPane.setRightAnchor(forward, 29.00);
 	AnchorPane.setBottomAnchor(forward, 550.00);
-	
+
 	// Tower Statistic Display
 	base.getChildren().add(towerStatsBg);
 	sellButton.setVisible(false);
@@ -212,13 +194,13 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	AnchorPane.setTopAnchor(sellButton, 150.50);
 	AnchorPane.setTopAnchor(tDmg, 100.00);
 	AnchorPane.setRightAnchor(tDmg, 155.00);
-	
+
 	AnchorPane.setTopAnchor(tName, 60.00);
 	AnchorPane.setRightAnchor(tName, 250.00);
-	
+
 	AnchorPane.setTopAnchor(tSell, 90.00);
 	AnchorPane.setRightAnchor(tSell, 270.00);
-	
+
 	AnchorPane.setTopAnchor(tCoords, 90.00);
 	AnchorPane.setRightAnchor(tCoords, 380.00);
 	ArrayList<ArrayList<Tile>> grid = model.getGrid();
@@ -226,7 +208,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	// Temp Label to sell Selected towers
 	sellButton.setOnMouseClicked((event) -> {
 	    if (towerView != null) {
-	    
+
 		controller.sellTower(towerView);
 		hideTowerInfo();
 
@@ -252,9 +234,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			highlighted = true;
 			String imagePath;
 			if (tile.getIsPlaceable() && tile.getPlacedTower() == null) {
-			    imagePath = "green-sq.png";
+			    imagePath = "assets/UI/towerSelection/green-sq.png";
 			} else {
-			    imagePath = "red-sq.png";
+			    imagePath = "assets/UI/towerSelection/red-sq.png";
 			}
 			selectionContext.drawImage(new Image(imagePath), 50 * col, 50 * row, 50, 50);
 			prevCol = col;
@@ -263,8 +245,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		}
 
 	    } else if (highlighted == true) {
-			highlighted = false;
-			selectionContext.clearRect(50 * prevCol, 50 * prevRow, 50, 50);
+		highlighted = false;
+		selectionContext.clearRect(50 * prevCol, 50 * prevRow, 50, 50);
 	    }
 
 	});
@@ -302,15 +284,15 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		// Check tower on this spot
 		towerView = controller.checkTower(row, col);
 		if (towerView != null) {
-			selectionContext.clearRect(prevCCol,  prevCRow, prevCSize, prevCSize);
-			int radius = towerView.getRange();
-			int size = (radius*2) + 50;
-			int coordCol = 50 * col -radius;
-			int coordRow = 50* row - radius;
-			prevCCol = coordCol;
-			prevCRow = coordRow;
-			prevCSize = size;
-			selectionContext.drawImage(new Image("selection-highlight.png"), coordCol, coordRow, size, size);
+		    selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
+		    int radius = towerView.getRange();
+		    int size = (radius * 2) + 50;
+		    int coordCol = 50 * col - radius;
+		    int coordRow = 50 * row - radius;
+		    prevCCol = coordCol;
+		    prevCRow = coordRow;
+		    prevCSize = size;
+		    selectionContext.drawImage(new Image("assets/UI/towerSelection/selection-highlight.png"), coordCol, coordRow, size, size);
 		    tDmg.getStyleClass().add("shopLabel");
 		    tName.getStyleClass().add("shopLabel");
 		    tSell.getStyleClass().add("shopLabel");
@@ -345,7 +327,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 	});
 
-
 	pause.setOnAction(e -> {
 	    if (!isPaused) {
 		timeline.stop();
@@ -378,8 +359,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	primaryStage.show();
     }
 
-    
-
     private void hideTowerInfo() {
 	towerStatsBg.setVisible(false);
 	sellButton.setVisible(false);
@@ -387,7 +366,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	tDmg.setVisible(false);
 	tSell.setVisible(false);
 	tCoords.setVisible(false);
-	selectionContext.clearRect(prevCCol,  prevCRow, prevCSize, prevCSize);
+	selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
     }
 
     private void showTowerInfo() {
@@ -402,8 +381,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     public void generateTowerStatsView() {
 	// Temporary GUI for displaying tower statistics
 	towerView = null;
-	towerStatsgp = new GridPane();
-	towerStatsBg = new ImageView(new Image("shopMenu_1.png", 400, 250, false, false));
+	towerStatsBg = new ImageView(new Image("assets/UI/menus/shopMenu_1.png", 400, 250, false, false));
 	towerStatsBg.setVisible(false);
 	tName = new Label();
 	tDmg = new Label();
@@ -417,18 +395,19 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	int height = 90;
 	int width = 110;
 	HBox hBox = new HBox();
-	stone = new ImageButton("stone.png", width, height);
-	fire = new ImageButton("fire.png", width, height);
-	ice = new ImageButton("ice.png", width, height);
-	heavy = new ImageButton("heavy.png", width, height);
-	lightning = new ImageButton("lightning.png", width, height);
-	magic = new ImageButton("magic.png", width, height);
-	slowdown = new ImageButton("slowdown.png", width, height);
-	damageboost = new ImageButton("damageboost.png", width, height);
+	
+	stone = new ImageButton("assets/UI/buttons/stone.png", width, height);
+	fire = new ImageButton("assets/UI/buttons/fire.png", width, height);
+	ice = new ImageButton("assets/UI/buttons/ice.png", width, height);
+	heavy = new ImageButton("assets/UI/buttons/heavy.png", width, height);
+	lightning = new ImageButton("assets/UI/buttons/lightning.png", width, height);
+	magic = new ImageButton("assets/UI/buttons/magic.png", width, height);
+	slowdown = new ImageButton("assets/UI/buttons/slowdown.png", width, height);
+//	damageboost = new ImageButton("assets/UI/buttons/damageboost.png", width, height);
 
 	hBox.setAlignment(Pos.CENTER);
 	hBox.setSpacing(75);
-	hBox.setPadding(new Insets(0, 0, 0, 35));
+	hBox.setPadding(new Insets(0, 0, 0, 130));
 	hBox.getChildren().add(stone);
 	hBox.getChildren().add(fire);
 	hBox.getChildren().add(ice);
@@ -436,10 +415,10 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	hBox.getChildren().add(lightning);
 	hBox.getChildren().add(magic);
 	hBox.getChildren().add(slowdown);
-	hBox.getChildren().add(damageboost);
+//	hBox.getChildren().add(damageboost);
 	base.getChildren().add(hBox);
 
-	base.setBottomAnchor(hBox, 25.0);
+	AnchorPane.setBottomAnchor(hBox, 25.0);
 
 	for (Node btn : hBox.getChildren()) {
 	    ((ImageButton) btn).setOnAction(new ButtonListener());
@@ -461,23 +440,24 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	Label l6 = new Label("LEVEL 6");
 	l6.getStyleClass().add("levelLabel");
 
-	ImageButton level1 = new ImageButton("desertTab.png", 280, 250);
+	ImageButton level1 = new ImageButton("assets/desert/desertTab.png", 280, 250);
 	level1.getStyleClass().add("levelButton");
-	ImageButton level2 = new ImageButton("iceTab.png", 280, 250);
+	ImageButton level2 = new ImageButton("assets/ice/iceTab.png", 280, 250);
 	level2.getStyleClass().add("levelButton");
-	ImageButton level3 = new ImageButton("volcanoTab.png", 280, 250);
+	ImageButton level3 = new ImageButton("assets/volcano/volcanoTab.png", 280, 250);
 	level3.getStyleClass().add("levelButton");
-	ImageButton level4 = new ImageButton("oasis.png", 280, 250);
+	ImageButton level4 = new ImageButton("assets/oasis/oasisTab.png", 280, 250);
 	level4.getStyleClass().add("levelButton");
-	ImageButton level5 = new ImageButton("acidForest.png", 280, 250);
+	ImageButton level5 = new ImageButton("assets/forest/forestTab.png", 280, 250);
 	level5.getStyleClass().add("levelButton");
-	ImageButton level6 = new ImageButton("farm.png", 280, 250);
+	ImageButton level6 = new ImageButton("assets/farm/farmTab.png", 280, 250);
 	level6.getStyleClass().add("levelButton");
-	ImageView imageView = new ImageView(new Image("levelSelectionMenu-01.png", 1400, 1000, false, false));
+	
+	ImageView imageView = new ImageView(new Image("assets/UI/menus/levelSelectionMenu-01.png", 1400, 1000, false, false));
 
 	level1.setOnAction(event -> {
 	    controller.createMap(1);
-	    baseContext.drawImage(new Image("test-easyMapSmallerFixedSpots.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/desert/desertMap.png", 1400, 1000, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
@@ -485,35 +465,35 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 	{
 	    controller.createMap(2);
-	    baseContext.drawImage(new Image("mediumMap.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/ice/iceMap.png", 1400, 1000, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
 
 	level3.setOnAction(event -> {
 	    controller.createMap(3);
-	    baseContext.drawImage(new Image("hardMap.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/volcano/volcanoMap.png", 1400, 1000, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
 
 	level4.setOnAction(event -> {
 	    controller.createMap(4);
-	    baseContext.drawImage(new Image("oasisMap.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/oasis/oasisMap.png", 1400, 1000, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
 
 	level5.setOnAction(event -> {
 	    controller.createMap(5);
-	    baseContext.drawImage(new Image("forestMap.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/forest/forestMap.png", 1400, 1000, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
 
 	level6.setOnAction(event -> {
 	    controller.createMap(6);
-	    baseContext.drawImage(new Image("farmMap.png", 1400, 1000, false, false), 0, 0);
+	    baseContext.drawImage(new Image("assets/farm/farmMap.png", 1400, 1000, false, false), 0, 0);
 	    setUpTowerMenu();
 	    window.setScene(game);
 	});
@@ -526,7 +506,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	hBox1.setSpacing(115);
 	hBoxLabel1.setPadding(new Insets(0, 0, 0, 220));
 	hBoxLabel1.setSpacing(300);
-	
+
 	hBox1.getChildren().add(level1);
 	hBox1.getChildren().add(level2);
 	hBox1.getChildren().add(level3);
@@ -539,7 +519,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	hBox2.setSpacing(115);
 	hBoxLabel2.setPadding(new Insets(0, 0, 0, 220));
 	hBoxLabel2.setSpacing(300);
-	
+
 	hBox2.getChildren().add(level4);
 	hBox2.getChildren().add(level5);
 	hBox2.getChildren().add(level6);
@@ -547,7 +527,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	hBoxLabel2.getChildren().add(l5);
 	hBoxLabel2.getChildren().add(l6);
 	hBoxLabel2.setAlignment(Pos.CENTER);
-	
+
 	levelPane.getStylesheets().add("test.css");
 	levelPane.getChildren().add(imageView);
 	levelPane.getChildren().add(hBoxLabel1);
@@ -576,13 +556,13 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
     public void makeMainScreen() {
 	mainScreen = new AnchorPane();
-	ImageView gameName = new ImageView("gameTitle.png");
 	
+	ImageView gameName = new ImageView("assets/UI/labels/gameTitle.png");
 	gameName.setFitWidth(1000);
 	gameName.setFitHeight(550);
-	
-	ImageButton newGame = new ImageButton("playNow.png", 900, 500);
-	Image image = new Image("bg.png", 1400, 1000, false, false);
+
+	ImageButton newGame = new ImageButton("assets/UI/labels/playNow.png", 900, 500);
+	Image image = new Image("assets/UI/bg.png", 1400, 1000, false, false);
 	BackgroundImage background = new BackgroundImage(image, null, null, null, null);
 	Background background2 = new Background(background);
 
@@ -596,7 +576,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	AnchorPane.setTopAnchor(newGame, 320.00);
 	AnchorPane.setLeftAnchor(newGame, 350.00);
 
-	mainscreen = new Scene(mainScreen,1400,1000);
+	mainscreen = new Scene(mainScreen, 1400, 1000);
 	newGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
 	    // setting a mouseEvent on the column in the grid
 	    @Override
@@ -615,12 +595,6 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
     }
 
-    private void setupImageView(ImageView imgView) {
-	imgView.setPreserveRatio(true);
-	imgView.setFitWidth(500);
-	imgView.setFitHeight(300);
-
-    }
 
     private class ButtonListener implements EventHandler<ActionEvent> {
 	/**
@@ -634,57 +608,58 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    System.out.println("Tower Placement enabled: " + togglePlacement);
 
 	    if (event.getSource().equals(stone)) {
-			selectedTowerType = 1;
-			System.out.println("Selected Stone tower");
-			selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
-			hideTowerInfo();
+		selectedTowerType = 1;
+		System.out.println("Selected Stone tower");
+		selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
+		hideTowerInfo();
 	    } else if (event.getSource().equals(fire)) {
-			selectedTowerType = 2;
-			System.out.println("Selected Fire tower");
-			selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
-			hideTowerInfo();
+		selectedTowerType = 2;
+		System.out.println("Selected Fire tower");
+		selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
+		hideTowerInfo();
 	    } else if (event.getSource().equals(ice)) {
-			selectedTowerType = 3;
-			System.out.println("Selected Ice tower");
-			selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
-			hideTowerInfo();
+		selectedTowerType = 3;
+		System.out.println("Selected Ice tower");
+		selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
+		hideTowerInfo();
 	    } else if (event.getSource().equals(heavy)) {
-			selectedTowerType = 4;
-			System.out.println("Selected Heavy tower");
-			selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
-			hideTowerInfo();
+		selectedTowerType = 4;
+		System.out.println("Selected Heavy tower");
+		selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
+		hideTowerInfo();
 	    } else if (event.getSource().equals(lightning)) {
-			selectedTowerType = 5;
-			System.out.println("Selected Lightning tower");
-			selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
-			hideTowerInfo();
+		selectedTowerType = 5;
+		System.out.println("Selected Lightning tower");
+		selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
+		hideTowerInfo();
 	    } else if (event.getSource().equals(magic)) {
-			selectedTowerType = 6;
-			System.out.println("Selected Magic tower");
-			selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
-			hideTowerInfo();
+		selectedTowerType = 6;
+		System.out.println("Selected Magic tower");
+		selectionContext.clearRect(prevCCol, prevCRow, prevCSize, prevCSize);
+		hideTowerInfo();
 	    } else if (event.getSource().equals(slowdown)) {
-			double temp = timeline.getRate();
-			new Thread(new Runnable() {
-			    @Override
-			    public void run() {
-				timeline.setRate(timeline.getRate() / 2);
-	
-				try {
-				    Thread.sleep(5000);
-				} catch (InterruptedException e) {
-				    // TODO Auto-generated catch block
-				    e.printStackTrace();
-				}
-	
-				timeline.setRate(temp);
-			    }
-			}).start();
-				System.out.println("Slowdown Enemies for 5 seconds");
-		    } else if (event.getSource().equals(damageboost)) {
-		    	System.out.println("Unimplemented Ability 2");
+		double temp = timeline.getRate();
+		new Thread(new Runnable() {
+		    @Override
+		    public void run() {
+			timeline.setRate(timeline.getRate() / 2);
+
+			try {
+			    Thread.sleep(5000);
+			} catch (InterruptedException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			}
+
+			timeline.setRate(temp);
 		    }
-		}
+		}).start();
+		System.out.println("Slowdown Enemies for 5 seconds");
+	    }
+//	    } else if (event.getSource().equals(damageboost)) {
+//		System.out.println("Unimplemented Ability 2");
+//	    }
+	}
     }
 
     // Normal GUI frame updates go here
@@ -731,17 +706,18 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
     public void setupWinMenu() {
 	AnchorPane winMenu = new AnchorPane();
-	Image image = new Image("bg.png", 1400, 1000, false, false);
+	Image image = new Image("assets/UI/bg.png", 1400, 1000, false, false);
 
 	BackgroundImage background = new BackgroundImage(image, null, null, null, null);
 
 	Background background2 = new Background(background);
 	timeline.stop();
 
-	ImageButton restart = new ImageButton("restart.png", 90, 110);
-	ImageButton menu = new ImageButton("menu.png", 90, 110);
+	ImageButton restart = new ImageButton("assets/UI/buttons/restart.png", 90, 110);
+	ImageButton menu = new ImageButton("assets/UI/buttons/menu.png", 90, 110);
 	winMenu = new AnchorPane();
-	ImageView imageView = new ImageView(new Image("levelWin.png", 650, 800, false, false));
+	
+	ImageView imageView = new ImageView(new Image("lassets/UI/menus/levelWin.png", 650, 800, false, false));
 	winMenu.getChildren().add(imageView);
 	winMenu.getChildren().add(restart);
 	winMenu.getChildren().add(menu);
@@ -788,10 +764,10 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	Background background2 = new Background(background);
 	timeline.stop();
 
-	ImageButton restart = new ImageButton("restart.png", 90, 110);
-	ImageButton menu = new ImageButton("menu.png", 90, 110);
+	ImageButton restart = new ImageButton("assets/UI/buttons/restart.png", 90, 110);
+	ImageButton menu = new ImageButton("assets/UI/buttons/menu.png", 90, 110);
 	looseMenu = new AnchorPane();
-	ImageView imageView = new ImageView(new Image("levelFail.png", 650, 800, false, false));
+	ImageView imageView = new ImageView(new Image("assets/UI/menus/levelFail.png", 650, 800, false, false));
 	looseMenu.getChildren().add(imageView);
 	looseMenu.getChildren().add(restart);
 	looseMenu.getChildren().add(menu);
@@ -856,14 +832,14 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	    setupLoseMenu();
 	}
     }
+
     private void updateEnemies(ArrayList<Enemy> enemies, GraphicsContext d) {
-		if (!isPaused) {
-			d.clearRect(0, 0, WIDTH, HEIGHT);
-			for (Enemy enemy : enemies) {
-				
-				d.drawImage(loader.getImage(enemy.getImage()), enemy.getPos().getX() - 25,
-						enemy.getPos().getY() - 25);
-			}
-		}
+	if (!isPaused) {
+	    d.clearRect(0, 0, WIDTH, HEIGHT);
+	    for (Enemy enemy : enemies) {
+
+		d.drawImage(loader.getImage(enemy.getImage()), enemy.getPos().getX() - 25, enemy.getPos().getY() - 25);
+	    }
 	}
+    }
 }
