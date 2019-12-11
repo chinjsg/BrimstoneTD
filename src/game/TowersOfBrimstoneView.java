@@ -693,12 +693,12 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
     private void frameUpdateHealth(int newVal) {
 	if (newVal > 0) {
-	    double percentage = ((double) newVal) / 100.0;
+	    double percentage = ((double) newVal) / 300.0;
 	    double width = percentage * 150.00;
 	    healthBar.setViewport(new Rectangle2D(0, 0, width, HEIGHT));
 	} else {
 	    newVal = 0;
-	    healthBar.setVisible(false);
+//	    healthBar.setVisible(false);
 	    ;
 	}
 
@@ -729,14 +729,16 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	AnchorPane.setTopAnchor(menu, 800.00);
 	AnchorPane.setLeftAnchor(menu, 570.00);
 
-	Scene win = new Scene(winMenu, 1400, 1000);
+	Scene win = new Scene(winMenu, WIDTH, HEIGHT);
 	window.setScene(win);
 
 	menu.setOnAction(event -> {
 	    model = new TowersOfBrimstoneModel();
 	    model.addObserver(this);
+	    healthBar.setVisible(true);
 	    controller = new TowersOfBrimstoneController(model);
 	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
+	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
 	    setUpLevelPane();
 	    window.setScene(levelSelection);
 
@@ -745,8 +747,10 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 	    model = new TowersOfBrimstoneModel();
 	    model.addObserver(this);
+	    healthBar.setVisible(true);
 	    controller = new TowersOfBrimstoneController(model);
 	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
+	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
 	    makeMainScreen();
 	    window.setScene(mainscreen);
 
@@ -779,14 +783,17 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	AnchorPane.setTopAnchor(menu, 800.00);
 	AnchorPane.setLeftAnchor(menu, 570.00);
 
-	Scene win = new Scene(looseMenu, 1400, 1000);
+	Scene win = new Scene(looseMenu, WIDTH, HEIGHT);
 	window.setScene(win);
 
 	menu.setOnAction(event -> {
 	    model = new TowersOfBrimstoneModel();
 	    model.addObserver(this);
+	    healthBar.setVisible(true);
 	    controller = new TowersOfBrimstoneController(model);
 	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
+	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
+	    frameUpdateHealth(model.getHealth());
 	    setUpLevelPane();
 	    window.setScene(levelSelection);
 
@@ -795,8 +802,11 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
 	    model = new TowersOfBrimstoneModel();
 	    model.addObserver(this);
+	    healthBar.setVisible(true);
 	    controller = new TowersOfBrimstoneController(model);
 	    towerContext.clearRect(0, 0, WIDTH, HEIGHT);
+	    enemyGc.clearRect(0, 0, WIDTH, HEIGHT);
+	    frameUpdateHealth(model.getHealth());
 	    makeMainScreen();
 	    window.setScene(mainscreen);
 

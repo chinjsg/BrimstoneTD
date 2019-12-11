@@ -37,7 +37,7 @@ public class TowersOfBrimstoneModel extends Observable {
 		towers = new ArrayList<Tower>();
 		enemies = new ArrayList<Enemy>();
 		waveNum = 0;
-		health = 100;
+		health = 300;
 		won = false;
 		gold = 2000;
 	}
