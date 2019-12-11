@@ -53,7 +53,6 @@ public class unit_testing {
 		ArrayList<Tile> enemyPath = null;
 		enemyPath.add(model.getRow(0).get(0));
 		System.out.println(enemyPath);
-		test3(enemyPath);
 	}
 	@Test
 	public void test10() {
