@@ -66,7 +66,7 @@ public abstract class Enemy {
 		
 		
 	}
-	public abstract Image getImage();
+	public abstract String getImage();
 //	public abstract Image getImageAttack();
 //	public abstract Image getImageDie();
 //	public abstract Image getImageHurt();

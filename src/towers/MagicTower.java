@@ -13,8 +13,8 @@ public class MagicTower extends Tower {
 		//  - Cost         = 550 gold
 		//  - X/Y coordinates will be set when it is placed
 		super(80, 1, false, 550, 200, row, col);
-		texture = new Image("tower_magic.png");
-		ammo = new Image("magicammo.png",20,20,false,false);
+		texture = "tower_magic.png";
+		ammo = "magicammo.png";
 	}
 	
 	public String toString() {

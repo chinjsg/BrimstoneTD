@@ -16,7 +16,6 @@ import enemies.Enemy3;
 import enemies.Enemy4;
 import enemies.Enemy5;
 import enemies.Enemy6;
-import enemies.Zombie;
 import stages.Map;
 import stages.MapVariant;
 import towers.StoneTower;
@@ -249,6 +248,7 @@ public class TowersOfBrimstoneController {
 	
 	
 	public void frameUpdate(int tick) {
+		
 		if(tick % 100 == 5) {
 			updateWave(tick);
 		}
@@ -256,6 +256,7 @@ public class TowersOfBrimstoneController {
 		collisionDetection(tick);
 		enemyAtEnd();
 		model.updateFrame(tick);
+		
 	}
 
 	private void enemyAtEnd() {
