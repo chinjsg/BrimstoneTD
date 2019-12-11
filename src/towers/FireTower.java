@@ -1,16 +1,36 @@
 package towers;
 
+import javafx.scene.image.Image;
+/**
+ * @author Glen Chin
+ * @author Marko Kreso
+ * @author Abhishek Sharma
+ * @author Abhishek Agarwal
+ *
+ */
 public class FireTower extends Tower {
-	
-	
-	public FireTower() {
+	/** 
+	 * This is the constructor of the FireTower
+	 * @param row
+	 * @param col
+	 */
+	public FireTower(int row, int col) {
 		
 		// Tower stats
-		//  - Damage       = 15
+		//  - Damage       = 25
 		//  - Rate of Fire = 1;
 		//  - Area Damage  = No
-		//  - Cost         = 100 gold
+		//  - Cost         = 150 gold
+		//  - Range        = 200
 		//  - X/Y coordinates will be set when it is placed
-		super(15, 1, false, 150, 0, 0, 2);
+		super(25, 1, false, 150, 200, row, col);
+		texture = "tower_fire.png";
+		ammo = "fireammo.png";
+	}
+	/**
+	 * This will print Fire Tower String
+	 */
+	public String toString() {
+		return "Fire Tower";
 	}
 }
