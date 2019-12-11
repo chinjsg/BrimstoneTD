@@ -335,6 +335,15 @@ public class TowersOfBrimstoneController {
 		}
 
 	}
+	
+	/**
+	 * It will return the ArrayList of path
+	 * @return ArrayList<Tile> 
+	 */
+	public ArrayList<Tile> get_path() {
+		return enemyPath;
+	}
+	
 	/**
 	 * This will update the position of the enemy.
 	 */
