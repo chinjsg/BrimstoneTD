@@ -318,7 +318,7 @@ public class TowersOfBrimstoneController {
 		
 	}
 	/**
-	 * This will check if the enemy is present at the end of the path
+	 * This will check if the enemy has reached the end of the path
 	 */
 	private void enemyAtEnd() {
 		double distance;
