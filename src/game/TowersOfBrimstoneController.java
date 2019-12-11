@@ -79,29 +79,68 @@ public class TowersOfBrimstoneController {
 			createPath(coord[0], coord[1]);
 		}
 
-		
-		
-		
-		//model.setEnd(4, 27);
-		//createPath(6, 0);
-		model.setWaves(createWaveMap1());
+		model.setWaves(createWaveMap(mapNum));
 	}
 	/**
 	 * This function will help us to create the wave of enemy
 	 * @return ArrayList<Queue<Enemy>>
 	 */
-	private ArrayList<Queue<Enemy>> createWaveMap1(){
-		ArrayList<Queue<Enemy>> waves = new ArrayList<Queue<Enemy>>();
+	private ArrayList<Queue<Enemy>> createWaveMap(int mapNum){
+		ArrayList<Queue<Enemy>> waves = new ArrayList<Queue<Enemy>>();;
+		if (mapNum == 1) {
+			Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 3, 1, 2, 1, 1)), allEnemyPaths);
+			Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 2, 1, 1, 1, 2, 3)), allEnemyPaths);
+			Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 3, 4, 5, 1, 3, 6, 3, 3)), allEnemyPaths);
+			waves.add(wave1);
+			waves.add(wave2);
+			waves.add(wave3);
+		} else if (mapNum == 2) {
+			Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 2, 1, 1, 2, 3, 3, 1)), allEnemyPaths);
+			Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(3, 2, 2, 2, 1, 3, 4, 1, 3)), allEnemyPaths);
+			Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(3, 6, 2, 3, 3, 3, 3, 5, 3)), allEnemyPaths);
+			waves.add(wave1);
+			waves.add(wave2);
+			waves.add(wave3);
+		} else if (mapNum == 3) {
+			Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 2, 2, 1, 4, 2, 2, 3, 1)), allEnemyPaths);
+			Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(6, 1, 3, 3, 1, 4, 4, 2, 3)), allEnemyPaths);
+			Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(4, 3, 3, 1, 5, 3, 2, 6, 5)), allEnemyPaths);
+			waves.add(wave1);
+			waves.add(wave2);
+			waves.add(wave3);
+		} else if (mapNum == 4) {
+			Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 3, 1, 3, 3, 1, 3, 1)), allEnemyPaths);
+			Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(4, 4, 2, 1, 1, 3, 3, 3, 1)), allEnemyPaths);
+			Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 3, 3, 4, 4, 1, 5, 3)), allEnemyPaths);
+			Queue<Enemy> wave4 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(6, 6, 2, 2, 3, 3, 3, 2, 5)), allEnemyPaths);
+			waves.add(wave1);
+			waves.add(wave2);
+			waves.add(wave3);
+			waves.add(wave4);
+		} else if (mapNum == 5) {
+			Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 3, 1, 1, 3, 2, 4, 3, 2)), allEnemyPaths);
+			Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(3, 3, 4, 4, 1, 6, 2, 5, 3)), allEnemyPaths);
+			Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 3, 3, 4, 2, 2, 4, 5)), allEnemyPaths);
+			Queue<Enemy> wave4 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(2, 2, 6, 6, 5, 6, 2, 2, 4)), allEnemyPaths);
+			waves.add(wave1);
+			waves.add(wave2);
+			waves.add(wave3);
+			waves.add(wave4);
+		} else if (mapNum == 6) {
+			Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(2, 2, 2, 3, 3, 3, 4, 1, 3)), allEnemyPaths);
+			Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(3, 1, 6, 4, 1, 6, 2, 3, 3)), allEnemyPaths);
+			Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(3, 3, 4, 5, 5, 4, 1, 3, 4)), allEnemyPaths);
+			Queue<Enemy> wave4 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(2, 2, 6, 6, 5, 6, 2, 4, 4)), allEnemyPaths);
+			Queue<Enemy> wave5 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(6, 6, 6, 2, 2, 6, 3, 2, 5)), allEnemyPaths);
+			waves.add(wave1);
+			waves.add(wave2);
+			waves.add(wave3);
+			waves.add(wave4);
+			waves.add(wave5);
+		}
 		
-		//Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(6, 6, 1, 1, 1, 1, 1)), allEnemyPaths);
-		Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), allEnemyPaths);
-		Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(2, 2, 1, 1, 1, 1, 1)), allEnemyPaths);
-		Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), allEnemyPaths);
-		
-		waves.add(wave1);
-		waves.add(wave2);
-		waves.add(wave3);
 		return waves;
+		
 	}
 	/**
 	 * This function will help us to create the object of the enemy passed in it.
