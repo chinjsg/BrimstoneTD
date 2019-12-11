@@ -9,8 +9,7 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
-import enemies.Enemy;
-import enemies.Enemy1;
+import enemies.*;
 import game.FrameMessage;
 import game.Tile;
 import game.TowersOfBrimstoneController;
@@ -28,6 +27,8 @@ public class unit_testing {
 		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
 		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
 		controller.createMap(1);
+		System.out.println("PATH");
+		System.out.println(controller.get_path());
 		
 //		model.setEnd(4, 27);
 //		model.setEndingTile(4, 27);
@@ -51,9 +52,9 @@ public class unit_testing {
 		System.out.println(controller.checkTower(5, 25));
 		System.out.println(controller.checkTower(5, 18));
 		System.out.println(controller.checkTower(5, 2));
-		ArrayList<Tile> enemyPath = null;
-		enemyPath.add(model.getRow(0).get(0));
-		System.out.println(enemyPath);
+//		ArrayList<Tile> enemyPath = null;
+//		enemyPath.add(model.getRow(0).get(0));
+//		System.out.println(enemyPath);
 	}
 	@Test
 	public void test10() {
@@ -109,21 +110,25 @@ public class unit_testing {
 		Paths paths = new Paths();
 	}
 	
-	
-	public void test3(ArrayList<Tile> pathArrayList) {
+	@Test
+	public void test3() {
+		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
+		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
+		controller.createMap(1);
+		ArrayList<Tile> pathArrayList = controller.get_path().get(0);
 		
 		Enemy one   = new Enemy1(pathArrayList);
-		assertEquals("Enemy 1", one);
-		Enemy two   = new Enemy1(pathArrayList);
-		assertEquals("Enemy 2", two);
-		Enemy three = new Enemy1(pathArrayList);
-		assertEquals("Enemy 3", three);
-		Enemy four  = new Enemy1(pathArrayList);
-		assertEquals("Enemy 4", four);
-		Enemy five  = new Enemy1(pathArrayList);
-		assertEquals("Enemy 5", five);
-		Enemy six   = new Enemy1(pathArrayList);
-		assertEquals("Enemy 6", six);
+		assertEquals("Enemy 1", one.toString());
+		Enemy two   = new Enemy2(pathArrayList);
+		assertEquals("Enemy 2", two.toString());
+		Enemy three = new Enemy3(pathArrayList);
+		assertEquals("Enemy 3", three.toString());
+		Enemy four  = new Enemy4(pathArrayList);
+		assertEquals("Enemy 4", four.toString());
+		Enemy five  = new Enemy5(pathArrayList);
+		assertEquals("Enemy 5", five.toString());
+		Enemy six   = new Enemy6(pathArrayList);
+		assertEquals("Enemy 6", six.toString());
 		System.out.println(one.getImage());
 		System.out.println(two.getImage());
 		System.out.println(three.getImage());
@@ -132,4 +137,5 @@ public class unit_testing {
 		System.out.println(six.getImage());
 		
 	}
+
 }
