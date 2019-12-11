@@ -1,7 +1,13 @@
 package stages;
 
 import java.util.HashMap;
-
+/**
+ * @author Glen Chin
+ * @author Marko Kreso
+ * @author Abhishek Sharma
+ * @author Abhishek Agarwal
+ *
+ */
 public class Map {
 	private HashMap<Integer, MapVariant> map;
 	
@@ -150,6 +156,10 @@ public class Map {
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		};
 	
+	/**
+	 * This is the constructor for the class
+	 * 
+	 */
 	public Map() {
 		map = new HashMap<>();
 		map.put(1, new Desert(desert));
@@ -159,7 +169,10 @@ public class Map {
 		map.put(5, new AcidForest(acidForest));
 		map.put(6, new Farm(farm));
 	}
-	
+	/**
+	 * This will return the Array list of paths
+	 * @param index
+	 */
 	public MapVariant getMap(int index) {
 		return map.get(index);
 	}
