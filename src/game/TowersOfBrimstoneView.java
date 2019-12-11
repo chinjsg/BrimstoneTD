@@ -93,6 +93,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	private boolean highlighted = false;
 	private int prevCol = 0;
 	private int prevRow = 19;
+	private int prevCCol = 0;
+	private int prevCRow = 0;
+	private int prevCSize = 0;
 	private Tower towerView;
 	private Label tName; // temp till GUI available
 	private Label tDmg; // temp till GUI available
@@ -106,6 +109,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	ImageView healthBar;
 	ImageView goldBar;
 	ImageView barView;
+	ImageView towerMenuL;
 
 	private ImageButton play = new ImageButton("play.png", 110, 90);
 	private ImageButton pause = new ImageButton("pause.png", 110, 90);
@@ -148,9 +152,9 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	healthBar = new ImageView(new Image("healthBar.png", 150, 15, false, false));
 	goldBar = new ImageView(new Image("goldBar.png", 150, 15, false, false));
 	barView = new ImageView(new Image("barMenu.png", 200, 150, false, false));
-
-	towerMenuLayer = selectionCanvas.getGraphicsContext2D();
-
+	//towerMenuLayer = selectionCanvas.getGraphicsContext2D();
+	towerMenuL = new ImageView(new Image("menuTowerEmpty2.png", 1400, 100, false, false));
+	
 	root.getChildren().add(canvas);
 	root.getChildren().add(selectionCanvas);
 	root.getChildren().add(towerCanvas);
@@ -166,19 +170,23 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	// Generate GUIs
 	generateTowerStatsView(); // temp for display of Tower stats onclick
 	setUpTowerMenu();
-	towerMenuLayer.drawImage(new Image("menuTowerEmpty2.png"), 0, 900, 1400, 100);
+	//towerMenuLayer.drawImage(new Image("menuTowerEmpty2.png"), 0, 900, 1400, 100);
 
 	// BarView
 	base.getChildren().add(barView);
 	base.getChildren().add(healthBar);
 	base.getChildren().add(goldBar);
 	base.getChildren().add(currency); // need actual value display
+	base.getChildren().add(towerMenuL);
+	
 	AnchorPane.setLeftAnchor(goldBar, 59.00);
 	AnchorPane.setTopAnchor(goldBar, 60.00);
 	AnchorPane.setLeftAnchor(healthBar, 59.00);
 	AnchorPane.setTopAnchor(healthBar, 120.00);
 	AnchorPane.setLeftAnchor(barView, 25.00);
 	AnchorPane.setTopAnchor(barView, 25.00);
+	
+	AnchorPane.setTopAnchor(towerMenuL, 900.00);
 
 	// Game buttons
 	base.getChildren().add(play);
@@ -224,15 +232,8 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	// Temp Label to sell Selected towers
 	sellButton.setOnMouseClicked((event) -> {
 	    if (towerView != null) {
+	    
 		controller.sellTower(towerView);
-		// UPdate gold bar i
-//		frameUpdateCurrency(gold +towerView.getSellPrice());
-//		towerStatsBg.setVisible(false);
-//		sellButton.setVisible(false);
-//		tName.setVisible(false);
-//		tDmg.setVisible(false);
-//		tSell.setVisible(false);
-//		tCoords.setVisible(false);
 		hideTowerInfo();
 
 	    }
@@ -308,6 +309,15 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		// Check tower on this spot
 		towerView = controller.checkTower(row, col);
 		if (towerView != null) {
+			selectionContext.clearRect(prevCol,  prevCRow, prevCSize, prevCSize);
+			int radius = towerView.getRange();
+			int size = (radius*2) + 50;
+			int coordCol = 50 * col -radius;
+			int coordRow = 50* row - radius;
+			prevCCol = coordCol;
+			prevCRow = coordRow;
+			prevCSize = size;
+			selectionContext.drawImage(new Image("selection-highlight.png"), coordCol, coordRow, size, size);
 		    tDmg.getStyleClass().add("shopLabel");
 		    tName.getStyleClass().add("shopLabel");
 		    tSell.getStyleClass().add("shopLabel");
@@ -384,6 +394,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	tDmg.setVisible(false);
 	tSell.setVisible(false);
 	tCoords.setVisible(false);
+	selectionContext.clearRect(prevCol,  prevCRow, prevCSize, prevCSize);
     }
 
     private void showTowerInfo() {
