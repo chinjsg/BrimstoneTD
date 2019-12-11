@@ -6,7 +6,13 @@ import java.util.Iterator;
 import enemies.Enemy;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
-
+/**
+ * @author Glen Chin
+ * @author Marko Kreso
+ * @author Abhishek Sharma
+ * @author Abhishek Agarwal
+ *
+ */
 public abstract class Tower {
 	protected int attackPower;
 	protected int rateOfFire;
@@ -22,7 +28,16 @@ public abstract class Tower {
 	
 	//protected image image;
 	//protected Title tile;
-	
+	/**
+	 * This is the constructor of  the of Tower Abstract class. 
+	 * @param attackPower
+	 * @param rateOfFire
+	 * @param areaDamage
+	 * @param cost
+	 * @param range
+	 * @param row
+	 * @param col
+	 */
 	public Tower(int attackPower, int rateOfFire, boolean areaDamage, int cost, int range, int row, int col) {
 		this.attackPower = attackPower;
 		this.rateOfFire = rateOfFire;
@@ -36,51 +51,87 @@ public abstract class Tower {
 		pos = new Point2D(col*50+25, row*50+25);
 		
 	}
-	
+	/**
+	 * This will return the power of the tower
+	 * @return int 
+	 */
 	public int getAttackPower() {
 		return attackPower;
 	}
-	
+	/**
+	 * This will return the RateofFire 
+	 * @return int
+	 */
 	public int getRateOfFire() {
 		return rateOfFire;
 	}
-	
+	/**
+	 * This is return whether a tower does a area damage or not.
+	 * @return boolean
+	 */
 	public boolean getAreaDamage() {
 		return areaDamage;
 	}
-	
+	/**
+	 * This will return the cost of the tower
+	 * @return int
+	 */
 	public int getCost() {
 		return cost;
 	}
-	
+	/**
+	 * This will return the row
+	 * @return int
+	 */
 	public int getRow() {
 		return row;
 	}
-	
+	/**
+	 * This will return the col
+	 * @return int
+	 */
 	public int getCol() {
 		return col;
 	}
+	/**
+	 * This will return the range
+	 * @return int 
+	 */
 	public int getRange() {
 		return range;
 	}
-	
+	/**
+	 * This will return the position
+	 * @return Point2D
+	 */
 	public Point2D getPos() {
 		return pos;
 		
 	}
-	
+	/**
+	 * This will return the image 
+	 * @return String
+	 */
 	public String getImage() {
 		return texture;
 	}
-	
+	/**
+	 * This will help us to return the sell price for the tower
+	 * @return int
+	 */
 	public int getSellPrice() {
 		return (int) (0.8 * cost);
 	}
-	
+	/**
+	 * This will add enemy to the projectile
+	 * @param enemy
+	 */
 	public void fire(Enemy enemy) {
 		projectiles.add(new Projectile(enemy));
 	}
-	
+	/**
+	 *  This will help us to update the projectile
+	 */
 	public void updateProjectiles(){
 		if(projectiles.size() > 0) {
 			Iterator<Projectile> iterator = projectiles.iterator();
