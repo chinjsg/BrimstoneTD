@@ -1,9 +1,19 @@
 package towers;
 
 import javafx.scene.image.Image;
-
+/**
+ * @author Glen Chin
+ * @author Marko Kreso
+ * @author Abhishek Sharma
+ * @author Abhishek Agarwal
+ *
+ */
 public class HeavyTower extends Tower {
-	
+	/**
+	 * This is the constructor HeavyTower 
+	 * @param row
+	 * @param col
+	 */
 	public HeavyTower(int row, int col) {
 		// Tower stats
 		//  - Damage       = 50
@@ -16,7 +26,9 @@ public class HeavyTower extends Tower {
 		texture = "tower_heavy.png";
 		ammo = "heavyammo.png";
 	}
-	
+	/**
+	 * This will print the String of HeavyTower class.
+	 */
 	public String toString() {
 		return "Heavy Tower";
 	}
