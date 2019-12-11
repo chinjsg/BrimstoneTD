@@ -13,7 +13,7 @@ public class IceTower extends Tower {
 		//  - Range        = 200
 		//  - X/Y coordinates will be set when it is placed
 		super(20, 1, false, 250, 200, row, col);
-		texture = new Image("tower_ice.png");
+		texture = new Image("tower_ice.png",65,65,false,false);
 		ammo = new Image("iceammo.png",20,20,false,false);
 	}
 	
