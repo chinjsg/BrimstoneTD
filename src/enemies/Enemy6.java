@@ -6,13 +6,13 @@ import game.Tile;
 import javafx.scene.image.Image;
 
 public class Enemy6 extends Enemy{
-	private Image picture;
+	private String picture;
 	public Enemy6(ArrayList<Tile> path) {
 		super(130, 2, 35, path);
-		picture = new Image("assets/desert/enemies/6/desert6.png");
+		picture = "assets/desert/enemies/6/desert6.png";
 	}
 	@Override
-	public Image getImage() {
+	public String getImage() {
 		return picture;
 	}
 	public String toString() {

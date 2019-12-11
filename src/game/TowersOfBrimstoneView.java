@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 import org.omg.CORBA.PRIVATE_MEMBER;
 
 import enemies.Enemy;
-import enemies.Zombie;
+import enemies.ImageLoader;
 import experimenting.ImageButton;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
@@ -72,7 +72,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	Scene levelSelection;
 	Scene game;
 	Stage window;
-
+	private ImageLoader loader;
 	private TowersOfBrimstoneModel model;
 	private TowersOfBrimstoneController controller;
 	private static final int WIDTH = 1400;
@@ -118,7 +118,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	public void start(Stage primaryStage) throws Exception {
 		window = primaryStage;
 		makeMainScreen();
-
+		loader = new ImageLoader();
 		model = new TowersOfBrimstoneModel();
 		model.addObserver(this);
 		controller = new TowersOfBrimstoneController(model);
@@ -392,7 +392,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 			d.clearRect(0, 0, WIDTH, HEIGHT);
 			for (Enemy enemy : enemies) {
 				
-				d.drawImage(enemy.getImage(), enemy.getPos().getX() - 25,
+				d.drawImage(loader.getImage(enemy.getImage()), enemy.getPos().getX() - 25,
 						enemy.getPos().getY() - 25);
 			}
 		}

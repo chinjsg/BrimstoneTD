@@ -3,7 +3,6 @@ package game;
 import java.util.ArrayList;
 
 import enemies.Enemy;
-import enemies.Zombie;
 
 public class FrameMessage {
 	

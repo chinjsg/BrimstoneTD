@@ -6,7 +6,7 @@ import game.Tile;
 import javafx.scene.image.Image;
 
 public class DesertEnimies extends Enemy{
-	private   Image texture;
+	private   String texture;
 	protected String image_pathAttack;
 	protected String image_pathDie;
 	protected String image_pathHurt;
@@ -34,8 +34,7 @@ public class DesertEnimies extends Enemy{
 		x = 0;
 		y = 0;		
 		if (enemy == 0) {
-			this.texture = new Image("DesertCommon.png");
-			System.out.println(texture.isError());
+			this.texture = "DesertCommon.png";
 		}else if (enemy == 1) {
 			image_pathAttack = "assets/desert/enemies/1/desert1Attack.png";
 			image_pathDie    = "assets/desert/enemies/1/desert1Die.png";
@@ -94,34 +93,15 @@ public class DesertEnimies extends Enemy{
 	}
 	
 	@Override
-	public Image getImage() {
+	public String getImage() {
 		return texture;
 	}
 	
 
-	public Image getImageAttack() {
-		this.texture = new Image(image_pathAttack);
-		return texture;
-	}
 
 
-	public Image getImageDie() {
-		this.texture = new Image(image_pathDie);
-		return texture;
-	}
-
-	public Image getImageHurt() {
-		this.texture = new Image(image_pathHurt);
-		return texture;
-	}
-	
-	public Image getImageRun() {
-		this.texture = new Image(image_pathRun);
-		return texture;
-	}
-
-	public Image getImageWalk() {
-		this.texture = new Image(image_pathWalk);
+	public String getImageWalk() {
+		this.texture = image_pathWalk;
 		return texture;
 	}
 

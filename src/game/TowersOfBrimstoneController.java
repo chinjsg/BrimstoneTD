@@ -16,7 +16,6 @@ import enemies.Enemy3;
 import enemies.Enemy4;
 import enemies.Enemy5;
 import enemies.Enemy6;
-import enemies.Zombie;
 import stages.Map;
 import stages.MapVariant;
 import towers.StoneTower;
