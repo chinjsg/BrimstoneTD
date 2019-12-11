@@ -561,7 +561,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
     private void updateProjectiles(ArrayList<Tower> towers, GraphicsContext enemyBackground) {
 	for (Tower tower : towers) {
 	    for (Projectile projectile : tower.getProjectiles()) {
-		Image image = projectile.getImage();
+		Image image = loader.getImage(projectile.getImage());
 		int xpos = (int) projectile.getPos().getX();
 		int ypos = (int) projectile.getPos().getY();
 		enemyBackground.drawImage(image, xpos, ypos);
@@ -680,7 +680,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		if (tile.getPlacedTower() != null) {
 		    Tower tower = tile.getPlacedTower();
 		    towerContext.clearRect(50 * col - 4, 50 * row - 15, 65, 65);
-		    towerContext.drawImage(tower.getImage(), 50 * col - 4, 50 * row - 15);
+		    towerContext.drawImage(loader.getImage(tower.getImage()), 50 * col - 4, 50 * row - 15);
 		}
 	    }
 

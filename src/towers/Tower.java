@@ -17,8 +17,8 @@ public abstract class Tower {
 	protected int col;
 	protected int range;
 	protected ArrayList<Projectile> projectiles;
-	protected Image texture;
-	protected Image ammo;
+	protected String texture;
+	protected String ammo;
 	
 	//protected image image;
 	//protected Title tile;
@@ -69,7 +69,7 @@ public abstract class Tower {
 		
 	}
 	
-	public Image getImage() {
+	public String getImage() {
 		return texture;
 	}
 	
@@ -116,7 +116,7 @@ public abstract class Tower {
 			}
 			return false;
 		}
-		public Image getImage() {
+		public String getImage() {
 			return ammo;
 		}
 		public Point2D getPos() {

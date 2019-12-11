@@ -248,6 +248,7 @@ public class TowersOfBrimstoneController {
 	
 	
 	public void frameUpdate(int tick) {
+		System.out.println(tick);
 		if(tick % 100 == 5) {
 			updateWave(tick);
 		}
@@ -255,6 +256,7 @@ public class TowersOfBrimstoneController {
 		collisionDetection(tick);
 		enemyAtEnd();
 		model.updateFrame(tick);
+		
 	}
 
 	private void enemyAtEnd() {
