@@ -6,12 +6,12 @@ import java.util.Random;
 import game.Tile;
 import javafx.scene.image.Image;
 
+// Normal enemy 1
 public class Enemy1 extends Enemy{
 	private String picture;
 	public Enemy1(ArrayList<Tile> path) {
-		super(100, 2, 20, path);
+		super(350, 3, 20, path);
 		picture = getRandomImagePath();
-
 	}
 	
 

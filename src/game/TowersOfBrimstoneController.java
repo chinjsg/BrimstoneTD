@@ -92,8 +92,9 @@ public class TowersOfBrimstoneController {
 	 */
 	private ArrayList<Queue<Enemy>> createWaveMap1(){
 		ArrayList<Queue<Enemy>> waves = new ArrayList<Queue<Enemy>>();
-
-		Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(6, 1, 2, 3, 4, 5, 1)), allEnemyPaths);
+		
+		//Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(6, 6, 1, 1, 1, 1, 1)), allEnemyPaths);
+		Queue<Enemy> wave1 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), allEnemyPaths);
 		Queue<Enemy> wave2 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(2, 2, 1, 1, 1, 1, 1)), allEnemyPaths);
 		Queue<Enemy> wave3 = createEnemyObjects(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1)), allEnemyPaths);
 		

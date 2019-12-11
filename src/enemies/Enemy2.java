@@ -6,10 +6,11 @@ import java.util.Random;
 import game.Tile;
 import javafx.scene.image.Image;
 
+// Rusher enemy
 public class Enemy2 extends Enemy{
 	private String picture;
 	public Enemy2(ArrayList<Tile> path) {
-		super(105, 2, 25, path);
+		super(125, 8, 25, path);
 		picture = getRandomImagePath();
 	}
 

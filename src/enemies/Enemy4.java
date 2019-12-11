@@ -9,10 +9,9 @@ import javafx.scene.image.Image;
 public class Enemy4 extends Enemy{
 	private String picture;
 	public Enemy4(ArrayList<Tile> path) {
-		super(115, 2, 30, path);
-
+		// Normal enemy 3
+		super(500, 2, 30, path);
 		picture = getRandomImagePath();
-
 	}
 
 	private String getRandomImagePath() {
