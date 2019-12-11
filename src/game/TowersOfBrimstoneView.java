@@ -717,7 +717,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 	ImageButton menu = new ImageButton("assets/UI/buttons/menu.png", 90, 110);
 	winMenu = new AnchorPane();
 	
-	ImageView imageView = new ImageView(new Image("lassets/UI/menus/levelWin.png", 650, 800, false, false));
+	ImageView imageView = new ImageView(new Image("assets/UI/menus/levelWin.png", 650, 800, false, false));
 	winMenu.getChildren().add(imageView);
 	winMenu.getChildren().add(restart);
 	winMenu.getChildren().add(menu);
@@ -757,7 +757,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 
     public void setupLoseMenu() {
 	AnchorPane looseMenu = new AnchorPane();
-	Image image = new Image("bg.png", 1400, 1000, false, false);
+	Image image = new Image("assets/UI/bg.png", 1400, 1000, false, false);
 
 	BackgroundImage background = new BackgroundImage(image, null, null, null, null);
 
