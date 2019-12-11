@@ -20,10 +20,9 @@ public class Enemy4 extends Enemy{
 	 * @param path
 	 */
 	public Enemy4(ArrayList<Tile> path) {
-		super(115, 2, 30, path,40);
-
+		// Normal enemy 3
+		super(500, 2, 30, path);
 		picture = getRandomImagePath();
-
 	}
 	/**
 	 * This is the return the String of the images which are randomly selected.

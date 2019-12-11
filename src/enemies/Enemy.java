@@ -22,8 +22,6 @@ public abstract class Enemy {
 	protected int TileIndex;
 	protected ArrayList<Tile> path;
 	
-	
-	//protected Title tile;
 	/**
 	 * This is the constructor of the Enemy class 
 	 * @param health
@@ -32,17 +30,18 @@ public abstract class Enemy {
 	 * @param pathToFollow
 	 * @param damage
 	 */
-	public Enemy(int health, int speed, int goldReward, ArrayList<Tile> pathToFollow,int damage) {
+	public Enemy(int health, int speed, int goldReward, ArrayList<Tile> pathToFollow) {
 		this.health = health;
 		this.speed = speed;
 		this.goldReward = goldReward;
 		int xPos = (int) pathToFollow.get(0).getPos().getX();
 		int yPos = (int) pathToFollow.get(0).getPos().getY();
-		this.damage = damage;
+		damage = 30;
 		path = pathToFollow;
 		TileIndex = 0;
 		position = new Point2D(xPos, yPos);
 	}
+	
 	/**
 	 * It will return the health of the enemy
 	 * @return int
@@ -50,6 +49,7 @@ public abstract class Enemy {
 	public int getHealth() {
 		return health;
 	}
+	
 	/**
 	 * it will return the speed of the enemy
 	 * @return int
@@ -57,6 +57,7 @@ public abstract class Enemy {
 	public int getSpeed() {
 		return speed;
 	}
+	
 	/**
 	 * It will return the goldreward of the enemy
 	 * @return int
@@ -64,6 +65,7 @@ public abstract class Enemy {
 	public int getGoldReward() {
 		return goldReward;
 	}
+	
 	/**
 	 * It will return the position of the enemy
 	 * @return Point2d
@@ -71,6 +73,7 @@ public abstract class Enemy {
 	public Point2D getPos() {
 		return position;
 	}
+	
 	/** 
 	 * It will helps to keep track of the health
 	 * @param damage
@@ -79,6 +82,7 @@ public abstract class Enemy {
 		health -= damage;
 		//System.out.println("health: " + health);
 	}
+	
 	/**
 	 * It will helps us to path the enemy 
 	 * @return  Point2D
@@ -93,6 +97,7 @@ public abstract class Enemy {
 		direction = direction.normalize();
 		return direction;
 	}
+	
 	/**
 	 * It will return the damage
 	 * @return int
@@ -100,6 +105,7 @@ public abstract class Enemy {
 	public int getDamage() {
 		return damage;
 	}
+	
 	/**
 	 * It will move the enemy.
 	 * @param dx
@@ -107,8 +113,6 @@ public abstract class Enemy {
 	 */
 	public void move(double dx, double dy) {
 		position = new Point2D(position.getX()+dx, position.getY()+dy);
-		
-		
 	}
 	/**
 	 * It will get the path of the image

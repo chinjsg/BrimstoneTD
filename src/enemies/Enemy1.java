@@ -5,6 +5,7 @@ import java.util.Random;
 
 import game.Tile;
 import javafx.scene.image.Image;
+
 /**
  * This is the abstract class that represent all the enemy used in the game 
  * @author Glen Chin
@@ -13,6 +14,8 @@ import javafx.scene.image.Image;
  * @author Abhishek Agarwal
  *
  */
+
+// Normal enemy 1
 public class Enemy1 extends Enemy{
 	private String picture;
 	/**
@@ -20,9 +23,8 @@ public class Enemy1 extends Enemy{
 	 * @param path
 	 */
 	public Enemy1(ArrayList<Tile> path) {
-		super(100, 2, 20, path,10);
+		super(350, 3, 20, path);
 		picture = getRandomImagePath();
-
 	}
 	
 	/**

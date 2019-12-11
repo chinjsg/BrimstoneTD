@@ -15,14 +15,15 @@ public class MagicTower extends Tower {
 	 * @param col
 	 */
 	public MagicTower(int row, int col) {
-		// Tower stats
+		//  [Sniper - Very High Damage - Slow RoF] 
+		//  Tower stats
 		//  - Damage       = 80
 		//  - Rate of Fire = 1;
 		//  - Area Damage  = No
 		//  - Range        = 200
 		//  - Cost         = 550 gold
 		//  - X/Y coordinates will be set when it is placed
-		super(80, 1, false, 550, 350, row, col);
+		super(120, 0.8, false, 550, 350, row, col);
 		texture = "tower_magic.png";
 		ammo = "magicammo.png";
 	}

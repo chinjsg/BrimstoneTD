@@ -23,7 +23,7 @@ public class FireTower extends Tower {
 		//  - Cost         = 150 gold
 		//  - Range        = 200
 		//  - X/Y coordinates will be set when it is placed
-		super(25, 1, false, 150, 200, row, col);
+		super(26, 0.2, false, 150, 180, row, col);
 		texture = "tower_fire.png";
 		ammo = "fireammo.png";
 	}

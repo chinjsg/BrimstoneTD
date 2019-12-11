@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
  * @author Abhishek Agarwal
  *
  */
+
+// Tank enemy
 public class Enemy6 extends Enemy{
 	private String picture;
 	/**
@@ -20,8 +22,7 @@ public class Enemy6 extends Enemy{
 	 * @param path
 	 */
 	public Enemy6(ArrayList<Tile> path) {
-		super(130, 2, 35, path,60);
-
+		super(900, 2, 35, path);
 		picture = getRandomImagePath();
 	}
 	

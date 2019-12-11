@@ -15,14 +15,15 @@ public class LightningTower extends Tower {
 	 * @param col
 	 */
 	public LightningTower(int row, int col) {
+		// [Average Damage - Fast RoF]
 		// Tower stats
-		//  - Damage       = 25
-		//  - Rate of Fire = 1;
-		//  - Area Damage  = No
-		//  - Cost         = 275 gold
-		//  - Range        = 200
-		//  - X/Y coordinates will be set when it is placed
-		super(25, 1, false, 275, 200, row, col);
+		// - Damage       = 25
+		// - Rate of Fire = 1;
+		// - Area Damage  = No
+		// - Cost         = 275 gold
+		// - Range        = 200
+		// - X/Y coordinates will be set when it is placed
+		super(24, 0.2, false, 275, 200, row, col);
 		texture = "tower_lightning.png";
 		ammo = "lightningammo.png";
 	}

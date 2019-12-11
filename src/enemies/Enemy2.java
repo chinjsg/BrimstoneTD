@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
  * @author Abhishek Agarwal
  *
  */
+
+// Rusher enemy
 public class Enemy2 extends Enemy{
 	private String picture;
 	/**
@@ -20,7 +22,7 @@ public class Enemy2 extends Enemy{
 	 * @param path
 	 */
 	public Enemy2(ArrayList<Tile> path) {
-		super(105, 2, 25, path,20);
+		super(120, 8, 25, path);
 		picture = getRandomImagePath();
 	}
 	/**
