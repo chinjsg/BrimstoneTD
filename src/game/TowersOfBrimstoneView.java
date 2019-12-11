@@ -274,7 +274,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		boolean isPlaced = controller.placeTower(row, col, selectedTowerType);
 		if (isPlaced) {
 		    selectionContext.clearRect(50 * col, 50 * row, 50, 50);
-		    selectionContext.drawImage(new Image("red-sq.png"), 50 * col, 50 * row, 50, 50);
+		    selectionContext.drawImage(new Image("assets/UI/towerSelection/red-sq.png"), 50 * col, 50 * row, 50, 50);
 		    System.out.println("Tower has been placed!");
 		    controller.frameUpdate(tick);
 		} else {
