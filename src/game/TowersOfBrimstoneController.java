@@ -341,10 +341,10 @@ public class TowersOfBrimstoneController {
 	
 	/**
 	 * It will return the ArrayList of path
-	 * @return ArrayList<Tile> 
+	 * @return ArrayList<ArrayList<Tile>> 
 	 */
-	public ArrayList<Tile> get_path() {
-		return enemyPath;
+	public ArrayList<ArrayList<Tile>>  get_path() {
+		return allEnemyPaths;
 	}
 	
 	/**
