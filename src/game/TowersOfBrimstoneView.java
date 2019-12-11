@@ -199,7 +199,7 @@ public class TowersOfBrimstoneView extends Application implements Observer {
 		// TEMP Code for Tower Statistic Display until GUI available - will be
 		// removed
 		base.getChildren().add(towerStatsBg); // background
-//	base.getChildren().add(towerStatsgp); // label display
+		//	base.getChildren().add(towerStatsgp); // label display
 		sellButton.setVisible(false);
 		base.getChildren().add(sellButton);
 		base.getChildren().add(tDmg);
