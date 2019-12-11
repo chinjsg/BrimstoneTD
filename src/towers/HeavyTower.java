@@ -15,14 +15,15 @@ public class HeavyTower extends Tower {
 	 * @param col
 	 */
 	public HeavyTower(int row, int col) {
+		// [High Damge - Low RoF] 
 		// Tower stats
-		//  - Damage       = 50
-		//  - Rate of Fire = 1;
-		//  - Area Damage  = No
-		//  - Cost         = 300 gold
-		//  - Range        = 200
-		//  - X/Y coordinates will be set when it is placed
-		super(50, 1, false, 300, 200, row, col);
+		// - Damage       = 50
+		// - Rate of Fire = 1;
+		// - Area Damage  = No
+		// - Cost         = 300 gold
+		// - Range        = 200
+		// - X/Y coordinates will be set when it is placed
+		super(60, 0.5, false, 300, 200, row, col);
 		texture = "tower_heavy.png";
 		ammo = "heavyammo.png";
 	}

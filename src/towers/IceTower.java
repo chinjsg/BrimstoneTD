@@ -15,14 +15,15 @@ public class IceTower extends Tower {
 	 * @param col
 	 */
 	public IceTower(int row, int col) {
+		// [Medium Damage - Average firing]
 		// Tower stats
-		//  - Damage       = 20
-		//  - Rate of Fire = 1;
-		//  - Area Damage  = No
-		//  - Cost         = 250 gold
-		//  - Range        = 200
-		//  - X/Y coordinates will be set when it is placed
-		super(20, 1, false, 250, 200, row, col);
+		// - Damage       = 20
+		// - Rate of Fire = 1;
+		// - Area Damage  = No
+		// - Cost         = 250 gold
+		// - Range        = 200
+		// - X/Y coordinates will be set when it is placed
+		super(38, 0.3, false, 250, 250, row, col);
 		texture = "tower_ice.png";
 		ammo = "iceammo.png";
 	}
