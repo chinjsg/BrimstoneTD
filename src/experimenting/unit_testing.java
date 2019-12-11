@@ -18,7 +18,14 @@ import stages.Map;
 import stages.MapVariant;
 import towers.FireTower;
 import towers.Tower;
-
+/**
+ * This is the unit testing all the non gui class.
+ * @author Glen Chin
+ * @author Marko Kreso
+ * @author Abhishek Sharma
+ * @author Abhishek Agarwal
+ *
+ */
 public class unit_testing {
 
 	@Test
