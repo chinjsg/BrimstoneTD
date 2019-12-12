@@ -46,7 +46,7 @@
     project="csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042" 
     file="/csc335-towerdef-marko-kreso-abhi-386-chinjsg-sharma1042/src/game/TowersOfBrimstone.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1766" y="-147"/>    
+    <position height="-1" width="-1" x="1952" y="-181"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
