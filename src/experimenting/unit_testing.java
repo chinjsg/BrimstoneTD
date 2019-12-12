@@ -29,17 +29,14 @@ import towers.Tower;
 public class unit_testing {
 
 	@Test
-	public void test1() {
+	public void test_model_controller() {
 
 		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
 		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
 		controller.createMap(1);
 		System.out.println("PATH");
 		System.out.println(controller.get_path());
-		
-//		model.setEnd(4, 27);
-//		model.setEndingTile(4, 27);
-		
+		model.addGold(10000);
 		assertTrue(controller.placeTower(5, 4, 1));
 		assertTrue(controller.placeTower(12, 6, 2));
 		assertTrue(controller.placeTower(12, 7, 3));
@@ -51,7 +48,6 @@ public class unit_testing {
 			controller.frameUpdate(i);
 		}		
 		System.out.println(controller.checkTower(0, 0));
-		System.out.println("---");
 		System.out.println(controller.checkTower(5, 4));
 		System.out.println(controller.checkTower(12, 6));
 		System.out.println(controller.checkTower(12, 7));
@@ -59,23 +55,17 @@ public class unit_testing {
 		System.out.println(controller.checkTower(5, 25));
 		System.out.println(controller.checkTower(5, 18));
 		System.out.println(controller.checkTower(5, 2));
-//		ArrayList<Tile> enemyPath = null;
-//		enemyPath.add(model.getRow(0).get(0));
-//		System.out.println(enemyPath);
 	}
 	
 	@Test
-	public void test2() {
+	public void checks_tower() {
 
 		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
 		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
 		controller.createMap(1);
 		System.out.println("PATH");
 		System.out.println(controller.get_path());
-		
-//		model.setEnd(4, 27);
-//		model.setEndingTile(4, 27);
-		
+		model.addGold(10000);		
 		assertTrue(controller.placeTower(5, 4, 1));
 		assertTrue(controller.placeTower(12, 6, 2));
 		assertTrue(controller.placeTower(12, 7, 3));
@@ -87,7 +77,6 @@ public class unit_testing {
 			controller.frameUpdate(i);
 		}		
 		System.out.println(controller.checkTower(0, 0));
-		System.out.println("---");
 		System.out.println(controller.checkTower(5, 4));
 		System.out.println(controller.checkTower(12, 6));
 		System.out.println(controller.checkTower(12, 7));
@@ -95,17 +84,64 @@ public class unit_testing {
 		System.out.println(controller.checkTower(5, 25));
 		System.out.println(controller.checkTower(5, 18));
 		System.out.println(controller.checkTower(5, 2));
-//		ArrayList<Tile> enemyPath = null;
-//		enemyPath.add(model.getRow(0).get(0));
-//		System.out.println(enemyPath);
 	}
+	
 	@Test
-	public void test10() {
-
+	public void test_map_1() {
 		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
 		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
 		controller.createMap(1);
 		ArrayList<ArrayList<Tile>> pathArrayList  = controller.get_path();
+		for (int i = 0 ; i < 200000 ; i++) {
+			controller.frameUpdate(i);
+		}		
+	}
+	
+	@Test
+	public void test_map_2() {
+		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
+		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
+		controller.createMap(2);
+		for (int i = 0 ; i < 200000 ; i++) {
+			controller.frameUpdate(i);
+		}		
+	}
+	
+	@Test
+	public void test_map_3() {
+		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
+		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
+		controller.createMap(3);
+		for (int i = 0 ; i < 200000 ; i++) {
+			controller.frameUpdate(i);
+		}		
+	}
+	
+	@Test
+	public void test_map_4() {
+		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
+		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
+		controller.createMap(4);
+		for (int i = 0 ; i < 200000 ; i++) {
+			controller.frameUpdate(i);
+		}		
+	}
+	
+	@Test
+	public void test_map_5() {
+		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
+		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
+		controller.createMap(5);
+		for (int i = 0 ; i < 200000 ; i++) {
+			controller.frameUpdate(i);
+		}		
+	}
+	
+	@Test
+	public void test_map_6() {
+		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
+		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
+		controller.createMap(6);
 		for (int i = 0 ; i < 200000 ; i++) {
 			controller.frameUpdate(i);
 		}		
@@ -118,8 +154,8 @@ public class unit_testing {
 		Tower tower = new FireTower(12, 7);
 		System.out.println(tower.getPos());
 		assertFalse(tower.getAreaDamage());
-		assertEquals(25,tower.getAttackPower());;
-		assertEquals(200,tower.getRange());
+		assertEquals(26,tower.getAttackPower());;
+		assertEquals(180,tower.getRange());
 		assertEquals("tower_fire.png",tower.getImage());
 		controller.sellTower(tower);
 		model.updateTowerMap(tower);
@@ -145,7 +181,7 @@ public class unit_testing {
 	
 
 	@Test
-	public void test3() {
+	public void test_enemy_classes() {
 		TowersOfBrimstoneModel model = new TowersOfBrimstoneModel();
 		TowersOfBrimstoneController controller = new TowersOfBrimstoneController(model);
 		controller.createMap(1);
